@@ -179,6 +179,48 @@
     .section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:40px}
     .section-head h2{margin:0;font-size:clamp(2.1rem,5vw,4.2rem);line-height:.98;letter-spacing:-.04em;text-transform:uppercase}
     .section-head p{max-width:460px;margin:0;color:#829aac;line-height:1.65}
+
+    .data-update-panel{
+      position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:24px;
+      margin:0 0 34px;padding:26px 28px;overflow:hidden;
+      border:1px solid rgba(102,229,255,.18);border-radius:12px;
+      background:linear-gradient(115deg,rgba(9,29,44,.94),rgba(5,16,27,.96) 58%,rgba(25,22,18,.92));
+      box-shadow:0 20px 55px rgba(0,0,0,.32)
+    }
+    .data-update-panel:before{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(circle at 0 50%,rgba(102,229,255,.11),transparent 28%),radial-gradient(circle at 100% 50%,rgba(216,182,110,.09),transparent 30%)
+    }
+    .data-update-mark{
+      position:relative;z-index:1;width:62px;height:62px;display:grid;place-items:center;flex:none;
+      border:1px solid rgba(102,229,255,.26);border-radius:14px;background:rgba(102,229,255,.06);
+      color:var(--cyan);font-size:1.55rem;font-weight:950
+    }
+    .data-update-copy{position:relative;z-index:1;min-width:0}
+    .data-update-eyebrow{color:var(--gold);font-size:.62rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+    .data-update-copy h3{margin:0 0 10px;font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.025em;text-transform:uppercase}
+    .data-update-copy p{margin:0 0 8px;color:#93a9b9;line-height:1.58;font-size:.9rem}
+    .data-update-copy p:last-child{margin-bottom:0}
+    .data-update-copy strong{color:#dff8ff}
+    .data-update-action{
+      position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      min-height:48px;padding:0 18px;border:1px solid rgba(102,229,255,.30);border-radius:8px;
+      background:linear-gradient(135deg,rgba(102,229,255,.18),rgba(216,182,110,.10));
+      color:#e9fbff;font-size:.68rem;font-weight:950;letter-spacing:.10em;text-transform:uppercase;white-space:nowrap;
+      transition:.22s ease
+    }
+    .data-update-action:hover{transform:translateY(-2px);border-color:rgba(102,229,255,.58);box-shadow:0 12px 30px rgba(0,0,0,.30)}
+    .data-update-action span{color:var(--cyan);font-size:1rem}
+    @media(max-width:820px){
+      .data-update-panel{grid-template-columns:auto 1fr;gap:16px;padding:22px}
+      .data-update-action{grid-column:1/-1;width:100%}
+    }
+    @media(max-width:520px){
+      .data-update-panel{grid-template-columns:1fr}
+      .data-update-mark{width:52px;height:52px}
+      .data-update-action{grid-column:auto}
+    }
+
     .hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
     .hub-card{
       position:relative;min-height:360px;display:flex;flex-direction:column;overflow:hidden;padding:30px;
@@ -366,6 +408,21 @@
           <p data-i18n="hubIntro">Everything useful to the alliance, from the current season walkthrough to the tools reserved for leadership.</p>
         </div>
 
+
+        <div class="data-update-panel" id="data-update">
+          <div class="data-update-mark">↻</div>
+          <div class="data-update-copy">
+            <div class="data-update-eyebrow" data-i18n="dataUpdateEyebrow">Alliance data</div>
+            <h3 data-i18n="dataUpdateTitle">Keep your data up to date</h3>
+            <p data-i18n="dataUpdateP1">To help ABYX prepare rallies and upcoming events more efficiently, we use a shared spreadsheet containing your vehicle power, rally size and APC troop type.</p>
+            <p data-i18n="dataUpdateP2">This information is not used to track anyone’s progression. It feeds our alliance tools, including Franky Rally Tool, and helps us prepare for future battles, events and challenges.</p>
+            <p><strong data-i18n="dataUpdateP3">Whenever your stats change significantly, please update your information. Keeping your data accurate only takes a moment and helps the whole alliance.</strong></p>
+          </div>
+          <a class="data-update-action" href="https://docs.google.com/spreadsheets/d/1_ci0bnYNIXa_weidXqOARD4MdHXkSFNvtVHsZ98Y5KU/edit?usp=sharing#gid=1705274318" target="_blank" rel="noopener">
+            <span>↗</span><span data-i18n="dataUpdateButton">Update my data</span>
+          </a>
+        </div>
+
         <div class="hub-grid">
           <a class="hub-card" id="season-guide" href="./season-guide/">
             <div class="card-top">
@@ -414,7 +471,7 @@
             <div class="card-body">
               <div class="card-index" data-i18n="leadershipIndex">04 • Leadership</div>
               <h3 data-i18n="leaderTools">Leader Tools</h3>
-              <p data-i18n="leaderDesc">Franky Rally Tool, Alliance Message Builder and future tools reserved for ABYX leadership.</p>
+              <p data-i18n="leaderDesc">Franky Rally Tool, ABYX Message Forge and future tools reserved for ABYX leadership.</p>
               <div class="card-link" data-i18n="leaderAccessCard">Leader access</div>
             </div>
           </a>
@@ -454,7 +511,7 @@
           commandNetwork:"ABYX Command Network",hubTitle:"Alliance Hub",hubIntro:"Everything useful to the alliance, from the current season walkthrough to the tools reserved for leadership.",
           statusSeason:"Season",fieldIntel:"01 • Field Intelligence",seasonGuide:"Season Guide",seasonDesc:"Interactive objectives, priorities, event guidance and key information for every ABYX member.",openGuide:"Open the guide",
           statusCommunity:"Community",resourcesIndex:"02 • Resources",newsGuides:"News & Guides",newsDesc:"Alliance announcements, tactical notes and practical guides collected in one place.",exploreResources:"Explore resources",
-          statusRestricted:"Restricted 🔒",leadershipIndex:"03 • Leadership",leaderTools:"Leader Tools",leaderDesc:"Franky Rally Tool, Alliance Message Builder and future tools reserved for ABYX leadership.",leaderAccessCard:"Leader access",
+          statusRestricted:"Restricted 🔒",leadershipIndex:"03 • Leadership",leaderTools:"Leader Tools",leaderDesc:"Franky Rally Tool, ABYX Message Forge and future tools reserved for ABYX leadership.",leaderAccessCard:"Leader access",
           migrationTitle:"ABYX tools migration",migrationDesc:"The current Franky Rally Tool remains online while the new hub is being built.",devBadge:"V2 • In development",footerEdition:"Alliance Hub • Season Edition"
         },
         fr:{statusHive:"Ruche",hiveIndex:"03 • Placement",hiveTitle:"Voir la ruche",hiveDesc:"Connaître son placement dans la ruche ABYX.",hiveLink:"Ouvrir la ruche",leadershipIndex:"04 • Commandement",
@@ -476,7 +533,7 @@
           commandNetwork:"Rete di comando ABYX",hubTitle:"Hub dell’alleanza",hubIntro:"Tutto ciò che serve all’alleanza, dalla guida della stagione attuale agli strumenti riservati alla leadership.",
           statusSeason:"Stagione",fieldIntel:"01 • Informazioni sul campo",seasonGuide:"Guida stagione",seasonDesc:"Obiettivi interattivi, priorità, consigli sugli eventi e informazioni chiave per tutti i membri ABYX.",openGuide:"Apri la guida",
           statusCommunity:"Comunità",resourcesIndex:"02 • Risorse",newsGuides:"Notizie & Guide",newsDesc:"Annunci dell’alleanza, note tattiche e guide pratiche raccolti in un unico posto.",exploreResources:"Esplora le risorse",
-          statusRestricted:"Riservato 🔒",leadershipIndex:"03 • Leadership",leaderTools:"Strumenti Leader",leaderDesc:"Franky Rally Tool, Alliance Message Builder e futuri strumenti riservati alla leadership ABYX.",leaderAccessCard:"Accesso Leader",
+          statusRestricted:"Riservato 🔒",leadershipIndex:"03 • Leadership",leaderTools:"Strumenti Leader",leaderDesc:"Franky Rally Tool, ABYX Message Forge e futuri strumenti riservati alla leadership ABYX.",leaderAccessCard:"Accesso Leader",
           migrationTitle:"Migrazione strumenti ABYX",migrationDesc:"L’attuale Franky Rally Tool resta online mentre costruiamo il nuovo hub.",devBadge:"V2 • In sviluppo",footerEdition:"Hub dell’alleanza • Edizione Stagione"
         },
         de:{statusHive:"Hive",hiveIndex:"03 • Platzierung",hiveTitle:"Hive ansehen",hiveDesc:"Finde deinen Platz im ABYX-Hive.",hiveLink:"Hive öffnen",leadershipIndex:"04 • Führung",
@@ -487,7 +544,7 @@
           commandNetwork:"ABYX-Kommandonetzwerk",hubTitle:"Allianz-Hub",hubIntro:"Alles Wichtige für die Allianz – vom aktuellen Saison-Guide bis zu den Tools für die Führung.",
           statusSeason:"Saison",fieldIntel:"01 • Feldaufklärung",seasonGuide:"Saison-Guide",seasonDesc:"Interaktive Ziele, Prioritäten, Event-Hinweise und wichtige Informationen für alle ABYX-Mitglieder.",openGuide:"Guide öffnen",
           statusCommunity:"Community",resourcesIndex:"02 • Ressourcen",newsGuides:"News & Guides",newsDesc:"Allianz-Ankündigungen, taktische Hinweise und praktische Guides an einem Ort.",exploreResources:"Ressourcen öffnen",
-          statusRestricted:"Geschützt 🔒",leadershipIndex:"03 • Führung",leaderTools:"Leader-Tools",leaderDesc:"Franky Rally Tool, Alliance Message Builder und zukünftige Tools exklusiv für die ABYX-Führung.",leaderAccessCard:"Leader-Zugang",
+          statusRestricted:"Geschützt 🔒",leadershipIndex:"03 • Führung",leaderTools:"Leader-Tools",leaderDesc:"Franky Rally Tool, ABYX Message Forge und zukünftige Tools exklusiv für die ABYX-Führung.",leaderAccessCard:"Leader-Zugang",
           migrationTitle:"Migration der ABYX-Tools",migrationDesc:"Das aktuelle Franky Rally Tool bleibt online, während der neue Hub aufgebaut wird.",devBadge:"V2 • In Entwicklung",footerEdition:"Allianz-Hub • Saison-Edition"
         },
         pl:{statusHive:"Ul",hiveIndex:"03 • Pozycja",hiveTitle:"Zobacz ul",hiveDesc:"Sprawdź swoje miejsce w ulu ABYX.",hiveLink:"Otwórz ul",leadershipIndex:"04 • Dowodzenie",
@@ -498,7 +555,7 @@
           commandNetwork:"Sieć dowodzenia ABYX",hubTitle:"Centrum sojuszu",hubIntro:"Wszystko, czego potrzebuje sojusz — od przewodnika aktualnego sezonu po narzędzia zarezerwowane dla liderów.",
           statusSeason:"Sezon",fieldIntel:"01 • Wywiad terenowy",seasonGuide:"Przewodnik sezonu",seasonDesc:"Interaktywne cele, priorytety, wskazówki dotyczące wydarzeń i kluczowe informacje dla wszystkich członków ABYX.",openGuide:"Otwórz przewodnik",
           statusCommunity:"Społeczność",resourcesIndex:"02 • Zasoby",newsGuides:"Aktualności i poradniki",newsDesc:"Ogłoszenia sojuszu, notatki taktyczne i praktyczne poradniki zebrane w jednym miejscu.",exploreResources:"Przeglądaj zasoby",
-          statusRestricted:"Tylko liderzy 🔒",leadershipIndex:"03 • Dowodzenie",leaderTools:"Narzędzia liderów",leaderDesc:"Franky Rally Tool, Alliance Message Builder i przyszłe narzędzia zarezerwowane dla liderów ABYX.",leaderAccessCard:"Dostęp liderów",
+          statusRestricted:"Tylko liderzy 🔒",leadershipIndex:"03 • Dowodzenie",leaderTools:"Narzędzia liderów",leaderDesc:"Franky Rally Tool, ABYX Message Forge i przyszłe narzędzia zarezerwowane dla liderów ABYX.",leaderAccessCard:"Dostęp liderów",
           migrationTitle:"Migracja narzędzi ABYX",migrationDesc:"Obecny Franky Rally Tool pozostaje online podczas budowy nowego hubu.",devBadge:"V2 • W budowie",footerEdition:"Centrum sojuszu • Edycja sezonowa"
         },
         ru:{statusHive:"Улей",hiveIndex:"03 • Позиция",hiveTitle:"Посмотреть улей",hiveDesc:"Узнай своё место в улье ABYX.",hiveLink:"Открыть улей",leadershipIndex:"04 • Руководство",
@@ -509,7 +566,7 @@
           commandNetwork:"Командная сеть ABYX",hubTitle:"Центр альянса",hubIntro:"Всё необходимое для альянса — от гайда текущего сезона до инструментов, доступных только руководству.",
           statusSeason:"Сезон",fieldIntel:"01 • Полевая разведка",seasonGuide:"Гайд сезона",seasonDesc:"Интерактивные цели, приоритеты, советы по событиям и ключевая информация для всех участников ABYX.",openGuide:"Открыть гайд",
           statusCommunity:"Сообщество",resourcesIndex:"02 • Ресурсы",newsGuides:"Новости и гайды",newsDesc:"Объявления альянса, тактические заметки и практические гайды в одном месте.",exploreResources:"Открыть ресурсы",
-          statusRestricted:"Только лидеры 🔒",leadershipIndex:"03 • Руководство",leaderTools:"Инструменты лидеров",leaderDesc:"Franky Rally Tool, Alliance Message Builder и будущие инструменты только для руководства ABYX.",leaderAccessCard:"Доступ лидеров",
+          statusRestricted:"Только лидеры 🔒",leadershipIndex:"03 • Руководство",leaderTools:"Инструменты лидеров",leaderDesc:"Franky Rally Tool, ABYX Message Forge и будущие инструменты только для руководства ABYX.",leaderAccessCard:"Доступ лидеров",
           migrationTitle:"Перенос инструментов ABYX",migrationDesc:"Текущий Franky Rally Tool остаётся доступным, пока мы строим новый hub.",devBadge:"V2 • В разработке",footerEdition:"Центр альянса • Сезонная версия"
         },
         uk:{statusHive:"Вулик",hiveIndex:"03 • Позиція",hiveTitle:"Переглянути вулик",hiveDesc:"Дізнайся своє місце у вулику ABYX.",hiveLink:"Відкрити вулик",leadershipIndex:"04 • Керівництво",
@@ -520,10 +577,68 @@
           commandNetwork:"Командна мережа ABYX",hubTitle:"Центр альянсу",hubIntro:"Усе необхідне для альянсу — від гайда поточного сезону до інструментів, доступних лише керівництву.",
           statusSeason:"Сезон",fieldIntel:"01 • Польова розвідка",seasonGuide:"Гайд сезону",seasonDesc:"Інтерактивні цілі, пріоритети, поради щодо подій і ключова інформація для всіх учасників ABYX.",openGuide:"Відкрити гайд",
           statusCommunity:"Спільнота",resourcesIndex:"02 • Ресурси",newsGuides:"Новини та гайди",newsDesc:"Оголошення альянсу, тактичні нотатки та практичні гайди в одному місці.",exploreResources:"Відкрити ресурси",
-          statusRestricted:"Тільки для лідерів 🔒",leadershipIndex:"03 • Керівництво",leaderTools:"Інструменти лідерів",leaderDesc:"Franky Rally Tool, Alliance Message Builder та майбутні інструменти лише для керівництва ABYX.",leaderAccessCard:"Доступ лідерів",
+          statusRestricted:"Тільки для лідерів 🔒",leadershipIndex:"03 • Керівництво",leaderTools:"Інструменти лідерів",leaderDesc:"Franky Rally Tool, ABYX Message Forge та майбутні інструменти лише для керівництва ABYX.",leaderAccessCard:"Доступ лідерів",
           migrationTitle:"Перенесення інструментів ABYX",migrationDesc:"Поточний Franky Rally Tool залишається доступним, поки ми будуємо новий hub.",devBadge:"V2 • У розробці",footerEdition:"Центр альянсу • Сезонна версія"
         }
       };
+
+
+      Object.assign(translations.en,{
+        dataUpdateEyebrow:"Alliance data",
+        dataUpdateTitle:"Keep your data up to date",
+        dataUpdateP1:"To help ABYX prepare rallies and upcoming events more efficiently, we use a shared spreadsheet containing your vehicle power, rally size and APC troop type.",
+        dataUpdateP2:"This information is not used to track anyone’s progression. It feeds our alliance tools, including Franky Rally Tool, and helps us prepare for future battles, events and challenges.",
+        dataUpdateP3:"Whenever your stats change significantly, please update your information. Keeping your data accurate only takes a moment and helps the whole alliance.",
+        dataUpdateButton:"Update my data"
+      });
+      Object.assign(translations.fr,{
+        dataUpdateEyebrow:"Données de l’alliance",
+        dataUpdateTitle:"Gardez vos données à jour",
+        dataUpdateP1:"Pour aider ABYX à préparer plus efficacement les rallyes et les événements à venir, nous utilisons une feuille partagée contenant la puissance de vos véhicules, votre taille de rallye et le type de troupes de vos APC.",
+        dataUpdateP2:"Ces informations ne servent pas à suivre la progression des membres. Elles alimentent nos outils d’alliance, notamment Franky Rally Tool, et nous aident à préparer les futurs combats, événements et défis.",
+        dataUpdateP3:"Lorsque vos statistiques changent de façon importante, pensez à mettre vos informations à jour. Cela ne prend qu’un instant et aide toute l’alliance.",
+        dataUpdateButton:"Mettre à jour mes données"
+      });
+      Object.assign(translations.it,{
+        dataUpdateEyebrow:"Dati dell’alleanza",
+        dataUpdateTitle:"Mantieni aggiornati i tuoi dati",
+        dataUpdateP1:"Per aiutare ABYX a preparare rally ed eventi in modo più efficiente, utilizziamo un foglio condiviso con potenza dei veicoli, dimensione del rally e tipo di truppe APC.",
+        dataUpdateP2:"Queste informazioni non servono a monitorare i progressi dei membri. Alimentano i nostri strumenti, incluso Franky Rally Tool, e ci aiutano a prepararci per battaglie, eventi e sfide.",
+        dataUpdateP3:"Quando le tue statistiche cambiano in modo significativo, aggiorna i tuoi dati. Bastano pochi istanti e aiuta tutta l’alleanza.",
+        dataUpdateButton:"Aggiorna i miei dati"
+      });
+      Object.assign(translations.de,{
+        dataUpdateEyebrow:"Allianzdaten",
+        dataUpdateTitle:"Halte deine Daten aktuell",
+        dataUpdateP1:"Damit ABYX Rallys und kommende Events effizienter vorbereiten kann, nutzen wir eine gemeinsame Tabelle mit Fahrzeugstärke, Rally-Größe und APC-Truppentyp.",
+        dataUpdateP2:"Diese Informationen dienen nicht dazu, den Fortschritt einzelner Mitglieder zu verfolgen. Sie versorgen unsere Allianz-Tools, darunter Franky Rally Tool, und helfen bei der Vorbereitung auf Kämpfe, Events und Herausforderungen.",
+        dataUpdateP3:"Wenn sich deine Werte deutlich ändern, aktualisiere bitte deine Angaben. Das dauert nur einen Moment und hilft der gesamten Allianz.",
+        dataUpdateButton:"Meine Daten aktualisieren"
+      });
+      Object.assign(translations.pl,{
+        dataUpdateEyebrow:"Dane sojuszu",
+        dataUpdateTitle:"Dbaj o aktualność swoich danych",
+        dataUpdateP1:"Aby ABYX mógł sprawniej przygotowywać rajdy i nadchodzące wydarzenia, korzystamy ze wspólnego arkusza zawierającego moc pojazdów, rozmiar rajdu i typ wojsk APC.",
+        dataUpdateP2:"Te informacje nie służą do śledzenia postępów członków. Zasilają nasze narzędzia sojuszu, w tym Franky Rally Tool, i pomagają przygotować się do przyszłych bitew, wydarzeń i wyzwań.",
+        dataUpdateP3:"Gdy twoje statystyki znacząco się zmienią, zaktualizuj dane. Zajmuje to chwilę i pomaga całemu sojuszowi.",
+        dataUpdateButton:"Zaktualizuj moje dane"
+      });
+      Object.assign(translations.ru,{
+        dataUpdateEyebrow:"Данные альянса",
+        dataUpdateTitle:"Поддерживайте данные в актуальном состоянии",
+        dataUpdateP1:"Чтобы ABYX эффективнее готовил ралли и предстоящие события, мы используем общую таблицу с силой техники, размером ралли и типом войск APC.",
+        dataUpdateP2:"Эти данные не используются для отслеживания прогресса участников. Они нужны нашим инструментам альянса, включая Franky Rally Tool, и помогают готовиться к будущим боям, событиям и испытаниям.",
+        dataUpdateP3:"Если ваши характеристики заметно изменились, обновите информацию. Это занимает всего минуту и помогает всему альянсу.",
+        dataUpdateButton:"Обновить мои данные"
+      });
+      Object.assign(translations.uk,{
+        dataUpdateEyebrow:"Дані альянсу",
+        dataUpdateTitle:"Підтримуйте свої дані актуальними",
+        dataUpdateP1:"Щоб ABYX ефективніше готував rally та майбутні події, ми використовуємо спільну таблицю з потужністю техніки, розміром rally та типом військ APC.",
+        dataUpdateP2:"Ці дані не використовуються для відстеження прогресу учасників. Вони потрібні нашим інструментам альянсу, зокрема Franky Rally Tool, і допомагають готуватися до майбутніх боїв, подій та випробувань.",
+        dataUpdateP3:"Якщо ваші характеристики суттєво змінилися, оновіть інформацію. Це займає лише хвилину й допомагає всьому альянсу.",
+        dataUpdateButton:"Оновити мої дані"
+      });
 
       var labels={en:"EN",fr:"FR",it:"IT",de:"DE",pl:"PL",ru:"RU",uk:"UA"};
       var picker=document.getElementById("langPicker");
