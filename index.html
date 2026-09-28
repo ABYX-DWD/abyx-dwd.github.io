@@ -909,20 +909,9 @@
         modal.setAttribute("aria-hidden","false");
         document.body.classList.add("hive-modal-open");
         close.focus();
-        if(!img.getAttribute("src") && window.loadAbyxBase64Image){
-          window.loadAbyxBase64Image(img,[
-            "./assets/hive-viewer-0.b64?v=20260928-3",
-            "./assets/hive-viewer-1.b64?v=20260928-3",
-            "./assets/hive-viewer-2.b64?v=20260928-3",
-            "./assets/hive-viewer-3.b64?v=20260928-3",
-            "./assets/hive-viewer-4a.b64?v=20260928-3",
-            "./assets/hive-viewer-4b.b64?v=20260928-3",
-            "./assets/hive-viewer-4c.b64?v=20260928-3",
-            "./assets/hive-viewer-4d.b64?v=20260928-3",
-            "./assets/hive-viewer-4e.b64?v=20260928-3",
-            "./assets/hive-viewer-5a.b64?v=20260928-3",
-            "./assets/hive-viewer-5b.b64?v=20260928-3"
-          ]);
+        if(!img.getAttribute("src")){
+          img.src="./assets/hive-map.webp?v=20260928-4";
+          img.dataset.loaded="1";
         }
         requestAnimationFrame(function(){
           if(img.complete && img.naturalWidth) centerImage();
