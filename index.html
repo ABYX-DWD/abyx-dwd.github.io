@@ -181,8 +181,8 @@
     .section-head p{max-width:460px;margin:0;color:#829aac;line-height:1.65}
 
     .data-update-panel{
-      position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:24px;
-      margin:0 0 34px;padding:26px 28px;overflow:hidden;
+      position:relative;display:grid;grid-template-columns:minmax(0,1fr) 292px;align-items:center;gap:30px;
+      margin:0 0 34px;padding:28px 30px;overflow:hidden;
       border:1px solid rgba(102,229,255,.18);border-radius:12px;
       background:linear-gradient(115deg,rgba(9,29,44,.94),rgba(5,16,27,.96) 58%,rgba(25,22,18,.92));
       box-shadow:0 20px 55px rgba(0,0,0,.32)
@@ -191,34 +191,49 @@
       content:"";position:absolute;inset:0;pointer-events:none;
       background:radial-gradient(circle at 0 50%,rgba(102,229,255,.11),transparent 28%),radial-gradient(circle at 100% 50%,rgba(216,182,110,.09),transparent 30%)
     }
-    .data-update-mark{
-      position:relative;z-index:1;width:62px;height:62px;display:grid;place-items:center;flex:none;
-      border:1px solid rgba(102,229,255,.26);border-radius:14px;background:rgba(102,229,255,.06);
-      color:var(--cyan);font-size:1.55rem;font-weight:950
-    }
     .data-update-copy{position:relative;z-index:1;min-width:0}
     .data-update-eyebrow{color:var(--gold);font-size:.62rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
     .data-update-copy h3{margin:0 0 10px;font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.025em;text-transform:uppercase}
     .data-update-copy p{margin:0 0 8px;color:#93a9b9;line-height:1.58;font-size:.9rem}
     .data-update-copy p:last-child{margin-bottom:0}
     .data-update-copy strong{color:#dff8ff}
+    .data-update-side{position:relative;z-index:1;display:grid;gap:13px;align-self:stretch;align-content:center}
+    .data-update-visuals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+    .data-update-visual{
+      min-width:0;padding:8px 6px 7px;border:1px solid rgba(102,229,255,.14);border-radius:10px;
+      background:linear-gradient(180deg,rgba(14,34,51,.78),rgba(5,15,25,.88));
+      text-align:center;overflow:hidden
+    }
+    .data-update-visual:nth-child(2){border-color:rgba(216,182,110,.20)}
+    .data-update-visual img{
+      display:block;width:100%;max-width:82px;aspect-ratio:1/1;object-fit:contain;margin:0 auto 3px;
+      filter:drop-shadow(0 7px 12px rgba(0,0,0,.36))
+    }
+    .data-update-visual span{
+      display:block;color:#7799aa;font-size:.52rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase
+    }
+    .data-update-visual:nth-child(2) span{color:#cdb57f}
     .data-update-action{
-      position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
       min-height:48px;padding:0 18px;border:1px solid rgba(102,229,255,.30);border-radius:8px;
       background:linear-gradient(135deg,rgba(102,229,255,.18),rgba(216,182,110,.10));
       color:#e9fbff;font-size:.68rem;font-weight:950;letter-spacing:.10em;text-transform:uppercase;white-space:nowrap;
       transition:.22s ease
     }
     .data-update-action:hover{transform:translateY(-2px);border-color:rgba(102,229,255,.58);box-shadow:0 12px 30px rgba(0,0,0,.30)}
-    .data-update-action span{color:var(--cyan);font-size:1rem}
-    @media(max-width:820px){
-      .data-update-panel{grid-template-columns:auto 1fr;gap:16px;padding:22px}
-      .data-update-action{grid-column:1/-1;width:100%}
+    .data-update-action>span:first-child{color:var(--cyan);font-size:1rem}
+    @media(max-width:900px){
+      .data-update-panel{grid-template-columns:1fr;gap:20px;padding:24px}
+      .data-update-side{width:100%}
+      .data-update-visuals{max-width:390px}
+      .data-update-visual img{max-width:76px}
     }
     @media(max-width:520px){
-      .data-update-panel{grid-template-columns:1fr}
-      .data-update-mark{width:52px;height:52px}
-      .data-update-action{grid-column:auto}
+      .data-update-panel{padding:21px 18px}
+      .data-update-visuals{max-width:none;gap:6px}
+      .data-update-visual{padding:6px 4px}
+      .data-update-visual img{max-width:68px}
+      .data-update-action{white-space:normal;text-align:center}
     }
 
     .hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
@@ -410,7 +425,6 @@
 
 
         <div class="data-update-panel" id="data-update">
-          <div class="data-update-mark">↻</div>
           <div class="data-update-copy">
             <div class="data-update-eyebrow" data-i18n="dataUpdateEyebrow">Alliance data</div>
             <h3 data-i18n="dataUpdateTitle">Keep your data up to date</h3>
@@ -418,9 +432,25 @@
             <p data-i18n="dataUpdateP2">This information is not used to track anyone’s progression. It feeds our alliance tools, including Franky Rally Tool, and helps us prepare for future battles, events and challenges.</p>
             <p><strong data-i18n="dataUpdateP3">Whenever your stats change significantly, please update your information. Keeping your data accurate only takes a moment and helps the whole alliance.</strong></p>
           </div>
-          <a class="data-update-action" href="https://docs.google.com/spreadsheets/d/1_ci0bnYNIXa_weidXqOARD4MdHXkSFNvtVHsZ98Y5KU/edit?usp=sharing#gid=1705274318" target="_blank" rel="noopener">
-            <span>↗</span><span data-i18n="dataUpdateButton">Update my data</span>
-          </a>
+          <div class="data-update-side">
+            <div class="data-update-visuals" aria-label="Vehicle power, APC and rally size">
+              <div class="data-update-visual">
+                <img src="./assets/data-power.webp?v=1" width="112" height="112" alt="" loading="lazy">
+                <span data-i18n="dataUpdatePower">Power</span>
+              </div>
+              <div class="data-update-visual">
+                <img src="./assets/data-apc.webp?v=1" width="112" height="112" alt="" loading="lazy">
+                <span>APC</span>
+              </div>
+              <div class="data-update-visual">
+                <img src="./assets/data-rally.webp?v=1" width="112" height="112" alt="" loading="lazy">
+                <span data-i18n="dataUpdateRally">Rally</span>
+              </div>
+            </div>
+            <a class="data-update-action" href="https://docs.google.com/spreadsheets/d/1_ci0bnYNIXa_weidXqOARD4MdHXkSFNvtVHsZ98Y5KU/edit?usp=sharing#gid=1705274318" target="_blank" rel="noopener">
+              <span>↗</span><span data-i18n="dataUpdateButton">Update my data</span>
+            </a>
+          </div>
         </div>
 
         <div class="hub-grid">
@@ -639,6 +669,14 @@
         dataUpdateP3:"Якщо ваші характеристики суттєво змінилися, оновіть інформацію. Це займає лише хвилину й допомагає всьому альянсу.",
         dataUpdateButton:"Оновити мої дані"
       });
+
+      Object.assign(translations.en,{dataUpdatePower:"Power",dataUpdateRally:"Rally"});
+      Object.assign(translations.fr,{dataUpdatePower:"Puissance",dataUpdateRally:"Rallye"});
+      Object.assign(translations.it,{dataUpdatePower:"Potenza",dataUpdateRally:"Rally"});
+      Object.assign(translations.de,{dataUpdatePower:"Stärke",dataUpdateRally:"Rally"});
+      Object.assign(translations.pl,{dataUpdatePower:"Moc",dataUpdateRally:"Rajd"});
+      Object.assign(translations.ru,{dataUpdatePower:"Сила",dataUpdateRally:"Ралли"});
+      Object.assign(translations.uk,{dataUpdatePower:"Сила",dataUpdateRally:"Rally"});
 
       var labels={en:"EN",fr:"FR",it:"IT",de:"DE",pl:"PL",ru:"RU",uk:"UA"};
       var picker=document.getElementById("langPicker");
