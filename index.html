@@ -4,6 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#020811">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/abyx-app-icon.png">
+  <link rel="apple-touch-icon" href="./assets/abyx-app-icon.png">
+  <meta name="apple-mobile-web-app-title" content="ABYX">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="description" content="ABYX Dark War: Survival alliance hub — season guides, resources and leader tools.">
   <title>ABYX • Dark War: Survival</title>
   <style>
@@ -168,7 +173,7 @@
     .section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:40px}
     .section-head h2{margin:0;font-size:clamp(2.1rem,5vw,4.2rem);line-height:.98;letter-spacing:-.04em;text-transform:uppercase}
     .section-head p{max-width:460px;margin:0;color:#829aac;line-height:1.65}
-    .hub-grid{display:grid;grid-template-columns:1.28fr .86fr .86fr;gap:16px}
+    .hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
     .hub-card{
       position:relative;min-height:360px;display:flex;flex-direction:column;overflow:hidden;padding:30px;
       border:1px solid var(--line);border-radius:12px;
@@ -186,6 +191,9 @@
     }
     .hub-card:hover{transform:translateY(-7px);border-color:rgba(102,229,255,.34);box-shadow:0 34px 90px rgba(0,0,0,.55),0 0 0 1px rgba(102,229,255,.04) inset}
     .hub-card:hover:before{opacity:1}
+    .hive-card{border-color:rgba(102,229,255,.22)}
+    .hive-card::after{background:linear-gradient(90deg,#66e5ff,#d8b66e,transparent);box-shadow:0 0 18px rgba(102,229,255,.42)}
+    .hive-card .card-icon{color:#d8b66e}
     .hub-card.gold{border-color:var(--line-gold)}
     .hub-card.gold:after{background:linear-gradient(90deg,var(--gold),transparent);box-shadow:0 0 16px rgba(216,182,110,.45)}
     .card-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -241,7 +249,7 @@
       .nav-links a:not(.nav-cta){display:none}
       .nav-links{border:0;background:transparent;padding:0}
       .hub-grid{grid-template-columns:1fr 1fr}
-      .hub-card:first-child{grid-column:1/-1}
+      .hub-card:first-child{grid-column:auto}
       .section-head{align-items:start;flex-direction:column}
     }
     @media(max-width:640px){
@@ -377,13 +385,26 @@
             </div>
           </a>
 
+          <a class="hub-card hive-card" id="hive-card" href="https://atlantisdws.com/hive-planner?code=1746FE" target="_blank" rel="noopener">
+            <div class="card-top">
+              <div class="card-icon">⌾</div>
+              <span class="status" data-i18n="statusHive">Hive</span>
+            </div>
+            <div class="card-body">
+              <div class="card-index" data-i18n="hiveIndex">03 • Placement</div>
+              <h3 data-i18n="hiveTitle">View the Hive</h3>
+              <p data-i18n="hiveDesc">Know your position in the ABYX hive.</p>
+              <div class="card-link" data-i18n="hiveLink">Open the hive</div>
+            </div>
+          </a>
+
           <a class="hub-card gold" id="leader-tools" href="#">
             <div class="card-top">
               <div class="card-icon">⌁</div>
               <span class="status" data-i18n="statusRestricted">Restricted 🔒</span>
             </div>
             <div class="card-body">
-              <div class="card-index" data-i18n="leadershipIndex">03 • Leadership</div>
+              <div class="card-index" data-i18n="leadershipIndex">04 • Leadership</div>
               <h3 data-i18n="leaderTools">Leader Tools</h3>
               <p data-i18n="leaderDesc">Franky Rally Tool, Alliance Message Builder and future tools reserved for ABYX leadership.</p>
               <div class="card-link" data-i18n="leaderAccessCard">Leader access</div>
@@ -417,7 +438,7 @@
   <script>
     (function(){
       var translations={
-        en:{
+        en:{statusHive:"Hive",hiveIndex:"03 • Placement",hiveTitle:"View the Hive",hiveDesc:"Know your position in the ABYX hive.",hiveLink:"Open the hive",leadershipIndex:"04 • Leadership",
           brandSub:"Dark War • Alliance Hub",navSeason:"Season Guide",navNews:"News & Guides",navLeader:"Leader Tools 🔒",navEnter:"Enter Hub",
           seasonTag:"Current Season • Alliance Command Center",heroLead:"Descend into the",heroAbyss:"Abyss",
           heroSub:"Welcome to the ABYX hub. Season intelligence, alliance resources and leadership tools gathered in one place for Dark War: Survival.",
@@ -428,7 +449,7 @@
           statusRestricted:"Restricted 🔒",leadershipIndex:"03 • Leadership",leaderTools:"Leader Tools",leaderDesc:"Franky Rally Tool, Alliance Message Builder and future tools reserved for ABYX leadership.",leaderAccessCard:"Leader access",
           migrationTitle:"ABYX tools migration",migrationDesc:"The current Franky Rally Tool remains online while the new hub is being built.",devBadge:"V2 • In development",footerEdition:"Alliance Hub • Season Edition"
         },
-        fr:{
+        fr:{statusHive:"Ruche",hiveIndex:"03 • Placement",hiveTitle:"Voir la ruche",hiveDesc:"Connaître son placement dans la ruche ABYX.",hiveLink:"Ouvrir la ruche",leadershipIndex:"04 • Commandement",
           brandSub:"Dark War • Hub d’alliance",navSeason:"Guide de saison",navNews:"Infos & Guides",navLeader:"Outils Leaders 🔒",navEnter:"Entrer",
           seasonTag:"Saison actuelle • Centre de commandement de l’alliance",heroLead:"Plongez dans les",heroAbyss:"Abysses",
           heroSub:"Bienvenue sur le hub ABYX. Renseignements de saison, ressources de l’alliance et outils de commandement réunis au même endroit pour Dark War: Survival.",
@@ -439,7 +460,7 @@
           statusRestricted:"Restreint 🔒",leadershipIndex:"03 • Commandement",leaderTools:"Outils Leaders",leaderDesc:"Franky Rally Tool, outil de rédaction de messages d’alliance et futurs outils réservés aux leaders ABYX.",leaderAccessCard:"Accès Leaders",
           migrationTitle:"Migration des outils ABYX",migrationDesc:"Le Franky Rally Tool actuel reste en ligne pendant la construction du nouveau hub.",devBadge:"V2 • En développement",footerEdition:"Hub d’alliance • Édition Saison"
         },
-        it:{
+        it:{statusHive:"Alveare",hiveIndex:"03 • Posizione",hiveTitle:"Vedi l’alveare",hiveDesc:"Scopri la tua posizione nell’alveare ABYX.",hiveLink:"Apri l’alveare",leadershipIndex:"04 • Leadership",
           brandSub:"Dark War • Hub dell’alleanza",navSeason:"Guida stagione",navNews:"Notizie & Guide",navLeader:"Strumenti Leader 🔒",navEnter:"Entra",
           seasonTag:"Stagione attuale • Centro di comando dell’alleanza",heroLead:"Scendi negli",heroAbyss:"Abissi",
           heroSub:"Benvenuto nell’hub ABYX. Informazioni sulla stagione, risorse dell’alleanza e strumenti di comando riuniti in un unico posto per Dark War: Survival.",
@@ -450,7 +471,7 @@
           statusRestricted:"Riservato 🔒",leadershipIndex:"03 • Leadership",leaderTools:"Strumenti Leader",leaderDesc:"Franky Rally Tool, Alliance Message Builder e futuri strumenti riservati alla leadership ABYX.",leaderAccessCard:"Accesso Leader",
           migrationTitle:"Migrazione strumenti ABYX",migrationDesc:"L’attuale Franky Rally Tool resta online mentre costruiamo il nuovo hub.",devBadge:"V2 • In sviluppo",footerEdition:"Hub dell’alleanza • Edizione Stagione"
         },
-        de:{
+        de:{statusHive:"Hive",hiveIndex:"03 • Platzierung",hiveTitle:"Hive ansehen",hiveDesc:"Finde deinen Platz im ABYX-Hive.",hiveLink:"Hive öffnen",leadershipIndex:"04 • Führung",
           brandSub:"Dark War • Allianz-Hub",navSeason:"Saison-Guide",navNews:"News & Guides",navLeader:"Leader-Tools 🔒",navEnter:"Hub öffnen",
           seasonTag:"Aktuelle Saison • Allianz-Kommandozentrale",heroLead:"Hinab in den",heroAbyss:"Abgrund",
           heroSub:"Willkommen im ABYX-Hub. Saisoninformationen, Allianz-Ressourcen und Führungstools an einem Ort für Dark War: Survival.",
@@ -461,7 +482,7 @@
           statusRestricted:"Geschützt 🔒",leadershipIndex:"03 • Führung",leaderTools:"Leader-Tools",leaderDesc:"Franky Rally Tool, Alliance Message Builder und zukünftige Tools exklusiv für die ABYX-Führung.",leaderAccessCard:"Leader-Zugang",
           migrationTitle:"Migration der ABYX-Tools",migrationDesc:"Das aktuelle Franky Rally Tool bleibt online, während der neue Hub aufgebaut wird.",devBadge:"V2 • In Entwicklung",footerEdition:"Allianz-Hub • Saison-Edition"
         },
-        pl:{
+        pl:{statusHive:"Ul",hiveIndex:"03 • Pozycja",hiveTitle:"Zobacz ul",hiveDesc:"Sprawdź swoje miejsce w ulu ABYX.",hiveLink:"Otwórz ul",leadershipIndex:"04 • Dowodzenie",
           brandSub:"Dark War • Centrum sojuszu",navSeason:"Przewodnik sezonu",navNews:"Aktualności i poradniki",navLeader:"Narzędzia liderów 🔒",navEnter:"Wejdź do hubu",
           seasonTag:"Aktualny sezon • Centrum dowodzenia sojuszu",heroLead:"Zejdź w",heroAbyss:"Otchłań",
           heroSub:"Witaj w centrum ABYX. Informacje sezonowe, zasoby sojuszu i narzędzia dowodzenia w jednym miejscu dla Dark War: Survival.",
@@ -472,7 +493,7 @@
           statusRestricted:"Tylko liderzy 🔒",leadershipIndex:"03 • Dowodzenie",leaderTools:"Narzędzia liderów",leaderDesc:"Franky Rally Tool, Alliance Message Builder i przyszłe narzędzia zarezerwowane dla liderów ABYX.",leaderAccessCard:"Dostęp liderów",
           migrationTitle:"Migracja narzędzi ABYX",migrationDesc:"Obecny Franky Rally Tool pozostaje online podczas budowy nowego hubu.",devBadge:"V2 • W budowie",footerEdition:"Centrum sojuszu • Edycja sezonowa"
         },
-        ru:{
+        ru:{statusHive:"Улей",hiveIndex:"03 • Позиция",hiveTitle:"Посмотреть улей",hiveDesc:"Узнай своё место в улье ABYX.",hiveLink:"Открыть улей",leadershipIndex:"04 • Руководство",
           brandSub:"Dark War • Центр альянса",navSeason:"Гайд сезона",navNews:"Новости и гайды",navLeader:"Инструменты лидеров 🔒",navEnter:"Войти",
           seasonTag:"Текущий сезон • Командный центр альянса",heroLead:"Спустись в",heroAbyss:"Бездну",
           heroSub:"Добро пожаловать в центр ABYX. Информация о сезоне, ресурсы альянса и инструменты управления собраны в одном месте для Dark War: Survival.",
@@ -483,7 +504,7 @@
           statusRestricted:"Только лидеры 🔒",leadershipIndex:"03 • Руководство",leaderTools:"Инструменты лидеров",leaderDesc:"Franky Rally Tool, Alliance Message Builder и будущие инструменты только для руководства ABYX.",leaderAccessCard:"Доступ лидеров",
           migrationTitle:"Перенос инструментов ABYX",migrationDesc:"Текущий Franky Rally Tool остаётся доступным, пока мы строим новый hub.",devBadge:"V2 • В разработке",footerEdition:"Центр альянса • Сезонная версия"
         },
-        uk:{
+        uk:{statusHive:"Вулик",hiveIndex:"03 • Позиція",hiveTitle:"Переглянути вулик",hiveDesc:"Дізнайся своє місце у вулику ABYX.",hiveLink:"Відкрити вулик",leadershipIndex:"04 • Керівництво",
           brandSub:"Dark War • Центр альянсу",navSeason:"Гайд сезону",navNews:"Новини та гайди",navLeader:"Інструменти лідерів 🔒",navEnter:"Увійти",
           seasonTag:"Поточний сезон • Командний центр альянсу",heroLead:"Спустися в",heroAbyss:"Безодню",
           heroSub:"Ласкаво просимо до центру ABYX. Інформація про сезон, ресурси альянсу та інструменти керування зібрані в одному місці для Dark War: Survival.",
