@@ -295,7 +295,7 @@
   var posterAssetsWaiters = [];
 
   var posterTroopSources = {
-    fighter: "/leader-tools/franky/assets/troops/fighter.png?v=7",
+    fighter: "/leader-tools/franky/assets/troops/fighter.png?v=8",
     shooter: "/leader-tools/franky/assets/troops/shooter.png?v=7",
     rider: "/leader-tools/franky/assets/troops/rider.png?v=7"
   };
