@@ -1,9 +1,9 @@
 (() => {
   'use strict';
 
-  const LANG_KEY = '434-ragnarok-language-v2';
-  const supported = ['en','fr','it','de','pl'];
-  const localeMap = { en:'en-US', fr:'fr-FR', it:'it-IT', de:'de-DE', pl:'pl-PL' };
+  const LANG_KEY = 'abyx_lang';
+  const supported = ['en','fr','it','de','pl','ru','uk'];
+  const localeMap = { en:'en-US', fr:'fr-FR', it:'it-IT', de:'de-DE', pl:'pl-PL', ru:'ru-RU', uk:'uk-UA' };
 
   const ui = {
     en:{navRoadmap:'Road Map',navSystems:'Season Systems',search:'Search',season6:'SEASON 6',originLands:'ORIGIN LANDS II',roadmapTitle:'ROAD MAP',roadmapSubtitle:'Six weeks. One path. Everything important at a glance.',viewRoadmap:'View the road map',seasonSystems:'SEASON SYSTEMS',alwaysWorthKnowing:'Always worth knowing',systemsIntro:'These mechanics run alongside the weekly calendar. Tap a card for the essentials.',sixWeekJourney:'THE 6-WEEK JOURNEY',seasonRoadmap:'Season Road Map',guideAvailable:'Guide available',calendarOnly:'Calendar info',calendarDisclaimer:'Dates and content may change. If anything differs in game, follow the official Dark War Survival announcements.',footerTitle:'Ragnarok Season 6 · Interactive Road Map',footerSub:'Built for quick use on mobile and desktop.',findFast:'FIND IT FAST',searchGuide:'Search the season',searchPlaceholder:'Search Outpost, Temple, Merchant...',noResults:'No result. Try another event or system.',week:'WEEK',now:'NOW',startsIn:'Season starts in {n} day(s)',startsToday:'Season starts today',seasonLive:'Season in progress · Week {n}',seasonEnded:'Season completed',days:'days',day:'day',guide:'GUIDE',calendar:'CALENDAR',when:'WHEN?',where:'WHERE?',what:'WHAT?',keyRule:'KEY RULE',tips:'KEY POINTS'},
@@ -11,6 +11,8 @@
     it:{navRoadmap:'Road Map',navSystems:'Sistemi stagionali',search:'Cerca',season6:'STAGIONE 6',originLands:'ORIGIN LANDS II',roadmapTitle:'ROAD MAP',roadmapSubtitle:'Sei settimane. Un solo percorso. Tutto ciò che conta a colpo d’occhio.',viewRoadmap:'Vedi la Road Map',seasonSystems:'SISTEMI STAGIONALI',alwaysWorthKnowing:'Da sapere per tutta la stagione',systemsIntro:'Queste meccaniche funzionano insieme al calendario settimanale. Tocca una scheda per i dettagli essenziali.',sixWeekJourney:'IL PERCORSO DI 6 SETTIMANE',seasonRoadmap:'Road Map stagionale',guideAvailable:'Guida disponibile',calendarOnly:'Info calendario',calendarDisclaimer:'Date e contenuti possono cambiare. In caso di differenze, segui gli annunci ufficiali di Dark War Survival.',footerTitle:'Ragnarok Stagione 6 · Road Map interattiva',footerSub:'Pensata per uso rapido su smartphone e desktop.',findFast:'TROVA SUBITO',searchGuide:'Cerca nella stagione',searchPlaceholder:'Cerca Outpost, Temple, Merchant...',noResults:'Nessun risultato. Prova un altro evento o sistema.',week:'SETTIMANA',now:'ORA',startsIn:'La stagione inizia tra {n} giorno/i',startsToday:'La stagione inizia oggi',seasonLive:'Stagione in corso · Settimana {n}',seasonEnded:'Stagione terminata',days:'giorni',day:'giorno',guide:'GUIDA',calendar:'CALENDARIO',when:'QUANDO?',where:'DOVE?',what:'COSA?',keyRule:'REGOLA CHIAVE',tips:'PUNTI CHIAVE'},
     de:{navRoadmap:'Road Map',navSystems:'Saison-Systeme',search:'Suche',season6:'SAISON 6',originLands:'ORIGIN LANDS II',roadmapTitle:'ROAD MAP',roadmapSubtitle:'Sechs Wochen. Ein Weg. Alles Wichtige auf einen Blick.',viewRoadmap:'Road Map ansehen',seasonSystems:'SAISON-SYSTEME',alwaysWorthKnowing:'Während der ganzen Saison wichtig',systemsIntro:'Diese Mechaniken laufen parallel zum Wochenkalender. Öffne eine Karte für die wichtigsten Infos.',sixWeekJourney:'DIE 6-WOCHEN-REISE',seasonRoadmap:'Saison Road Map',guideAvailable:'Guide verfügbar',calendarOnly:'Kalenderinfo',calendarDisclaimer:'Termine und Inhalte können sich ändern. Bei Abweichungen gelten die offiziellen Dark War Survival-Ankündigungen.',footerTitle:'Ragnarok Saison 6 · Interaktive Road Map',footerSub:'Für schnelle Nutzung auf Handy und Desktop.',findFast:'SCHNELL FINDEN',searchGuide:'Saison durchsuchen',searchPlaceholder:'Outpost, Temple, Merchant suchen...',noResults:'Kein Ergebnis. Versuche ein anderes Event oder System.',week:'WOCHE',now:'JETZT',startsIn:'Die Saison startet in {n} Tag(en)',startsToday:'Die Saison startet heute',seasonLive:'Saison läuft · Woche {n}',seasonEnded:'Saison beendet',days:'Tage',day:'Tag',guide:'GUIDE',calendar:'KALENDER',when:'WANN?',where:'WO?',what:'WAS?',keyRule:'WICHTIGE REGEL',tips:'WICHTIGE PUNKTE'},
     pl:{navRoadmap:'Road Map',navSystems:'Systemy sezonowe',search:'Szukaj',season6:'SEZON 6',originLands:'ORIGIN LANDS II',roadmapTitle:'ROAD MAP',roadmapSubtitle:'Sześć tygodni. Jedna droga. Wszystko, co ważne, na pierwszy rzut oka.',viewRoadmap:'Zobacz Road Map',seasonSystems:'SYSTEMY SEZONOWE',alwaysWorthKnowing:'Warto znać przez cały sezon',systemsIntro:'Te mechaniki działają równolegle z kalendarzem tygodniowym. Otwórz kartę, aby zobaczyć najważniejsze informacje.',sixWeekJourney:'6-TYGODNIOWA DROGA',seasonRoadmap:'Road Map sezonu',guideAvailable:'Poradnik dostępny',calendarOnly:'Informacja kalendarza',calendarDisclaimer:'Daty i zawartość mogą się zmienić. W razie różnic sprawdź oficjalne ogłoszenia Dark War Survival.',footerTitle:'Ragnarok Sezon 6 · Interaktywna Road Map',footerSub:'Do szybkiego użycia na telefonie i komputerze.',findFast:'ZNAJDŹ SZYBKO',searchGuide:'Przeszukaj sezon',searchPlaceholder:'Szukaj Outpost, Temple, Merchant...',noResults:'Brak wyników. Spróbuj innego wydarzenia lub systemu.',week:'TYDZIEŃ',now:'TERAZ',startsIn:'Sezon zaczyna się za {n} dni',startsToday:'Sezon zaczyna się dziś',seasonLive:'Sezon trwa · Tydzień {n}',seasonEnded:'Sezon zakończony',days:'dni',day:'dzień',guide:'PORADNIK',calendar:'KALENDARZ',when:'KIEDY?',where:'GDZIE?',what:'CO?',keyRule:'KLUCZOWA ZASADA',tips:'NAJWAŻNIEJSZE'}
+    ,ru:{navRoadmap:'Road Map',navSystems:'Системы сезона',search:'Поиск',season6:'СЕЗОН 6',originLands:'ORIGIN LANDS II',roadmapTitle:'ROAD MAP',roadmapSubtitle:'Шесть недель. Один путь. Всё важное — с первого взгляда.',viewRoadmap:'Открыть Road Map',seasonSystems:'СИСТЕМЫ СЕЗОНА',alwaysWorthKnowing:'Важно знать весь сезон',systemsIntro:'Эти механики действуют параллельно недельному календарю. Открой карточку, чтобы увидеть главное.',sixWeekJourney:'ПУТЬ НА 6 НЕДЕЛЬ',seasonRoadmap:'Road Map сезона',guideAvailable:'Есть гайд',calendarOnly:'Календарь',calendarDisclaimer:'Даты и содержание могут меняться. При расхождениях следуйте официальным объявлениям Dark War Survival.',footerTitle:'Ragnarok Сезон 6 · Интерактивная Road Map',footerSub:'Для быстрого использования на телефоне и компьютере.',findFast:'БЫСТРЫЙ ПОИСК',searchGuide:'Поиск по сезону',searchPlaceholder:'Искать Outpost, Temple, Merchant...',noResults:'Ничего не найдено. Попробуйте другое событие или систему.',week:'НЕДЕЛЯ',now:'СЕЙЧАС',startsIn:'До начала сезона: {n} дн.',startsToday:'Сезон начинается сегодня',seasonLive:'Сезон идёт · Неделя {n}',seasonEnded:'Сезон завершён',days:'дней',day:'день',guide:'ГАЙД',calendar:'КАЛЕНДАРЬ',when:'КОГДА?',where:'ГДЕ?',what:'ЧТО?',keyRule:'ГЛАВНОЕ ПРАВИЛО',tips:'КЛЮЧЕВЫЕ МОМЕНТЫ'},
+    uk:{navRoadmap:'Road Map',navSystems:'Системи сезону',search:'Пошук',season6:'СЕЗОН 6',originLands:'ORIGIN LANDS II',roadmapTitle:'ROAD MAP',roadmapSubtitle:'Шість тижнів. Один шлях. Усе важливе — з першого погляду.',viewRoadmap:'Відкрити Road Map',seasonSystems:'СИСТЕМИ СЕЗОНУ',alwaysWorthKnowing:'Варто знати протягом сезону',systemsIntro:'Ці механіки працюють паралельно тижневому календарю. Відкрий картку, щоб побачити головне.',sixWeekJourney:'ШЛЯХ НА 6 ТИЖНІВ',seasonRoadmap:'Road Map сезону',guideAvailable:'Є гайд',calendarOnly:'Календар',calendarDisclaimer:'Дати та зміст можуть змінюватися. У разі розбіжностей дотримуйся офіційних оголошень Dark War Survival.',footerTitle:'Ragnarok Сезон 6 · Інтерактивна Road Map',footerSub:'Для швидкого використання на телефоні та комп’ютері.',findFast:'ШВИДКИЙ ПОШУК',searchGuide:'Пошук по сезону',searchPlaceholder:'Шукати Outpost, Temple, Merchant...',noResults:'Нічого не знайдено. Спробуй іншу подію або систему.',week:'ТИЖДЕНЬ',now:'ЗАРАЗ',startsIn:'До початку сезону: {n} дн.',startsToday:'Сезон починається сьогодні',seasonLive:'Сезон триває · Тиждень {n}',seasonEnded:'Сезон завершено',days:'днів',day:'день',guide:'ГАЙД',calendar:'КАЛЕНДАР',when:'КОЛИ?',where:'ДЕ?',what:'ЩО?',keyRule:'ГОЛОВНЕ ПРАВИЛО',tips:'КЛЮЧОВІ МОМЕНТИ'}
   };
 
   const dayNames = {
@@ -18,10 +20,12 @@
     fr:{mon:'Lundi',tue:'Mardi',wed:'Mercredi',thu:'Jeudi',fri:'Vendredi',sat:'Samedi',sun:'Dimanche',ongoing:'En continu',weekly:'Hebdo'},
     it:{mon:'Lunedì',tue:'Martedì',wed:'Mercoledì',thu:'Giovedì',fri:'Venerdì',sat:'Sabato',sun:'Domenica',ongoing:'In corso',weekly:'Settimanale'},
     de:{mon:'Montag',tue:'Dienstag',wed:'Mittwoch',thu:'Donnerstag',fri:'Freitag',sat:'Samstag',sun:'Sonntag',ongoing:'Laufend',weekly:'Wöchentlich'},
-    pl:{mon:'Poniedziałek',tue:'Wtorek',wed:'Środa',thu:'Czwartek',fri:'Piątek',sat:'Sobota',sun:'Niedziela',ongoing:'Przez cały sezon',weekly:'Co tydzień'}
+    pl:{mon:'Poniedziałek',tue:'Wtorek',wed:'Środa',thu:'Czwartek',fri:'Piątek',sat:'Sobota',sun:'Niedziela',ongoing:'Przez cały sezon',weekly:'Co tydzień'},
+    ru:{mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье',ongoing:'Весь сезон',weekly:'Еженедельно'},
+    uk:{mon:'Понеділок',tue:'Вівторок',wed:'Середа',thu:'Четвер',fri:'П’ятниця',sat:'Субота',sun:'Неділя',ongoing:'Увесь сезон',weekly:'Щотижня'}
   };
 
-  const L = (en,fr,it,de,pl) => ({en,fr,it,de,pl});
+  const L = (en,fr,it,de,pl) => ({en,fr,it,de,pl,ru:en,uk:en});
 
   const details = {
     kickoff:{icon:'☠',kicker:L('WEEK 1','SEMAINE 1','SETTIMANA 1','WOCHE 1','TYDZIEŃ 1'),title:L('Season Kickoff','Lancement de saison','Inizio stagione','Saisonstart','Start sezonu'),lead:L('Hunt the highest-level Mummies you can handle to help your camp climb the rankings.','Élimine les Momies du plus haut niveau possible pour faire progresser ton camp au classement.','Elimina le Mummie del livello più alto possibile per far salire il tuo campo in classifica.','Besiege möglichst hochstufige Mumien, damit dein Camp im Ranking steigt.','Pokonuj Mumie na najwyższym możliwym poziomie, aby twój obóz awansował w rankingu.'),facts:[['when',L('Week 1 · 6 days','Semaine 1 · 6 jours','Settimana 1 · 6 giorni','Woche 1 · 6 Tage','Tydzień 1 · 6 dni')],['what',L('Camp ranking event','Événement de classement de camp','Evento classifica campo','Camp-Ranglisten-Event','Wydarzenie rankingowe obozu')]],tips:[L('The higher the Mummy level and the earlier the kill, the better the ranking contribution.','Plus le niveau de la Momie est élevé et plus tu la tues tôt, meilleure est la contribution au classement.','Più alto è il livello della Mummia e prima la elimini, migliore è il contributo alla classifica.','Je höher das Mumien-Level und je früher der Kill, desto besser für das Ranking.','Im wyższy poziom Mumii i im wcześniejsze zabicie, tym lepszy wynik rankingowy.')]},
@@ -105,6 +109,17 @@
   const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
   const tr = ()=>ui[lang] || ui.en;
   const pick = obj => (obj && (obj[lang] || obj.en)) || '';
+
+  const shellUi = {
+    en:{brandSub:'Dark War • Alliance Hub',seasonGuide:'Season Guide',newsGuides:'News & Guides',leaderTools:'Leader Tools 🔒',enterHub:'Enter Hub'},
+    fr:{brandSub:'Dark War • Hub d’alliance',seasonGuide:'Guide de saison',newsGuides:'Infos & Guides',leaderTools:'Outils Leaders 🔒',enterHub:'Entrer'},
+    it:{brandSub:'Dark War • Hub dell’alleanza',seasonGuide:'Guida stagione',newsGuides:'Notizie & Guide',leaderTools:'Strumenti Leader 🔒',enterHub:'Entra'},
+    de:{brandSub:'Dark War • Allianz-Hub',seasonGuide:'Saison-Guide',newsGuides:'News & Guides',leaderTools:'Leader-Tools 🔒',enterHub:'Hub öffnen'},
+    pl:{brandSub:'Dark War • Centrum sojuszu',seasonGuide:'Przewodnik sezonu',newsGuides:'Aktualności i poradniki',leaderTools:'Narzędzia liderów 🔒',enterHub:'Wejdź'},
+    ru:{brandSub:'Dark War • Центр альянса',seasonGuide:'Гайд сезона',newsGuides:'Новости и гайды',leaderTools:'Инструменты лидеров 🔒',enterHub:'Войти'},
+    uk:{brandSub:'Dark War • Центр альянсу',seasonGuide:'Гайд сезону',newsGuides:'Новини та гайди',leaderTools:'Інструменти лідерів 🔒',enterHub:'Увійти'}
+  };
+  const shellLabels={en:'EN',fr:'FR',it:'IT',de:'DE',pl:'PL',ru:'RU',uk:'UA'};
 
   function getInitialLanguage(){
     try{const s=localStorage.getItem(LANG_KEY);if(supported.includes(s))return s;}catch(_){}
@@ -239,20 +254,44 @@
     document.documentElement.lang=lang;
     document.title='434 — '+(lang==='fr'?'Road Map Ragnarok':lang==='it'?'Road Map Ragnarok':lang==='de'?'Ragnarok Road Map':lang==='pl'?'Ragnarok Road Map':'Ragnarok Road Map');
     $('#languageSelect').value=lang;
-    $$('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(tr()[key])el.textContent=tr()[key];});
+    $('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(tr()[key])el.textContent=tr()[key];});
+    const shell=shellUi[lang]||shellUi.en;
+    $('[data-shell-i18n]').forEach(el=>{const key=el.dataset.shellI18n;if(shell[key])el.textContent=shell[key];});
+    const current=$('#abyxLangCurrent'); if(current) current.textContent=shellLabels[lang]||lang.toUpperCase();
+    $('.abyx-lang-option').forEach(btn=>btn.classList.toggle('active',btn.dataset.lang===lang));
     $('#guideSearch').placeholder=tr().searchPlaceholder;
     const sr=$('.nav-toggle .sr-only'); if(sr) sr.textContent=lang==='fr'?'Ouvrir la navigation':'Open navigation';
     renderSystems();renderRoadmap();updateSeasonProgress();buildSearch();saveLanguage();
   }
 
   const navToggle=$('.nav-toggle'), mobileNav=$('#mobileNav');
-  navToggle.addEventListener('click',()=>{const open=navToggle.getAttribute('aria-expanded')==='true';navToggle.setAttribute('aria-expanded',String(!open));mobileNav.hidden=open;});
-  $$('#mobileNav a').forEach(a=>a.addEventListener('click',()=>{navToggle.setAttribute('aria-expanded','false');mobileNav.hidden=true;}));
+  if(navToggle&&mobileNav){
+    navToggle.addEventListener('click',()=>{const open=navToggle.getAttribute('aria-expanded')==='true';navToggle.setAttribute('aria-expanded',String(!open));mobileNav.hidden=open;});
+    $('#mobileNav a').forEach(a=>a.addEventListener('click',()=>{navToggle.setAttribute('aria-expanded','false');mobileNav.hidden=true;}));
+  }
 
   const languageSelect=$('#languageSelect');
   const onLanguageChange=e=>{const next=e.target.value;if(supported.includes(next)){lang=next;applyLanguage();}};
   languageSelect.addEventListener('change',onLanguageChange);
   languageSelect.addEventListener('input',onLanguageChange);
+
+  const langPicker=$('#abyxLangPicker'), langCurrent=$('#abyxLangCurrent');
+  if(langPicker&&langCurrent){
+    langCurrent.addEventListener('click',e=>{
+      e.stopPropagation();
+      const open=langPicker.classList.toggle('open');
+      langCurrent.setAttribute('aria-expanded',open?'true':'false');
+    });
+    $('.abyx-lang-option').forEach(btn=>btn.addEventListener('click',()=>{
+      const next=btn.dataset.lang;
+      if(supported.includes(next)){lang=next;applyLanguage();}
+      langPicker.classList.remove('open');
+      langCurrent.setAttribute('aria-expanded','false');
+    }));
+    document.addEventListener('click',e=>{
+      if(!langPicker.contains(e.target)){langPicker.classList.remove('open');langCurrent.setAttribute('aria-expanded','false');}
+    });
+  }
   $('#searchOpen').addEventListener('click',openSearch);
   $$('[data-close-search]').forEach(x=>x.addEventListener('click',closeSearch));
   $$('[data-close-detail]').forEach(x=>x.addEventListener('click',closeDetail));
