@@ -234,3 +234,228 @@ body{padding-top:82px}
   .guide-nav .search-open{padding:0 8px}
   .guide-nav .search-open-label{display:none}
 }
+
+
+/* =========================================================
+   ABYX UNIFIED SEASON GUIDE SKIN
+   Abyss / Egypt visual system shared with the homepage
+   ========================================================= */
+:root{
+  --bg:#020811;--bg2:#05111c;--panel:#071421;--panel2:#0b1b2b;--ink:#f7fbff;--muted:#8da5b8;
+  --gold:#d8b66e;--gold2:#efd59d;--amber:#1e9ec3;--bronze:#6f5b35;
+  --cyan:#66e5ff;--cyan2:#1e9ec3;--line:rgba(102,229,255,.20);
+  --red:#ff6678;--green:#64d99b;--shadow:0 28px 80px rgba(0,0,0,.48);--max:1200px
+}
+html{background:#02070d}
+body{
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 18% 0%,rgba(30,158,195,.10),transparent 30%),
+    radial-gradient(circle at 85% 24%,rgba(216,182,110,.06),transparent 28%),
+    linear-gradient(180deg,#020912 0%,#02070d 100%);
+}
+body:before{
+  background-image:
+    linear-gradient(rgba(102,229,255,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(102,229,255,.022) 1px,transparent 1px);
+  background-size:52px 52px;opacity:.65
+}
+.page-glow-left{background:#1e9ec3}.page-glow-right{background:#d8b66e}
+.page-glow{opacity:.09}
+
+/* Shared header / guide toolbar */
+.abyx-topbar:before{
+  background:linear-gradient(180deg,rgba(1,7,13,.96),rgba(1,7,13,.76) 70%,rgba(1,7,13,.55));
+  border-bottom-color:rgba(102,229,255,.08)
+}
+.guide-toolbar{
+  border-bottom:1px solid rgba(102,229,255,.10);
+  background:rgba(3,12,21,.88)
+}
+.guide-context{color:#839bad}.guide-context span{color:var(--gold)}
+.guide-nav>a{color:#91a9b9}
+.guide-nav>a:hover{color:#fff;background:rgba(102,229,255,.07)}
+.guide-nav .search-open{border-color:rgba(102,229,255,.16);background:rgba(102,229,255,.05);color:#9bc8d5}
+.guide-nav .search-open:hover{border-color:rgba(102,229,255,.38);color:#fff}
+
+/* Hero */
+main{width:min(var(--max),calc(100% - 34px));margin:0 auto}
+.hero{
+  position:relative;min-height:610px;margin:22px 0 74px;padding:72px 56px 58px;
+  display:grid;grid-template-columns:minmax(0,1fr);align-items:center;
+  overflow:hidden;border:1px solid rgba(102,229,255,.14);border-radius:20px;
+  background:#03101c;box-shadow:0 35px 100px rgba(0,0,0,.52);isolation:isolate
+}
+.hero:before{
+  content:"";position:absolute;inset:-5%;z-index:-3;
+  background:
+    linear-gradient(90deg,rgba(1,7,12,.91) 0%,rgba(1,7,12,.56) 38%,rgba(1,7,12,.20) 68%,rgba(1,7,12,.42) 100%),
+    linear-gradient(180deg,rgba(1,7,12,.18),rgba(1,7,12,.76)),
+    url("../assets/abyx-hero-egypt.webp") center 46%/cover no-repeat;
+  transform:scale(1.08);animation:abyxGuideDrift 24s ease-in-out infinite alternate
+}
+.hero:after{
+  content:"";position:absolute;inset:0;z-index:-2;height:auto;
+  background:
+    radial-gradient(circle at 72% 18%,rgba(102,229,255,.14),transparent 24%),
+    linear-gradient(180deg,transparent 55%,rgba(1,7,12,.46));
+  pointer-events:none
+}
+.hero-sun,.hero-pyramids,.hero-seal{display:none!important}
+.hero-copy{position:relative;z-index:2;max-width:760px}
+.season-badge{
+  display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;padding:8px 11px;
+  border:1px solid rgba(216,182,110,.27);border-radius:999px;background:rgba(216,182,110,.06);
+  color:#d9bd82;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase
+}
+.hero h1{margin:0}
+.hero-kicker{
+  display:block;margin-bottom:7px;color:#d9bd82;font-size:clamp(.82rem,1.4vw,1rem);
+  letter-spacing:.22em;font-weight:900;text-transform:uppercase
+}
+.hero-title{
+  display:block;color:transparent;font-size:clamp(3.8rem,8vw,7rem);line-height:.84;
+  letter-spacing:-.055em;font-weight:950;text-transform:uppercase;
+  -webkit-text-stroke:1px rgba(126,229,255,.72);
+  background:linear-gradient(180deg,#f3fcff 8%,#87eaff 48%,#267f9d 105%);
+  -webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 0 25px rgba(69,207,241,.15))
+}
+.hero-subtitle{
+  max-width:620px;margin:23px 0 0;color:#a8bdcb;font-size:1.04rem;line-height:1.72;
+  text-shadow:0 2px 15px rgba(0,0,0,.65)
+}
+.hero-status{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:30px}
+.season-state-chip{
+  min-height:47px;display:inline-flex;align-items:center;padding:0 16px;
+  border:1px solid rgba(216,182,110,.24);border-radius:7px;background:rgba(3,12,21,.56);
+  color:#d9bd82;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
+  backdrop-filter:blur(10px)
+}
+.season-progress{display:none!important}
+.hero-cta{
+  min-height:49px;display:inline-flex;align-items:center;gap:11px;padding:0 19px;
+  border:1px solid transparent;border-radius:7px;color:#031019;
+  background:linear-gradient(135deg,#71e9ff,#b1f4ff);
+  box-shadow:0 14px 42px rgba(63,208,242,.18);
+  font-size:.72rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase
+}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 18px 50px rgba(63,208,242,.28)}
+
+/* Sections */
+.systems-section,.roadmap-section{position:relative;margin-top:0;padding:28px 0 42px}
+.section-heading{margin-bottom:26px}
+.eyebrow{color:#d8b66e;letter-spacing:.20em;font-weight:900}
+.section-heading h2{color:#f7fbff;font-size:clamp(2rem,4.5vw,3.8rem);letter-spacing:-.035em;text-transform:uppercase}
+.section-heading>p,.compact-heading>p{color:#829aac;line-height:1.65}
+.roadmap-heading-tools{gap:8px}
+.legend-chip{
+  border:1px solid rgba(102,229,255,.13);background:rgba(5,17,29,.58);
+  color:#8fa8b8;border-radius:999px
+}
+.detail-dot{background:#66e5ff;box-shadow:0 0 10px rgba(102,229,255,.6)}
+.schedule-dot{background:#d8b66e;box-shadow:0 0 10px rgba(216,182,110,.45)}
+
+/* System cards */
+.system-grid{gap:15px}
+.system-card{
+  min-height:228px;border:1px solid rgba(102,229,255,.16);border-radius:13px;
+  background:linear-gradient(180deg,rgba(11,28,43,.86),rgba(4,14,24,.96));
+  box-shadow:0 22px 58px rgba(0,0,0,.35);overflow:hidden
+}
+.system-card:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(130deg,rgba(102,229,255,.08),transparent 34%),radial-gradient(circle at 100% 100%,rgba(216,182,110,.07),transparent 35%)
+}
+.system-card:hover{
+  transform:translateY(-6px);border-color:rgba(102,229,255,.38);
+  box-shadow:0 30px 75px rgba(0,0,0,.48)
+}
+.system-art{opacity:.66;filter:saturate(.86) contrast(1.03)}
+.system-art:after{background:linear-gradient(180deg,rgba(4,14,24,.04),rgba(4,14,24,.84))}
+.system-icon{
+  color:#d8b66e;border-color:rgba(216,182,110,.28);
+  background:rgba(3,12,21,.86);box-shadow:0 0 25px rgba(102,229,255,.10)
+}
+.system-card small,.system-copy small{color:#69cce5}
+.system-card strong,.system-copy strong{color:#f4fbff}
+.system-card p,.system-copy p{color:#8da5b8}
+.system-arrow{color:#66e5ff}
+
+/* Roadmap */
+.roadmap-shell{position:relative}
+.roadmap-line{background:linear-gradient(180deg,rgba(102,229,255,.15),rgba(102,229,255,.65),rgba(216,182,110,.32))}
+.week-node{
+  border-color:rgba(102,229,255,.30);background:#071522;color:#82e8fb;
+  box-shadow:0 0 0 7px rgba(2,8,17,.92),0 0 22px rgba(102,229,255,.12)
+}
+.week-node:after{background:#66e5ff}
+.week-row.is-current .week-node{
+  color:#04121a;background:linear-gradient(135deg,#66e5ff,#b0f3ff);
+  border-color:#a4efff;box-shadow:0 0 0 7px rgba(2,8,17,.92),0 0 30px rgba(102,229,255,.30)
+}
+.week-card,.week-row:nth-child(odd) .week-card,.week-row:nth-child(even) .week-card{
+  border:1px solid rgba(102,229,255,.15);border-radius:13px;
+  background:linear-gradient(180deg,rgba(10,26,40,.84),rgba(4,14,24,.95));
+  box-shadow:0 22px 60px rgba(0,0,0,.32)
+}
+.week-row.is-current .week-card{
+  border-color:rgba(216,182,110,.38);box-shadow:0 25px 68px rgba(0,0,0,.42),0 0 28px rgba(216,182,110,.06)
+}
+.week-title-wrap small{color:#5fcce5}.week-title-wrap strong{color:#f5fbff}
+.week-date{color:#d4bc88;background:rgba(216,182,110,.06);border-color:rgba(216,182,110,.16)}
+.event-card{
+  border:1px solid rgba(102,229,255,.10);background:rgba(5,18,30,.76);border-radius:9px
+}
+.event-card:hover{border-color:rgba(102,229,255,.32);background:rgba(9,27,42,.92)}
+.event-day b{color:#72def5}.event-day span{color:#748e9f}
+.event-copy strong{color:#edf8fd}.event-copy small{color:#829aaa}
+.event-arrow{color:#66e5ff}
+.event-badge{color:#d8bd83;border-color:rgba(216,182,110,.22);background:rgba(216,182,110,.05)}
+.week-chip{color:#89dff1;background:rgba(102,229,255,.05);border-color:rgba(102,229,255,.15)}
+.roadmap-note{
+  border:1px solid rgba(216,182,110,.16);background:linear-gradient(90deg,rgba(216,182,110,.05),rgba(5,17,29,.5))
+}
+.roadmap-note span{color:#d8b66e}.roadmap-note p{color:#839cab}
+
+/* Search + detail modal */
+.search-dialog,.detail-sheet{
+  border:1px solid rgba(102,229,255,.18);background:linear-gradient(180deg,#081827,#04101b);
+  box-shadow:0 35px 100px rgba(0,0,0,.68)
+}
+.search-dialog-head strong,.detail-sheet h2{color:#f7fbff}
+.search-field{border-color:rgba(102,229,255,.18);background:rgba(2,10,17,.7)}
+.search-field input{color:#effaff}.search-field input::placeholder{color:#60798b}
+.search-result{border-color:rgba(102,229,255,.08);background:rgba(7,20,32,.68)}
+.search-result:hover{background:rgba(10,29,44,.95);border-color:rgba(102,229,255,.25)}
+.search-result-icon{color:#66e5ff;border-color:rgba(102,229,255,.22)}
+.search-result-copy strong{color:#effaff}.search-result-copy small{color:#839aaa}
+.search-result-arrow{color:#d8b66e}
+.detail-sheet:before{background:linear-gradient(90deg,#66e5ff,#d8b66e,transparent)}
+.detail-close{border-color:rgba(102,229,255,.15);background:rgba(102,229,255,.05);color:#bcd0db}
+.detail-ornament{color:#d8b66e;border-color:rgba(216,182,110,.22);background:rgba(216,182,110,.05)}
+.detail-kicker{color:#66e5ff}.detail-lead{color:#a1b6c4}
+.detail-fact-card{border-color:rgba(102,229,255,.10);background:rgba(5,17,29,.66)}
+.detail-tip{border-color:rgba(216,182,110,.10);background:linear-gradient(90deg,rgba(216,182,110,.045),rgba(5,17,29,.48))}
+.detail-tip:before{color:#d8b66e}
+
+/* Footer */
+.footer{
+  margin-top:62px;border-top:1px solid rgba(102,229,255,.08);background:#01070c;color:#60798a
+}
+.footer strong{color:#b6c9d4}.footer p{color:#647d8e}
+
+@keyframes abyxGuideDrift{
+  0%{transform:scale(1.08) translate3d(-.5%,0,0)}
+  50%{transform:scale(1.12) translate3d(.5%,-.35%,0)}
+  100%{transform:scale(1.09) translate3d(-.15%,.25%,0)}
+}
+@media(max-width:760px){
+  .hero{min-height:540px;margin-top:14px;padding:58px 24px 46px;border-radius:16px}
+  .hero-title{font-size:clamp(3.15rem,17vw,5rem)}
+  .hero-status{align-items:stretch;flex-direction:column}
+  .season-state-chip,.hero-cta{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero:before{animation:none!important}
+}
