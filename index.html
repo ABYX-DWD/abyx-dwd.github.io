@@ -205,7 +205,7 @@
       text-align:center;overflow:hidden
     }
     .data-update-visual:nth-child(2){border-color:rgba(216,182,110,.20)}
-    .data-update-visual img{
+    .data-update-visual img,.data-update-visual svg{
       display:block;width:100%;max-width:82px;aspect-ratio:1/1;object-fit:contain;margin:0 auto 3px;
       filter:drop-shadow(0 7px 12px rgba(0,0,0,.36))
     }
@@ -226,13 +226,13 @@
       .data-update-panel{grid-template-columns:1fr;gap:20px;padding:24px}
       .data-update-side{width:100%}
       .data-update-visuals{max-width:390px}
-      .data-update-visual img{max-width:76px}
+      .data-update-visual img,.data-update-visual svg{max-width:76px}
     }
     @media(max-width:520px){
       .data-update-panel{padding:21px 18px}
       .data-update-visuals{max-width:none;gap:6px}
       .data-update-visual{padding:6px 4px}
-      .data-update-visual img{max-width:68px}
+      .data-update-visual img,.data-update-visual svg{max-width:68px}
       .data-update-action{white-space:normal;text-align:center}
     }
 
@@ -279,26 +279,44 @@
     }
     .hive-modal.open{display:flex}
     .hive-modal-dialog{
-      position:relative;width:min(96vw,1420px);max-height:92vh;padding:14px;border:1px solid rgba(102,229,255,.24);
-      border-radius:14px;background:linear-gradient(180deg,rgba(6,19,31,.98),rgba(2,9,16,.99));
-      box-shadow:0 35px 120px rgba(0,0,0,.72);overflow:auto
+      position:relative;width:min(96vw,1500px);height:min(92vh,980px);padding:14px;
+      display:grid;grid-template-rows:auto minmax(0,1fr);
+      border:1px solid rgba(102,229,255,.24);border-radius:14px;
+      background:linear-gradient(180deg,rgba(6,19,31,.98),rgba(2,9,16,.99));
+      box-shadow:0 35px 120px rgba(0,0,0,.72);overflow:hidden
     }
     .hive-modal-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:3px 3px 12px}
     .hive-modal-title{color:#dceff8;font-size:.72rem;font-weight:950;letter-spacing:.15em;text-transform:uppercase}
-    .hive-modal-close{
+    .hive-modal-actions{display:flex;align-items:center;gap:7px;margin-left:auto}
+    .hive-modal-tool,.hive-modal-close{
       width:40px;height:40px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);border-radius:9px;
-      background:rgba(255,255,255,.045);color:#e9f8ff;font-size:1.35rem;cursor:pointer
+      background:rgba(255,255,255,.045);color:#e9f8ff;font-size:1.15rem;font-weight:900;cursor:pointer
     }
-    .hive-modal-close:hover{border-color:rgba(102,229,255,.4);background:rgba(102,229,255,.08)}
+    .hive-modal-tool:hover,.hive-modal-close:hover{border-color:rgba(102,229,255,.4);background:rgba(102,229,255,.08)}
+    .hive-modal-viewport{
+      position:relative;min-width:0;min-height:0;overflow:hidden;border:1px solid rgba(216,182,110,.18);
+      border-radius:8px;background:#020b12;cursor:grab;touch-action:none
+    }
+    .hive-modal-viewport.dragging{cursor:grabbing}
     .hive-modal-image{
-      display:block;width:100%;height:auto;border:1px solid rgba(216,182,110,.18);border-radius:8px;background:#020b12
+      position:absolute;left:0;top:0;display:block;max-width:none;max-height:none;width:auto;height:auto;
+      transform-origin:0 0;will-change:transform;user-select:none;-webkit-user-drag:none;pointer-events:none
+    }
+    .hive-zoom-label{
+      min-width:58px;text-align:center;color:#8fb0bf;font-size:.62rem;font-weight:900;letter-spacing:.06em
+    }
+    .hive-modal-hint{
+      position:absolute;left:12px;bottom:10px;z-index:2;padding:6px 8px;border-radius:6px;
+      background:rgba(0,7,12,.72);color:#698696;font-size:.58rem;letter-spacing:.06em;pointer-events:none
     }
     body.hive-modal-open{overflow:hidden}
     @media(max-width:640px){
       .hive-modal{padding:8px}
-      .hive-modal-dialog{width:100%;max-height:96vh;padding:9px;border-radius:10px}
+      .hive-modal-dialog{width:100%;height:96vh;padding:9px;border-radius:10px}
       .hive-modal-head{padding-bottom:8px}
-      .hive-modal-close{width:36px;height:36px}
+      .hive-modal-tool,.hive-modal-close{width:36px;height:36px}
+      .hive-zoom-label{display:none}
+      .hive-modal-hint{font-size:.52rem}
     }
 
     .coming{padding:0 0 100px;background:#02070c}
@@ -471,7 +489,25 @@
                 <span>APC</span>
               </div>
               <div class="data-update-visual">
-                <img src="./assets/data-rally.webp?v=2" width="112" height="112" alt="" loading="eager" decoding="async">
+                <svg class="data-rally-svg" viewBox="0 0 112 112" width="112" height="112" role="img" aria-label="Rally">
+                  <defs>
+                    <linearGradient id="rallyGlow" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#66e5ff"/>
+                      <stop offset="1" stop-color="#d8b66e"/>
+                    </linearGradient>
+                    <filter id="rallyShadow" x="-40%" y="-40%" width="180%" height="180%">
+                      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity=".45"/>
+                    </filter>
+                  </defs>
+                  <g fill="none" stroke="url(#rallyGlow)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#rallyShadow)">
+                    <circle cx="56" cy="56" r="18"/>
+                    <path d="M18 28h23M35 20l8 8-8 8"/>
+                    <path d="M94 28H71M77 20l-8 8 8 8"/>
+                    <path d="M18 84h23M35 76l8 8-8 8"/>
+                    <path d="M94 84H71M77 76l-8 8 8 8"/>
+                  </g>
+                  <circle cx="56" cy="56" r="7" fill="#dff8ff"/>
+                </svg>
                 <span data-i18n="dataUpdateRally">Rally</span>
               </div>
             </div>
@@ -555,9 +591,18 @@
     <div class="hive-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="hiveModalTitle">
       <div class="hive-modal-head">
         <div class="hive-modal-title" id="hiveModalTitle" data-i18n="hiveModalTitle">ABYX Hive</div>
-        <button class="hive-modal-close" id="hiveModalClose" type="button" aria-label="Close">×</button>
+        <div class="hive-modal-actions">
+          <button class="hive-modal-tool" id="hiveZoomOut" type="button" aria-label="Zoom out">−</button>
+          <span class="hive-zoom-label" id="hiveZoomLabel">100%</span>
+          <button class="hive-modal-tool" id="hiveZoomIn" type="button" aria-label="Zoom in">+</button>
+          <button class="hive-modal-tool" id="hiveZoomReset" type="button" aria-label="Reset zoom">↺</button>
+          <button class="hive-modal-close" id="hiveModalClose" type="button" aria-label="Close">×</button>
+        </div>
       </div>
-      <img class="hive-modal-image" src="./assets/hive-preview.webp?v=2" alt="ABYX Hive layout" decoding="async">
+      <div class="hive-modal-viewport" id="hiveViewport">
+        <img class="hive-modal-image" id="hiveImage" src="./assets/hive-preview.webp?v=3" alt="ABYX Hive layout" decoding="async" draggable="false">
+        <div class="hive-modal-hint">Mouse wheel / + − to zoom • drag to move</div>
+      </div>
     </div>
   </div>
 
@@ -801,14 +846,60 @@
       var trigger=document.getElementById("hive-card");
       var modal=document.getElementById("hiveModal");
       var close=document.getElementById("hiveModalClose");
-      if(!trigger||!modal||!close) return;
+      var viewport=document.getElementById("hiveViewport");
+      var img=document.getElementById("hiveImage");
+      var zoomIn=document.getElementById("hiveZoomIn");
+      var zoomOut=document.getElementById("hiveZoomOut");
+      var zoomReset=document.getElementById("hiveZoomReset");
+      var zoomLabel=document.getElementById("hiveZoomLabel");
+      if(!trigger||!modal||!close||!viewport||!img) return;
 
+      var scale=1,minScale=1,maxScale=5,x=0,y=0;
+      var dragging=false,startX=0,startY=0,startPanX=0,startPanY=0;
+
+      function clamp(v,min,max){return Math.max(min,Math.min(max,v));}
+      function render(){
+        img.style.transform="translate("+x+"px,"+y+"px) scale("+scale+")";
+        if(zoomLabel) zoomLabel.textContent=Math.round(scale*100)+"%";
+      }
+      function centerImage(){
+        var vw=viewport.clientWidth,vh=viewport.clientHeight;
+        var iw=img.naturalWidth,ih=img.naturalHeight;
+        if(!vw||!vh||!iw||!ih) return;
+        minScale=Math.min(vw/iw,vh/ih);
+        if(!isFinite(minScale)||minScale<=0) minScale=1;
+        scale=minScale;
+        x=(vw-iw*scale)/2;
+        y=(vh-ih*scale)/2;
+        render();
+      }
+      function clampPan(){
+        var vw=viewport.clientWidth,vh=viewport.clientHeight;
+        var w=img.naturalWidth*scale,h=img.naturalHeight*scale;
+        if(w<=vw) x=(vw-w)/2; else x=clamp(x,vw-w,0);
+        if(h<=vh) y=(vh-h)/2; else y=clamp(y,vh-h,0);
+      }
+      function setZoom(next,cx,cy){
+        var old=scale;
+        next=clamp(next,minScale,maxScale);
+        if(Math.abs(next-old)<0.0001) return;
+        if(cx==null) cx=viewport.clientWidth/2;
+        if(cy==null) cy=viewport.clientHeight/2;
+        x=cx-(cx-x)*(next/old);
+        y=cy-(cy-y)*(next/old);
+        scale=next;
+        clampPan();
+        render();
+      }
       function openHive(e){
         if(e) e.preventDefault();
         modal.classList.add("open");
         modal.setAttribute("aria-hidden","false");
         document.body.classList.add("hive-modal-open");
         close.focus();
+        requestAnimationFrame(function(){
+          if(img.complete && img.naturalWidth) centerImage();
+        });
       }
       function closeHive(){
         modal.classList.remove("open");
@@ -817,11 +908,55 @@
         trigger.focus();
       }
 
+      img.addEventListener("load",centerImage);
+      window.addEventListener("resize",function(){
+        if(modal.classList.contains("open")) centerImage();
+      });
+
+      if(zoomIn) zoomIn.addEventListener("click",function(){setZoom(scale*1.25);});
+      if(zoomOut) zoomOut.addEventListener("click",function(){setZoom(scale/1.25);});
+      if(zoomReset) zoomReset.addEventListener("click",centerImage);
+
+      viewport.addEventListener("wheel",function(e){
+        if(!img.naturalWidth) return;
+        e.preventDefault();
+        var r=viewport.getBoundingClientRect();
+        setZoom(scale*(e.deltaY<0?1.12:1/1.12),e.clientX-r.left,e.clientY-r.top);
+      },{passive:false});
+
+      viewport.addEventListener("pointerdown",function(e){
+        if(scale<=minScale+0.0001) return;
+        dragging=true;
+        startX=e.clientX;
+        startY=e.clientY;
+        startPanX=x;
+        startPanY=y;
+        viewport.classList.add("dragging");
+        viewport.setPointerCapture(e.pointerId);
+      });
+      viewport.addEventListener("pointermove",function(e){
+        if(!dragging) return;
+        x=startPanX+(e.clientX-startX);
+        y=startPanY+(e.clientY-startY);
+        clampPan();
+        render();
+      });
+      function stopDrag(e){
+        if(!dragging) return;
+        dragging=false;
+        viewport.classList.remove("dragging");
+        try{viewport.releasePointerCapture(e.pointerId);}catch(_){}
+      }
+      viewport.addEventListener("pointerup",stopDrag);
+      viewport.addEventListener("pointercancel",stopDrag);
+
       trigger.addEventListener("click",openHive);
       close.addEventListener("click",closeHive);
       modal.addEventListener("click",function(e){if(e.target===modal) closeHive();});
       document.addEventListener("keydown",function(e){
         if(e.key==="Escape" && modal.classList.contains("open")) closeHive();
+        if(modal.classList.contains("open") && (e.key==="+"||e.key==="=")) setZoom(scale*1.25);
+        if(modal.classList.contains("open") && e.key==="-") setZoom(scale/1.25);
       });
     })();
   </script>
