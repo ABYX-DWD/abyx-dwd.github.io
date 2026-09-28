@@ -481,33 +481,15 @@
           <div class="data-update-side">
             <div class="data-update-visuals" aria-label="Vehicle power, APC and rally size">
               <div class="data-update-visual">
-                <img src="./assets/data-power.webp?v=1" width="112" height="112" alt="" loading="lazy">
+                <img src="./assets/data-power.webp?v=20260928-2" width="112" height="112" alt="" loading="lazy">
                 <span data-i18n="dataUpdatePower">Power</span>
               </div>
               <div class="data-update-visual">
-                <img src="./assets/data-apc.webp?v=1" width="112" height="112" alt="" loading="lazy">
+                <img src="./assets/data-apc.webp?v=20260928-2" width="112" height="112" alt="" loading="lazy">
                 <span>APC</span>
               </div>
               <div class="data-update-visual">
-                <svg class="data-rally-svg" viewBox="0 0 112 112" width="112" height="112" role="img" aria-label="Rally">
-                  <defs>
-                    <linearGradient id="rallyGlow" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0" stop-color="#66e5ff"/>
-                      <stop offset="1" stop-color="#d8b66e"/>
-                    </linearGradient>
-                    <filter id="rallyShadow" x="-40%" y="-40%" width="180%" height="180%">
-                      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity=".45"/>
-                    </filter>
-                  </defs>
-                  <g fill="none" stroke="url(#rallyGlow)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#rallyShadow)">
-                    <circle cx="56" cy="56" r="18"/>
-                    <path d="M18 28h23M35 20l8 8-8 8"/>
-                    <path d="M94 28H71M77 20l-8 8 8 8"/>
-                    <path d="M18 84h23M35 76l8 8-8 8"/>
-                    <path d="M94 84H71M77 76l-8 8 8 8"/>
-                  </g>
-                  <circle cx="56" cy="56" r="7" fill="#dff8ff"/>
-                </svg>
+                <img src="./assets/data-rally.webp?v=20260928-2" width="112" height="112" alt="" loading="lazy" decoding="async">
                 <span data-i18n="dataUpdateRally">Rally</span>
               </div>
             </div>
@@ -600,8 +582,8 @@
         </div>
       </div>
       <div class="hive-modal-viewport" id="hiveViewport">
-        <img class="hive-modal-image" id="hiveImage" src="./assets/hive-preview.webp?v=3" alt="ABYX Hive layout" decoding="async" draggable="false">
-        <div class="hive-modal-hint">Mouse wheel / + − to zoom • drag to move</div>
+        <img class="hive-modal-image" id="hiveImage" data-src="./assets/hive-map.webp?v=20260928-2" alt="ABYX Hive layout" decoding="async" draggable="false">
+        <div class="hive-modal-hint">Pinch / scroll / + − to zoom • drag to move</div>
       </div>
     </div>
   </div>
@@ -855,12 +837,12 @@
       if(!trigger||!modal||!close||!viewport||!img) return;
 
       var scale=1,minScale=1,maxScale=5,x=0,y=0;
-      var dragging=false,startX=0,startY=0,startPanX=0,startPanY=0;
+      var pointers=new Map(),lastGesture=null;
 
       function clamp(v,min,max){return Math.max(min,Math.min(max,v));}
       function render(){
         img.style.transform="translate("+x+"px,"+y+"px) scale("+scale+")";
-        if(zoomLabel) zoomLabel.textContent=Math.round(scale*100)+"%";
+        if(zoomLabel) zoomLabel.textContent=Math.round(scale/minScale*100)+"%";
       }
       function centerImage(){
         var vw=viewport.clientWidth,vh=viewport.clientHeight;
@@ -868,6 +850,7 @@
         if(!vw||!vh||!iw||!ih) return;
         minScale=Math.min(vw/iw,vh/ih);
         if(!isFinite(minScale)||minScale<=0) minScale=1;
+        maxScale=Math.max(5,minScale*8);
         scale=minScale;
         x=(vw-iw*scale)/2;
         y=(vh-ih*scale)/2;
@@ -880,6 +863,7 @@
         if(h<=vh) y=(vh-h)/2; else y=clamp(y,vh-h,0);
       }
       function setZoom(next,cx,cy){
+        if(!img.naturalWidth) return;
         var old=scale;
         next=clamp(next,minScale,maxScale);
         if(Math.abs(next-old)<0.0001) return;
@@ -897,11 +881,13 @@
         modal.setAttribute("aria-hidden","false");
         document.body.classList.add("hive-modal-open");
         close.focus();
+        if(!img.getAttribute("src")) img.src=img.getAttribute("data-src");
         requestAnimationFrame(function(){
           if(img.complete && img.naturalWidth) centerImage();
         });
       }
       function closeHive(){
+        pointers.clear(); lastGesture=null; viewport.classList.remove("dragging");
         modal.classList.remove("open");
         modal.setAttribute("aria-hidden","true");
         document.body.classList.remove("hive-modal-open");
@@ -924,37 +910,55 @@
         setZoom(scale*(e.deltaY<0?1.12:1/1.12),e.clientX-r.left,e.clientY-r.top);
       },{passive:false});
 
+      function gesture(){
+        var points=Array.from(pointers.values());
+        if(!points.length) return null;
+        var a=points[0],b=points[1]||a;
+        return {x:(a.x+b.x)/2,y:(a.y+b.y)/2,
+          distance:points.length>1?Math.hypot(b.x-a.x,b.y-a.y):0,count:points.length};
+      }
       viewport.addEventListener("pointerdown",function(e){
-        if(scale<=minScale+0.0001) return;
-        dragging=true;
-        startX=e.clientX;
-        startY=e.clientY;
-        startPanX=x;
-        startPanY=y;
+        if(!img.naturalWidth || (e.pointerType==="mouse" && e.button!==0)) return;
+        e.preventDefault();
+        pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+        lastGesture=gesture();
         viewport.classList.add("dragging");
         viewport.setPointerCapture(e.pointerId);
       });
       viewport.addEventListener("pointermove",function(e){
-        if(!dragging) return;
-        x=startPanX+(e.clientX-startX);
-        y=startPanY+(e.clientY-startY);
-        clampPan();
-        render();
+        if(!pointers.has(e.pointerId)) return;
+        pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+        var next=gesture(),prev=lastGesture;
+        if(prev && next.count===prev.count){
+          var r=viewport.getBoundingClientRect();
+          if(next.count>1 && prev.distance>0){
+            setZoom(scale*next.distance/prev.distance,prev.x-r.left,prev.y-r.top);
+          }
+          x+=next.x-prev.x; y+=next.y-prev.y;
+          clampPan(); render();
+        }
+        lastGesture=next;
       });
       function stopDrag(e){
-        if(!dragging) return;
-        dragging=false;
-        viewport.classList.remove("dragging");
-        try{viewport.releasePointerCapture(e.pointerId);}catch(_){}
+        pointers.delete(e.pointerId);
+        lastGesture=gesture();
+        if(!pointers.size) viewport.classList.remove("dragging");
       }
       viewport.addEventListener("pointerup",stopDrag);
       viewport.addEventListener("pointercancel",stopDrag);
+      viewport.addEventListener("lostpointercapture",stopDrag);
 
       trigger.addEventListener("click",openHive);
       close.addEventListener("click",closeHive);
       modal.addEventListener("click",function(e){if(e.target===modal) closeHive();});
       document.addEventListener("keydown",function(e){
         if(e.key==="Escape" && modal.classList.contains("open")) closeHive();
+        if(e.key==="Tab" && modal.classList.contains("open")){
+          var buttons=Array.from(modal.querySelectorAll("button"));
+          var first=buttons[0],last=buttons[buttons.length-1];
+          if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+          else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+        }
         if(modal.classList.contains("open") && (e.key==="+"||e.key==="=")) setZoom(scale*1.25);
         if(modal.classList.contains("open") && e.key==="-") setZoom(scale/1.25);
       });
