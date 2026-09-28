@@ -253,11 +253,11 @@
     document.documentElement.lang=lang;
     document.title='434 — '+(lang==='fr'?'Road Map Ragnarok':lang==='it'?'Road Map Ragnarok':lang==='de'?'Ragnarok Road Map':lang==='pl'?'Ragnarok Road Map':'Ragnarok Road Map');
     $('#languageSelect').value=lang;
-    $('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(tr()[key])el.textContent=tr()[key];});
+    $$('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(tr()[key])el.textContent=tr()[key];});
     const shell=shellUi[lang]||shellUi.en;
-    $('[data-shell-i18n]').forEach(el=>{const key=el.dataset.shellI18n;if(shell[key])el.textContent=shell[key];});
+    $$('[data-shell-i18n]').forEach(el=>{const key=el.dataset.shellI18n;if(shell[key])el.textContent=shell[key];});
     const current=$('#abyxLangCurrent'); if(current) current.textContent=shellLabels[lang]||lang.toUpperCase();
-    $('.abyx-lang-option').forEach(btn=>btn.classList.toggle('active',btn.dataset.lang===lang));
+    $$('.abyx-lang-option').forEach(btn=>btn.classList.toggle('active',btn.dataset.lang===lang));
     $('#guideSearch').placeholder=tr().searchPlaceholder;
     const sr=$('.nav-toggle .sr-only'); if(sr) sr.textContent=lang==='fr'?'Ouvrir la navigation':'Open navigation';
     renderSystems();renderRoadmap();updateSeasonProgress();buildSearch();saveLanguage();
@@ -266,7 +266,7 @@
   const navToggle=$('.nav-toggle'), mobileNav=$('#mobileNav');
   if(navToggle&&mobileNav){
     navToggle.addEventListener('click',()=>{const open=navToggle.getAttribute('aria-expanded')==='true';navToggle.setAttribute('aria-expanded',String(!open));mobileNav.hidden=open;});
-    $('#mobileNav a').forEach(a=>a.addEventListener('click',()=>{navToggle.setAttribute('aria-expanded','false');mobileNav.hidden=true;}));
+    $$('#mobileNav a').forEach(a=>a.addEventListener('click',()=>{navToggle.setAttribute('aria-expanded','false');mobileNav.hidden=true;}));
   }
 
   const languageSelect=$('#languageSelect');
@@ -281,7 +281,7 @@
       const open=langPicker.classList.toggle('open');
       langCurrent.setAttribute('aria-expanded',open?'true':'false');
     });
-    $('.abyx-lang-option').forEach(btn=>btn.addEventListener('click',()=>{
+    $$('.abyx-lang-option').forEach(btn=>btn.addEventListener('click',()=>{
       const next=btn.dataset.lang;
       if(supported.includes(next)){lang=next;applyLanguage();}
       langPicker.classList.remove('open');
