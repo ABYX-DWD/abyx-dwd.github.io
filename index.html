@@ -50,6 +50,33 @@
     .nav-links a:hover{color:#fff;background:rgba(102,229,255,.08)}
     .leader-nav{color:#d9bd82!important}
     .nav-cta{padding:11px 16px;border-radius:8px;color:#031018!important;background:linear-gradient(135deg,var(--cyan),#90efff);box-shadow:0 8px 28px rgba(102,229,255,.14)}
+    .nav-actions{display:flex;align-items:center;gap:9px}
+    .lang-picker{position:relative}
+    .lang-current{
+      min-width:52px;height:42px;padding:0 11px;display:flex;align-items:center;justify-content:center;gap:6px;
+      border:1px solid rgba(255,255,255,.09);border-radius:9px;background:rgba(2,10,17,.5);
+      color:#c4d7e3;backdrop-filter:blur(14px);cursor:pointer;font-size:.67rem;font-weight:900;letter-spacing:.08em;
+      transition:.2s ease
+    }
+    .lang-current:hover,.lang-picker.open .lang-current{border-color:rgba(102,229,255,.32);color:#fff;background:rgba(102,229,255,.07)}
+    .lang-current:after{content:"▾";font-size:.62rem;color:#6aaec1;transition:.2s ease}
+    .lang-picker.open .lang-current:after{transform:rotate(180deg)}
+    .lang-menu{
+      position:absolute;top:calc(100% + 9px);right:0;min-width:190px;padding:7px;
+      border:1px solid rgba(102,229,255,.14);border-radius:11px;
+      background:rgba(3,12,21,.96);backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.5);
+      opacity:0;visibility:hidden;transform:translateY(-6px);transition:.18s ease
+    }
+    .lang-picker.open .lang-menu{opacity:1;visibility:visible;transform:translateY(0)}
+    .lang-option{
+      width:100%;height:37px;padding:0 11px;display:flex;align-items:center;justify-content:space-between;
+      border:0;border-radius:7px;background:transparent;color:#93a9b8;cursor:pointer;text-align:left;
+      font-size:.72rem;font-weight:800;letter-spacing:.035em
+    }
+    .lang-option:hover{color:#fff;background:rgba(102,229,255,.07)}
+    .lang-option.active{color:#07131c;background:linear-gradient(135deg,#70e9ff,#aef3ff)}
+    .lang-code{font-size:.6rem;letter-spacing:.1em;opacity:.7}
+
 
     .hero{
       position:relative;min-height:100svh;display:grid;align-items:center;
@@ -223,6 +250,10 @@
       .brand{font-size:.88rem}
       .brand-mark{width:37px;height:37px}
       .nav-cta{padding:10px 12px!important;font-size:.62rem!important}
+      .nav-actions{gap:6px}
+      .lang-current{min-width:46px;height:38px;padding:0 9px}
+      .lang-menu{position:fixed;top:66px;right:13px;left:13px;min-width:0}
+
       .hero-content{padding:116px 0 116px}
       .hero h1{font-size:clamp(3.25rem,17vw,5.2rem)}
       .hero-sub{font-size:.98rem}
@@ -251,14 +282,28 @@
     <div class="shell nav">
       <a href="#top" class="brand" aria-label="ABYX home">
         <span class="brand-mark">A</span>
-        <span>ABYX<small>Dark War • Alliance Hub</small></span>
+        <span>ABYX<small data-i18n="brandSub">Dark War • Alliance Hub</small></span>
       </a>
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#season-guide">Season Guide</a>
-        <a href="#news-guides">News & Guides</a>
-        <a class="leader-nav" href="#leader-tools">Leader Tools 🔒</a>
-        <a class="nav-cta" href="#hub">Enter Hub</a>
-      </nav>
+      <div class="nav-actions">
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#season-guide" data-i18n="navSeason">Season Guide</a>
+          <a href="#news-guides" data-i18n="navNews">News & Guides</a>
+          <a class="leader-nav" href="#leader-tools" data-i18n="navLeader">Leader Tools 🔒</a>
+          <a class="nav-cta" href="#hub" data-i18n="navEnter">Enter Hub</a>
+        </nav>
+        <div class="lang-picker" id="langPicker">
+          <button class="lang-current" id="langCurrent" type="button" aria-haspopup="true" aria-expanded="false">EN</button>
+          <div class="lang-menu" id="langMenu" role="menu" aria-label="Language">
+            <button class="lang-option" type="button" data-lang="en"><span>English</span><span class="lang-code">EN</span></button>
+            <button class="lang-option" type="button" data-lang="fr"><span>Français</span><span class="lang-code">FR</span></button>
+            <button class="lang-option" type="button" data-lang="it"><span>Italiano</span><span class="lang-code">IT</span></button>
+            <button class="lang-option" type="button" data-lang="de"><span>Deutsch</span><span class="lang-code">DE</span></button>
+            <button class="lang-option" type="button" data-lang="pl"><span>Polski</span><span class="lang-code">PL</span></button>
+            <button class="lang-option" type="button" data-lang="ru"><span>Русский</span><span class="lang-code">RU</span></button>
+            <button class="lang-option" type="button" data-lang="uk"><span>Українська</span><span class="lang-code">UA</span></button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -275,23 +320,23 @@
 
       <div class="shell hero-content">
         <div class="hero-copy">
-          <div class="season-tag">Current Season • Alliance Command Center</div>
-          <h1>Descend into the <span class="abyss">Abyss</span></h1>
-          <p class="hero-sub">Welcome to the ABYX hub. Season intelligence, alliance resources and leadership tools gathered in one place for Dark War: Survival.</p>
+          <div class="season-tag" data-i18n="seasonTag">Current Season • Alliance Command Center</div>
+          <h1><span data-i18n="heroLead">Descend into the</span> <span class="abyss" data-i18n="heroAbyss">Abyss</span></h1>
+          <p class="hero-sub" data-i18n="heroSub">Welcome to the ABYX hub. Season intelligence, alliance resources and leadership tools gathered in one place for Dark War: Survival.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#season-guide">Open Season Guide <span>→</span></a>
-            <a class="btn btn-secondary" href="#leader-tools">Leader Access <span>🔒</span></a>
+            <a class="btn btn-primary" href="#season-guide"><span data-i18n="openSeason">Open Season Guide</span> <span>→</span></a>
+            <a class="btn btn-secondary" href="#leader-tools"><span data-i18n="leaderAccess">Leader Access</span> <span>🔒</span></a>
           </div>
         </div>
       </div>
 
       <div class="hero-meta">
         <div class="meta-line">
-          <div><strong>ABYX</strong>Alliance</div>
+          <div><strong>ABYX</strong><span data-i18n="metaAlliance">Alliance</span></div>
           <div><strong>DWS</strong>Dark War</div>
-          <div><strong>LIVE</strong>Hub Online</div>
+          <div><strong>LIVE</strong><span data-i18n="metaOnline">Hub Online</span></div>
         </div>
-        <div class="scroll-cue"><span></span>Explore</div>
+        <div class="scroll-cue"><span></span><span data-i18n="explore">Explore</span></div>
       </div>
     </section>
 
@@ -299,49 +344,49 @@
       <div class="shell">
         <div class="section-head">
           <div>
-            <div class="section-eyebrow">ABYX Command Network</div>
-            <h2>Alliance Hub</h2>
+            <div class="section-eyebrow" data-i18n="commandNetwork">ABYX Command Network</div>
+            <h2 data-i18n="hubTitle">Alliance Hub</h2>
           </div>
-          <p>Everything useful to the alliance, from the current season walkthrough to the tools reserved for leadership.</p>
+          <p data-i18n="hubIntro">Everything useful to the alliance, from the current season walkthrough to the tools reserved for leadership.</p>
         </div>
 
         <div class="hub-grid">
           <a class="hub-card" id="season-guide" href="#">
             <div class="card-top">
               <div class="card-icon">𓂀</div>
-              <span class="status">Season</span>
+              <span class="status" data-i18n="statusSeason">Season</span>
             </div>
             <div class="card-body">
-              <div class="card-index">01 • Field Intelligence</div>
-              <h3>Season Guide</h3>
-              <p>Interactive objectives, priorities, event guidance and key information for every ABYX member.</p>
-              <div class="card-link">Open the guide</div>
+              <div class="card-index" data-i18n="fieldIntel">01 • Field Intelligence</div>
+              <h3 data-i18n="seasonGuide">Season Guide</h3>
+              <p data-i18n="seasonDesc">Interactive objectives, priorities, event guidance and key information for every ABYX member.</p>
+              <div class="card-link" data-i18n="openGuide">Open the guide</div>
             </div>
           </a>
 
           <a class="hub-card" id="news-guides" href="#">
             <div class="card-top">
               <div class="card-icon">◇</div>
-              <span class="status">Community</span>
+              <span class="status" data-i18n="statusCommunity">Community</span>
             </div>
             <div class="card-body">
-              <div class="card-index">02 • Resources</div>
-              <h3>News & Guides</h3>
-              <p>Alliance announcements, tactical notes and practical guides collected in one place.</p>
-              <div class="card-link">Explore resources</div>
+              <div class="card-index" data-i18n="resourcesIndex">02 • Resources</div>
+              <h3 data-i18n="newsGuides">News & Guides</h3>
+              <p data-i18n="newsDesc">Alliance announcements, tactical notes and practical guides collected in one place.</p>
+              <div class="card-link" data-i18n="exploreResources">Explore resources</div>
             </div>
           </a>
 
           <a class="hub-card gold" id="leader-tools" href="#">
             <div class="card-top">
               <div class="card-icon">⌁</div>
-              <span class="status">Restricted 🔒</span>
+              <span class="status" data-i18n="statusRestricted">Restricted 🔒</span>
             </div>
             <div class="card-body">
-              <div class="card-index">03 • Leadership</div>
-              <h3>Leader Tools</h3>
-              <p>Franky Rally Tool, Alliance Message Builder and future tools reserved for ABYX leadership.</p>
-              <div class="card-link">Leader access</div>
+              <div class="card-index" data-i18n="leadershipIndex">03 • Leadership</div>
+              <h3 data-i18n="leaderTools">Leader Tools</h3>
+              <p data-i18n="leaderDesc">Franky Rally Tool, Alliance Message Builder and future tools reserved for ABYX leadership.</p>
+              <div class="card-link" data-i18n="leaderAccessCard">Leader access</div>
             </div>
           </a>
         </div>
@@ -352,10 +397,10 @@
       <div class="shell">
         <div class="coming-panel">
           <div>
-            <strong>ABYX tools migration</strong>
-            <span>The current Franky Rally Tool remains online while the new hub is being built.</span>
+            <strong data-i18n="migrationTitle">ABYX tools migration</strong>
+            <span data-i18n="migrationDesc">The current Franky Rally Tool remains online while the new hub is being built.</span>
           </div>
-          <div class="coming-badge">V2 • In development</div>
+          <div class="coming-badge" data-i18n="devBadge">V2 • In development</div>
         </div>
       </div>
     </section>
@@ -364,9 +409,140 @@
   <footer>
     <div class="shell foot">
       <span>ABYX • Dark War: Survival</span>
-      <span>Alliance Hub • Season Edition</span>
+      <span data-i18n="footerEdition">Alliance Hub • Season Edition</span>
     </div>
   </footer>
+
+
+  <script>
+    (function(){
+      var translations={
+        en:{
+          brandSub:"Dark War • Alliance Hub",navSeason:"Season Guide",navNews:"News & Guides",navLeader:"Leader Tools 🔒",navEnter:"Enter Hub",
+          seasonTag:"Current Season • Alliance Command Center",heroLead:"Descend into the",heroAbyss:"Abyss",
+          heroSub:"Welcome to the ABYX hub. Season intelligence, alliance resources and leadership tools gathered in one place for Dark War: Survival.",
+          openSeason:"Open Season Guide",leaderAccess:"Leader Access",metaAlliance:"Alliance",metaOnline:"Hub Online",explore:"Explore",
+          commandNetwork:"ABYX Command Network",hubTitle:"Alliance Hub",hubIntro:"Everything useful to the alliance, from the current season walkthrough to the tools reserved for leadership.",
+          statusSeason:"Season",fieldIntel:"01 • Field Intelligence",seasonGuide:"Season Guide",seasonDesc:"Interactive objectives, priorities, event guidance and key information for every ABYX member.",openGuide:"Open the guide",
+          statusCommunity:"Community",resourcesIndex:"02 • Resources",newsGuides:"News & Guides",newsDesc:"Alliance announcements, tactical notes and practical guides collected in one place.",exploreResources:"Explore resources",
+          statusRestricted:"Restricted 🔒",leadershipIndex:"03 • Leadership",leaderTools:"Leader Tools",leaderDesc:"Franky Rally Tool, Alliance Message Builder and future tools reserved for ABYX leadership.",leaderAccessCard:"Leader access",
+          migrationTitle:"ABYX tools migration",migrationDesc:"The current Franky Rally Tool remains online while the new hub is being built.",devBadge:"V2 • In development",footerEdition:"Alliance Hub • Season Edition"
+        },
+        fr:{
+          brandSub:"Dark War • Hub d’alliance",navSeason:"Guide de saison",navNews:"Infos & Guides",navLeader:"Outils Leaders 🔒",navEnter:"Entrer",
+          seasonTag:"Saison actuelle • Centre de commandement de l’alliance",heroLead:"Plongez dans les",heroAbyss:"Abysses",
+          heroSub:"Bienvenue sur le hub ABYX. Renseignements de saison, ressources de l’alliance et outils de commandement réunis au même endroit pour Dark War: Survival.",
+          openSeason:"Ouvrir le guide de saison",leaderAccess:"Accès Leaders",metaAlliance:"Alliance",metaOnline:"Hub en ligne",explore:"Explorer",
+          commandNetwork:"Réseau de commandement ABYX",hubTitle:"Hub de l’alliance",hubIntro:"Tout ce qui est utile à l’alliance, du guide de la saison en cours aux outils réservés au commandement.",
+          statusSeason:"Saison",fieldIntel:"01 • Renseignements terrain",seasonGuide:"Guide de saison",seasonDesc:"Objectifs interactifs, priorités, conseils d’événements et informations clés pour tous les membres ABYX.",openGuide:"Ouvrir le guide",
+          statusCommunity:"Communauté",resourcesIndex:"02 • Ressources",newsGuides:"Infos & Guides",newsDesc:"Annonces de l’alliance, notes tactiques et guides pratiques réunis au même endroit.",exploreResources:"Explorer les ressources",
+          statusRestricted:"Restreint 🔒",leadershipIndex:"03 • Commandement",leaderTools:"Outils Leaders",leaderDesc:"Franky Rally Tool, outil de rédaction de messages d’alliance et futurs outils réservés aux leaders ABYX.",leaderAccessCard:"Accès Leaders",
+          migrationTitle:"Migration des outils ABYX",migrationDesc:"Le Franky Rally Tool actuel reste en ligne pendant la construction du nouveau hub.",devBadge:"V2 • En développement",footerEdition:"Hub d’alliance • Édition Saison"
+        },
+        it:{
+          brandSub:"Dark War • Hub dell’alleanza",navSeason:"Guida stagione",navNews:"Notizie & Guide",navLeader:"Strumenti Leader 🔒",navEnter:"Entra",
+          seasonTag:"Stagione attuale • Centro di comando dell’alleanza",heroLead:"Scendi negli",heroAbyss:"Abissi",
+          heroSub:"Benvenuto nell’hub ABYX. Informazioni sulla stagione, risorse dell’alleanza e strumenti di comando riuniti in un unico posto per Dark War: Survival.",
+          openSeason:"Apri la guida stagione",leaderAccess:"Accesso Leader",metaAlliance:"Alleanza",metaOnline:"Hub online",explore:"Esplora",
+          commandNetwork:"Rete di comando ABYX",hubTitle:"Hub dell’alleanza",hubIntro:"Tutto ciò che serve all’alleanza, dalla guida della stagione attuale agli strumenti riservati alla leadership.",
+          statusSeason:"Stagione",fieldIntel:"01 • Informazioni sul campo",seasonGuide:"Guida stagione",seasonDesc:"Obiettivi interattivi, priorità, consigli sugli eventi e informazioni chiave per tutti i membri ABYX.",openGuide:"Apri la guida",
+          statusCommunity:"Comunità",resourcesIndex:"02 • Risorse",newsGuides:"Notizie & Guide",newsDesc:"Annunci dell’alleanza, note tattiche e guide pratiche raccolti in un unico posto.",exploreResources:"Esplora le risorse",
+          statusRestricted:"Riservato 🔒",leadershipIndex:"03 • Leadership",leaderTools:"Strumenti Leader",leaderDesc:"Franky Rally Tool, Alliance Message Builder e futuri strumenti riservati alla leadership ABYX.",leaderAccessCard:"Accesso Leader",
+          migrationTitle:"Migrazione strumenti ABYX",migrationDesc:"L’attuale Franky Rally Tool resta online mentre costruiamo il nuovo hub.",devBadge:"V2 • In sviluppo",footerEdition:"Hub dell’alleanza • Edizione Stagione"
+        },
+        de:{
+          brandSub:"Dark War • Allianz-Hub",navSeason:"Saison-Guide",navNews:"News & Guides",navLeader:"Leader-Tools 🔒",navEnter:"Hub öffnen",
+          seasonTag:"Aktuelle Saison • Allianz-Kommandozentrale",heroLead:"Hinab in den",heroAbyss:"Abgrund",
+          heroSub:"Willkommen im ABYX-Hub. Saisoninformationen, Allianz-Ressourcen und Führungstools an einem Ort für Dark War: Survival.",
+          openSeason:"Saison-Guide öffnen",leaderAccess:"Leader-Zugang",metaAlliance:"Allianz",metaOnline:"Hub online",explore:"Entdecken",
+          commandNetwork:"ABYX-Kommandonetzwerk",hubTitle:"Allianz-Hub",hubIntro:"Alles Wichtige für die Allianz – vom aktuellen Saison-Guide bis zu den Tools für die Führung.",
+          statusSeason:"Saison",fieldIntel:"01 • Feldaufklärung",seasonGuide:"Saison-Guide",seasonDesc:"Interaktive Ziele, Prioritäten, Event-Hinweise und wichtige Informationen für alle ABYX-Mitglieder.",openGuide:"Guide öffnen",
+          statusCommunity:"Community",resourcesIndex:"02 • Ressourcen",newsGuides:"News & Guides",newsDesc:"Allianz-Ankündigungen, taktische Hinweise und praktische Guides an einem Ort.",exploreResources:"Ressourcen öffnen",
+          statusRestricted:"Geschützt 🔒",leadershipIndex:"03 • Führung",leaderTools:"Leader-Tools",leaderDesc:"Franky Rally Tool, Alliance Message Builder und zukünftige Tools exklusiv für die ABYX-Führung.",leaderAccessCard:"Leader-Zugang",
+          migrationTitle:"Migration der ABYX-Tools",migrationDesc:"Das aktuelle Franky Rally Tool bleibt online, während der neue Hub aufgebaut wird.",devBadge:"V2 • In Entwicklung",footerEdition:"Allianz-Hub • Saison-Edition"
+        },
+        pl:{
+          brandSub:"Dark War • Centrum sojuszu",navSeason:"Przewodnik sezonu",navNews:"Aktualności i poradniki",navLeader:"Narzędzia liderów 🔒",navEnter:"Wejdź do hubu",
+          seasonTag:"Aktualny sezon • Centrum dowodzenia sojuszu",heroLead:"Zejdź w",heroAbyss:"Otchłań",
+          heroSub:"Witaj w centrum ABYX. Informacje sezonowe, zasoby sojuszu i narzędzia dowodzenia w jednym miejscu dla Dark War: Survival.",
+          openSeason:"Otwórz przewodnik sezonu",leaderAccess:"Dostęp liderów",metaAlliance:"Sojusz",metaOnline:"Hub online",explore:"Odkrywaj",
+          commandNetwork:"Sieć dowodzenia ABYX",hubTitle:"Centrum sojuszu",hubIntro:"Wszystko, czego potrzebuje sojusz — od przewodnika aktualnego sezonu po narzędzia zarezerwowane dla liderów.",
+          statusSeason:"Sezon",fieldIntel:"01 • Wywiad terenowy",seasonGuide:"Przewodnik sezonu",seasonDesc:"Interaktywne cele, priorytety, wskazówki dotyczące wydarzeń i kluczowe informacje dla wszystkich członków ABYX.",openGuide:"Otwórz przewodnik",
+          statusCommunity:"Społeczność",resourcesIndex:"02 • Zasoby",newsGuides:"Aktualności i poradniki",newsDesc:"Ogłoszenia sojuszu, notatki taktyczne i praktyczne poradniki zebrane w jednym miejscu.",exploreResources:"Przeglądaj zasoby",
+          statusRestricted:"Tylko liderzy 🔒",leadershipIndex:"03 • Dowodzenie",leaderTools:"Narzędzia liderów",leaderDesc:"Franky Rally Tool, Alliance Message Builder i przyszłe narzędzia zarezerwowane dla liderów ABYX.",leaderAccessCard:"Dostęp liderów",
+          migrationTitle:"Migracja narzędzi ABYX",migrationDesc:"Obecny Franky Rally Tool pozostaje online podczas budowy nowego hubu.",devBadge:"V2 • W budowie",footerEdition:"Centrum sojuszu • Edycja sezonowa"
+        },
+        ru:{
+          brandSub:"Dark War • Центр альянса",navSeason:"Гайд сезона",navNews:"Новости и гайды",navLeader:"Инструменты лидеров 🔒",navEnter:"Войти",
+          seasonTag:"Текущий сезон • Командный центр альянса",heroLead:"Спустись в",heroAbyss:"Бездну",
+          heroSub:"Добро пожаловать в центр ABYX. Информация о сезоне, ресурсы альянса и инструменты управления собраны в одном месте для Dark War: Survival.",
+          openSeason:"Открыть гайд сезона",leaderAccess:"Доступ лидеров",metaAlliance:"Альянс",metaOnline:"Hub онлайн",explore:"Исследовать",
+          commandNetwork:"Командная сеть ABYX",hubTitle:"Центр альянса",hubIntro:"Всё необходимое для альянса — от гайда текущего сезона до инструментов, доступных только руководству.",
+          statusSeason:"Сезон",fieldIntel:"01 • Полевая разведка",seasonGuide:"Гайд сезона",seasonDesc:"Интерактивные цели, приоритеты, советы по событиям и ключевая информация для всех участников ABYX.",openGuide:"Открыть гайд",
+          statusCommunity:"Сообщество",resourcesIndex:"02 • Ресурсы",newsGuides:"Новости и гайды",newsDesc:"Объявления альянса, тактические заметки и практические гайды в одном месте.",exploreResources:"Открыть ресурсы",
+          statusRestricted:"Только лидеры 🔒",leadershipIndex:"03 • Руководство",leaderTools:"Инструменты лидеров",leaderDesc:"Franky Rally Tool, Alliance Message Builder и будущие инструменты только для руководства ABYX.",leaderAccessCard:"Доступ лидеров",
+          migrationTitle:"Перенос инструментов ABYX",migrationDesc:"Текущий Franky Rally Tool остаётся доступным, пока мы строим новый hub.",devBadge:"V2 • В разработке",footerEdition:"Центр альянса • Сезонная версия"
+        },
+        uk:{
+          brandSub:"Dark War • Центр альянсу",navSeason:"Гайд сезону",navNews:"Новини та гайди",navLeader:"Інструменти лідерів 🔒",navEnter:"Увійти",
+          seasonTag:"Поточний сезон • Командний центр альянсу",heroLead:"Спустися в",heroAbyss:"Безодню",
+          heroSub:"Ласкаво просимо до центру ABYX. Інформація про сезон, ресурси альянсу та інструменти керування зібрані в одному місці для Dark War: Survival.",
+          openSeason:"Відкрити гайд сезону",leaderAccess:"Доступ лідерів",metaAlliance:"Альянс",metaOnline:"Hub онлайн",explore:"Дослідити",
+          commandNetwork:"Командна мережа ABYX",hubTitle:"Центр альянсу",hubIntro:"Усе необхідне для альянсу — від гайда поточного сезону до інструментів, доступних лише керівництву.",
+          statusSeason:"Сезон",fieldIntel:"01 • Польова розвідка",seasonGuide:"Гайд сезону",seasonDesc:"Інтерактивні цілі, пріоритети, поради щодо подій і ключова інформація для всіх учасників ABYX.",openGuide:"Відкрити гайд",
+          statusCommunity:"Спільнота",resourcesIndex:"02 • Ресурси",newsGuides:"Новини та гайди",newsDesc:"Оголошення альянсу, тактичні нотатки та практичні гайди в одному місці.",exploreResources:"Відкрити ресурси",
+          statusRestricted:"Тільки для лідерів 🔒",leadershipIndex:"03 • Керівництво",leaderTools:"Інструменти лідерів",leaderDesc:"Franky Rally Tool, Alliance Message Builder та майбутні інструменти лише для керівництва ABYX.",leaderAccessCard:"Доступ лідерів",
+          migrationTitle:"Перенесення інструментів ABYX",migrationDesc:"Поточний Franky Rally Tool залишається доступним, поки ми будуємо новий hub.",devBadge:"V2 • У розробці",footerEdition:"Центр альянсу • Сезонна версія"
+        }
+      };
+
+      var labels={en:"EN",fr:"FR",it:"IT",de:"DE",pl:"PL",ru:"RU",uk:"UA"};
+      var picker=document.getElementById("langPicker");
+      var current=document.getElementById("langCurrent");
+      var options=[].slice.call(document.querySelectorAll(".lang-option"));
+
+      function setLang(lang){
+        if(!translations[lang]) lang="en";
+        var dict=translations[lang];
+        document.documentElement.lang=lang;
+        document.querySelectorAll("[data-i18n]").forEach(function(el){
+          var key=el.getAttribute("data-i18n");
+          if(dict[key]!==undefined) el.textContent=dict[key];
+        });
+        current.textContent=labels[lang]||lang.toUpperCase();
+        options.forEach(function(btn){btn.classList.toggle("active",btn.getAttribute("data-lang")===lang);});
+        try{localStorage.setItem("abyx_lang",lang);}catch(e){}
+        picker.classList.remove("open");
+        current.setAttribute("aria-expanded","false");
+      }
+
+      current.addEventListener("click",function(e){
+        e.stopPropagation();
+        var open=picker.classList.toggle("open");
+        current.setAttribute("aria-expanded",open?"true":"false");
+      });
+      options.forEach(function(btn){
+        btn.addEventListener("click",function(){setLang(btn.getAttribute("data-lang"));});
+      });
+      document.addEventListener("click",function(e){
+        if(!picker.contains(e.target)){
+          picker.classList.remove("open");
+          current.setAttribute("aria-expanded","false");
+        }
+      });
+      document.addEventListener("keydown",function(e){
+        if(e.key==="Escape"){
+          picker.classList.remove("open");
+          current.setAttribute("aria-expanded","false");
+        }
+      });
+
+      var saved=null;
+      try{saved=localStorage.getItem("abyx_lang");}catch(e){}
+      var browser=(navigator.language||"en").slice(0,2).toLowerCase();
+      setLang(saved&&translations[saved]?saved:(translations[browser]?browser:"en"));
+    })();
+  </script>
 
   <script>
     (function(){
