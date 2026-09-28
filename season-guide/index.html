@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#130b06" />
+  <meta name="description" content="Server 434 Ragnarok Season 6 interactive road map." />
+  <title>434 — Ragnarok Road Map</title>
+  <link rel="stylesheet" href="styles.css?v=11" />
+</head>
+<body>
+  <div class="page-glow page-glow-left" aria-hidden="true"></div>
+  <div class="page-glow page-glow-right" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="434 Ragnarok Road Map">
+      <span class="brand-emblem">☥</span>
+      <span class="brand-copy">
+        <strong>434</strong>
+        <small>RAGNAROK · SEASON 6</small>
+      </span>
+    </a>
+
+    <div class="topbar-tools">
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#roadmap" data-i18n="navRoadmap">Road Map</a>
+        <a href="#systems" data-i18n="navSystems">Season Systems</a>
+      </nav>
+
+      <button class="search-open" id="searchOpen" type="button" aria-label="Search">
+        <span aria-hidden="true">⌕</span>
+        <span class="search-open-label" data-i18n="search">Search</span>
+      </button>
+
+      <label class="language-picker" for="languageSelect">
+        <span aria-hidden="true">◎</span>
+        <select id="languageSelect" aria-label="Language">
+          <option value="en">EN</option>
+          <option value="fr">FR</option>
+          <option value="it">IT</option>
+          <option value="de">DE</option>
+          <option value="pl">PL</option>
+        </select>
+      </label>
+
+      <button class="nav-toggle" type="button" aria-controls="mobileNav" aria-expanded="false">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Open navigation</span>
+      </button>
+    </div>
+  </header>
+
+  <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation" hidden>
+    <a href="#roadmap" data-i18n="navRoadmap">Road Map</a>
+    <a href="#systems" data-i18n="navSystems">Season Systems</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-sun" aria-hidden="true"></div>
+      <div class="hero-pyramids" aria-hidden="true">
+        <span class="pyramid pyramid-a"></span>
+        <span class="pyramid pyramid-b"></span>
+        <span class="pyramid pyramid-c"></span>
+      </div>
+
+      <div class="hero-copy">
+        <p class="season-badge"><span>☥</span> <b>RAGNAROK</b> · <span data-i18n="season6">SEASON 6</span></p>
+        <h1>
+          <span class="hero-kicker" data-i18n="originLands">ORIGIN LANDS II</span>
+          <span class="hero-title" data-i18n="roadmapTitle">ROAD MAP</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="roadmapSubtitle">Six weeks. One path. Everything important at a glance.</p>
+
+        <div class="hero-status">
+          <div class="season-progress">
+            <div class="season-progress-top">
+              <span id="seasonState">Season starts soon</span>
+              <strong id="seasonProgressLabel">0%</strong>
+            </div>
+            <div class="season-progress-track">
+              <div id="seasonProgressFill" class="season-progress-fill"></div>
+            </div>
+          </div>
+          <a class="hero-cta" href="#roadmap">
+            <span data-i18n="viewRoadmap">View the road map</span>
+            <b aria-hidden="true">↓</b>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-seal" aria-hidden="true">
+        <span class="seal-ring"></span>
+        <span class="seal-symbol">☥</span>
+        <span class="seal-caption">434</span>
+      </div>
+    </section>
+
+    <section id="systems" class="systems-section section-anchor">
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="eyebrow" data-i18n="seasonSystems">SEASON SYSTEMS</p>
+          <h2 data-i18n="alwaysWorthKnowing">Always worth knowing</h2>
+        </div>
+        <p data-i18n="systemsIntro">These mechanics run alongside the weekly calendar. Tap a card for the essentials.</p>
+      </div>
+
+      <div id="systemGrid" class="system-grid"></div>
+    </section>
+
+    <section id="roadmap" class="roadmap-section section-anchor">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow" data-i18n="sixWeekJourney">THE 6-WEEK JOURNEY</p>
+          <h2 data-i18n="seasonRoadmap">Season Road Map</h2>
+        </div>
+        <div class="roadmap-heading-tools">
+          <span class="legend-chip"><i class="legend-dot detail-dot"></i><span data-i18n="guideAvailable">Guide available</span></span>
+          <span class="legend-chip"><i class="legend-dot schedule-dot"></i><span data-i18n="calendarOnly">Calendar info</span></span>
+        </div>
+      </div>
+
+      <div class="roadmap-shell">
+        <div class="roadmap-line" aria-hidden="true"></div>
+        <div id="roadmapWeeks" class="roadmap-weeks"></div>
+      </div>
+    </section>
+
+    <section class="roadmap-note">
+      <span>!</span>
+      <p data-i18n="calendarDisclaimer">Dates and content may change. If anything differs in game, follow the official Dark War Survival announcements.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <strong>434</strong>
+      <span data-i18n="footerTitle">Ragnarok Season 6 · Interactive Road Map</span>
+    </div>
+    <p data-i18n="footerSub">Built for quick use on mobile and desktop.</p>
+  </footer>
+
+  <div id="searchPanel" class="search-panel" hidden>
+    <button class="search-backdrop" type="button" data-close-search aria-label="Close search"></button>
+    <div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="searchDialogTitle">
+      <div class="search-dialog-head">
+        <div>
+          <span class="eyebrow" data-i18n="findFast">FIND IT FAST</span>
+          <strong id="searchDialogTitle" data-i18n="searchGuide">Search the season</strong>
+        </div>
+        <button class="icon-button" type="button" data-close-search aria-label="Close">×</button>
+      </div>
+      <label class="search-field" for="guideSearch">
+        <span aria-hidden="true">⌕</span>
+        <input id="guideSearch" type="search" autocomplete="off" placeholder="Search Outpost, Temple, Merchant..." />
+      </label>
+      <div id="searchResults" class="search-results"></div>
+    </div>
+  </div>
+
+  <div id="detailModal" class="detail-modal" hidden>
+    <button class="detail-backdrop" type="button" data-close-detail aria-label="Close details"></button>
+    <article class="detail-sheet" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <button class="detail-close" type="button" data-close-detail aria-label="Close">×</button>
+      <div class="detail-media">
+        <div id="detailArt" class="detail-art art-0" aria-hidden="true"></div>
+        <div class="detail-ornament" aria-hidden="true">☥</div>
+      </div>
+      <p id="detailKicker" class="detail-kicker"></p>
+      <h2 id="detailTitle"></h2>
+      <p id="detailLead" class="detail-lead"></p>
+      <div id="detailFacts" class="detail-facts"></div>
+      <div id="detailTips" class="detail-tips"></div>
+    </article>
+  </div>
+
+  <script src="app.js?v=11"></script>
+</body>
+</html>
