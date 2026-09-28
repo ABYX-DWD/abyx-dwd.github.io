@@ -273,6 +273,34 @@
     .hub-card:hover .card-link:after{transform:translateX(5px)}
     .gold .card-link{color:#ead8b3}.gold .card-link:after{color:var(--gold)}
 
+    .hive-modal{
+      position:fixed;inset:0;z-index:6000;display:none;align-items:center;justify-content:center;
+      padding:22px;background:rgba(0,5,10,.90);backdrop-filter:blur(12px)
+    }
+    .hive-modal.open{display:flex}
+    .hive-modal-dialog{
+      position:relative;width:min(96vw,1420px);max-height:92vh;padding:14px;border:1px solid rgba(102,229,255,.24);
+      border-radius:14px;background:linear-gradient(180deg,rgba(6,19,31,.98),rgba(2,9,16,.99));
+      box-shadow:0 35px 120px rgba(0,0,0,.72);overflow:auto
+    }
+    .hive-modal-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:3px 3px 12px}
+    .hive-modal-title{color:#dceff8;font-size:.72rem;font-weight:950;letter-spacing:.15em;text-transform:uppercase}
+    .hive-modal-close{
+      width:40px;height:40px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);border-radius:9px;
+      background:rgba(255,255,255,.045);color:#e9f8ff;font-size:1.35rem;cursor:pointer
+    }
+    .hive-modal-close:hover{border-color:rgba(102,229,255,.4);background:rgba(102,229,255,.08)}
+    .hive-modal-image{
+      display:block;width:100%;height:auto;border:1px solid rgba(216,182,110,.18);border-radius:8px;background:#020b12
+    }
+    body.hive-modal-open{overflow:hidden}
+    @media(max-width:640px){
+      .hive-modal{padding:8px}
+      .hive-modal-dialog{width:100%;max-height:96vh;padding:9px;border-radius:10px}
+      .hive-modal-head{padding-bottom:8px}
+      .hive-modal-close{width:36px;height:36px}
+    }
+
     .coming{padding:0 0 100px;background:#02070c}
     .coming-panel{
       display:grid;grid-template-columns:1fr auto;align-items:center;gap:28px;padding:28px 30px;
@@ -480,7 +508,7 @@
             </div>
           </a>
 
-          <a class="hub-card hive-card" id="hive-card" href="https://atlantisdws.com/hive-planner?code=1746FE" target="_blank" rel="noopener">
+          <a class="hub-card hive-card" id="hive-card" href="#hive-preview" role="button" aria-haspopup="dialog">
             <div class="card-top">
               <div class="card-icon">⌾</div>
               <span class="status" data-i18n="statusHive">Hive</span>
@@ -522,6 +550,17 @@
     </section>
   </main>
 
+
+  <div class="hive-modal" id="hiveModal" aria-hidden="true">
+    <div class="hive-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="hiveModalTitle">
+      <div class="hive-modal-head">
+        <div class="hive-modal-title" id="hiveModalTitle" data-i18n="hiveModalTitle">ABYX Hive</div>
+        <button class="hive-modal-close" id="hiveModalClose" type="button" aria-label="Close">×</button>
+      </div>
+      <img class="hive-modal-image" src="./assets/hive-preview.webp?v=1" alt="ABYX Hive layout">
+    </div>
+  </div>
+
   <footer>
     <div class="shell foot">
       <span>ABYX • Dark War: Survival</span>
@@ -544,7 +583,7 @@
           statusRestricted:"Restricted 🔒",leadershipIndex:"03 • Leadership",leaderTools:"Leader Tools",leaderDesc:"Franky Rally Tool, ABYX Message Forge and future tools reserved for ABYX leadership.",leaderAccessCard:"Leader access",
           migrationTitle:"ABYX tools migration",migrationDesc:"The current Franky Rally Tool remains online while the new hub is being built.",devBadge:"V2 • In development",footerEdition:"Alliance Hub • Season Edition"
         },
-        fr:{statusHive:"Ruche",hiveIndex:"03 • Placement",hiveTitle:"Voir la ruche",hiveDesc:"Connaître son placement dans la ruche ABYX.",hiveLink:"Ouvrir la ruche",leadershipIndex:"04 • Commandement",
+        fr:{statusHive:"Ruche",hiveIndex:"03 • Placement",hiveTitle:"Voir la ruche",hiveDesc:"Connaître son placement dans la ruche ABYX.",hiveLink:"Consulter la ruche",leadershipIndex:"04 • Commandement",
           brandSub:"Dark War • Hub d’alliance",navSeason:"Guide de saison",navNews:"Infos & Guides",navLeader:"Outils Leaders 🔒",navEnter:"Entrer",
           seasonTag:"Saison actuelle • Centre de commandement de l’alliance",heroLead:"Plongez dans les",heroAbyss:"Abysses",
           heroSub:"Bienvenue sur le hub ABYX. Renseignements de saison, ressources de l’alliance et outils de commandement réunis au même endroit pour Dark War: Survival.",
@@ -678,6 +717,14 @@
       Object.assign(translations.ru,{dataUpdatePower:"Сила",dataUpdateRally:"Ралли"});
       Object.assign(translations.uk,{dataUpdatePower:"Сила",dataUpdateRally:"Rally"});
 
+      Object.assign(translations.en,{hiveModalTitle:"ABYX Hive",hiveLink:"View the hive"});
+      Object.assign(translations.fr,{hiveModalTitle:"Ruche ABYX",hiveLink:"Consulter la ruche"});
+      Object.assign(translations.it,{hiveModalTitle:"Alveare ABYX"});
+      Object.assign(translations.de,{hiveModalTitle:"ABYX-Hive"});
+      Object.assign(translations.pl,{hiveModalTitle:"Ul ABYX"});
+      Object.assign(translations.ru,{hiveModalTitle:"Улей ABYX"});
+      Object.assign(translations.uk,{hiveModalTitle:"Вулик ABYX"});
+
       var labels={en:"EN",fr:"FR",it:"IT",de:"DE",pl:"PL",ru:"RU",uk:"UA"};
       var picker=document.getElementById("langPicker");
       var current=document.getElementById("langCurrent");
@@ -746,6 +793,36 @@
         p.style.setProperty('--drift',drift);
         host.appendChild(p);
       }
+    })();
+  </script>
+
+  <script>
+    (function(){
+      var trigger=document.getElementById("hive-card");
+      var modal=document.getElementById("hiveModal");
+      var close=document.getElementById("hiveModalClose");
+      if(!trigger||!modal||!close) return;
+
+      function openHive(e){
+        if(e) e.preventDefault();
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden","false");
+        document.body.classList.add("hive-modal-open");
+        close.focus();
+      }
+      function closeHive(){
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden","true");
+        document.body.classList.remove("hive-modal-open");
+        trigger.focus();
+      }
+
+      trigger.addEventListener("click",openHive);
+      close.addEventListener("click",closeHive);
+      modal.addEventListener("click",function(e){if(e.target===modal) closeHive();});
+      document.addEventListener("keydown",function(e){
+        if(e.key==="Escape" && modal.classList.contains("open")) closeHive();
+      });
     })();
   </script>
 </body>
