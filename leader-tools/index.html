@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="ABYX Leader Tools — protected leadership utilities for Dark War: Survival.">
+  <meta name="theme-color" content="#020811">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ABYX">
+  <link rel="apple-touch-icon" href="https://abyx-dwd.github.io/abyx-icon-180.png?v=6">
+  <link rel="apple-touch-icon-precomposed" href="https://abyx-dwd.github.io/abyx-icon-180.png?v=6">
+  <link rel="manifest" href="../manifest.webmanifest?v=5">
+  <link rel="stylesheet" href="/install.css?v=2">
+  <script src="/install.js?v=2" defer></script>
+  <title>ABYX • Leader Tools</title>
+  <style>
+    :root{
+      --bg:#020811;--panel:#071421;--panel2:#0b1b2b;--text:#f7fbff;--muted:#8da5b8;
+      --cyan:#66e5ff;--gold:#d8b66e;--gold2:#efd59d;--line:rgba(102,229,255,.18);
+      --shadow:0 28px 80px rgba(0,0,0,.48);--max:1200px
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:#02070d}
+    body{
+      margin:0;min-height:100vh;color:var(--text);overflow-x:hidden;
+      background:
+        radial-gradient(circle at 15% 0%,rgba(30,158,195,.12),transparent 34%),
+        radial-gradient(circle at 86% 18%,rgba(216,182,110,.07),transparent 26%),
+        linear-gradient(180deg,#020912 0%,#02070d 100%);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+    }
+    body:before{
+      content:"";position:fixed;inset:0;pointer-events:none;opacity:.45;
+      background-image:linear-gradient(rgba(102,229,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(102,229,255,.018) 1px,transparent 1px);
+      background-size:52px 52px
+    }
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    .shell{width:min(var(--max),calc(100% - 36px));margin:auto}
+
+    .topbar{position:fixed;inset:0 0 auto;z-index:50}
+    .topbar:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,7,13,.96),rgba(1,7,13,.72) 75%,rgba(1,7,13,.36));border-bottom:1px solid rgba(102,229,255,.08);backdrop-filter:blur(14px)}
+    .nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:1}
+    .brand{display:flex;align-items:center;gap:13px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+    .brand-mark{
+      position:relative;width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(102,229,255,.32);
+      background:linear-gradient(145deg,rgba(102,229,255,.16),rgba(216,182,110,.06));
+      clip-path:polygon(50% 0,100% 26%,100% 74%,50% 100%,0 74%,0 26%);color:var(--cyan)
+    }
+    .brand-mark:after{content:"";position:absolute;inset:5px;border:1px solid rgba(216,182,110,.35);clip-path:inherit}
+    .brand small{display:block;color:#7891a4;font-size:.52rem;letter-spacing:.22em;margin-top:3px;font-weight:700}
+    .nav-actions{display:flex;align-items:center;gap:9px}
+    .nav-links{display:flex;align-items:center;gap:7px;padding:6px;border:1px solid rgba(255,255,255,.06);border-radius:999px;background:rgba(2,10,17,.42);backdrop-filter:blur(14px)}
+    .nav-links a{padding:10px 15px;border-radius:999px;color:#a5b6c4;font-size:.73rem;font-weight:850;letter-spacing:.065em;text-transform:uppercase}
+    .nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(102,229,255,.08)}
+    .nav-links a.active{color:#e2ca96;background:rgba(216,182,110,.08)}
+    .lang-picker{position:relative}
+    .lang-current{
+      min-width:52px;height:42px;padding:0 11px;display:flex;align-items:center;justify-content:center;gap:6px;
+      border:1px solid rgba(255,255,255,.09);border-radius:9px;background:rgba(2,10,17,.5);color:#c4d7e3;
+      backdrop-filter:blur(14px);cursor:pointer;font-size:.67rem;font-weight:900;letter-spacing:.08em
+    }
+    .lang-current:after{content:"▾";font-size:.62rem;color:#6aaec1}
+    .lang-menu{
+      position:absolute;top:calc(100% + 9px);right:0;min-width:190px;padding:7px;border:1px solid rgba(102,229,255,.14);
+      border-radius:11px;background:rgba(3,12,21,.98);box-shadow:0 24px 60px rgba(0,0,0,.5);
+      opacity:0;visibility:hidden;transform:translateY(-6px);transition:.18s ease
+    }
+    .lang-picker.open .lang-menu{opacity:1;visibility:visible;transform:translateY(0)}
+    .lang-option{width:100%;height:37px;padding:0 11px;display:flex;align-items:center;justify-content:space-between;border:0;border-radius:7px;background:transparent;color:#93a9b8;cursor:pointer;text-align:left;font-size:.72rem;font-weight:800}
+    .lang-option:hover{color:#fff;background:rgba(102,229,255,.07)}
+    .lang-option.active{color:#07131c;background:linear-gradient(135deg,#70e9ff,#aef3ff)}
+    .lang-code{font-size:.6rem;letter-spacing:.1em;opacity:.7}
+
+    main{padding:142px 0 80px;position:relative;z-index:2}
+    .hero{position:relative;overflow:hidden;min-height:330px;padding:48px 44px;border:1px solid rgba(102,229,255,.15);border-radius:20px;background:#03101c;box-shadow:var(--shadow);isolation:isolate}
+    .hero:before{
+      content:"";position:absolute;inset:-7%;z-index:-2;
+      background:
+        linear-gradient(90deg,rgba(1,7,12,.94) 0%,rgba(1,7,12,.66) 42%,rgba(1,7,12,.28) 74%,rgba(1,7,12,.52) 100%),
+        linear-gradient(180deg,rgba(1,7,12,.08),rgba(1,7,12,.72)),
+        url("../assets/abyx-hero-egypt.webp") center 46%/cover no-repeat;
+      transform:scale(1.08)
+    }
+    .hero:after{content:"";position:absolute;right:24px;top:24px;width:34px;height:34px;border-top:1px solid rgba(216,182,110,.45);border-right:1px solid rgba(216,182,110,.45)}
+    .eyebrow{margin:0 0 12px;color:#d8b66e;font-size:.7rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+    h1{margin:0;font-size:clamp(2.7rem,6vw,5.7rem);line-height:.88;letter-spacing:-.045em;text-transform:uppercase}
+    h1 span{display:block;color:transparent;-webkit-text-stroke:1px rgba(126,229,255,.68);background:linear-gradient(180deg,#f3fcff,#87eaff 48%,#267f9d);-webkit-background-clip:text;background-clip:text}
+    .hero p.lead{max-width:690px;margin:20px 0 0;color:#a6bac7;font-size:1.02rem;line-height:1.72}
+
+    .tools-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin:58px 0 24px}
+    .tools-head h2{margin:5px 0 0;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.035em;text-transform:uppercase}
+    .tools-head p{max-width:500px;margin:0;color:#8099aa;line-height:1.6}
+    .tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .tool-card{
+      position:relative;min-height:330px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;
+      border:1px solid rgba(102,229,255,.18);border-radius:15px;
+      background:linear-gradient(180deg,rgba(10,27,42,.92),rgba(4,14,24,.97));box-shadow:0 22px 60px rgba(0,0,0,.34);
+      transition:.22s ease
+    }
+    a.tool-card:hover{transform:translateY(-6px);border-color:rgba(102,229,255,.46);box-shadow:0 30px 75px rgba(0,0,0,.48)}
+    .tool-card.gold{border-color:rgba(216,182,110,.24)}
+    .tool-card:before{content:"";position:absolute;left:0;top:0;width:120px;height:2px;background:linear-gradient(90deg,#66e5ff,#d8b66e,transparent)}
+    .tool-card.disabled{opacity:.66;cursor:not-allowed}
+    .tool-icon{width:54px;height:54px;display:grid;place-items:center;border:1px solid rgba(102,229,255,.20);border-radius:13px;background:rgba(102,229,255,.055);color:#70e9ff;font-size:1.6rem}
+    .tool-card.gold .tool-icon{border-color:rgba(216,182,110,.24);background:rgba(216,182,110,.055);color:#e3c786}
+    .tool-tag{display:inline-flex;margin-top:22px;color:#63cfe7;font-size:.67rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+    .tool-card.gold .tool-tag{color:#d9bd82}
+    .tool-card h3{margin:8px 0 10px;font-size:1.45rem;letter-spacing:-.02em}
+    .tool-card p{margin:0;color:#8fa7b7;line-height:1.58;font-size:.93rem}
+    .tool-link{margin-top:22px;color:#d9bd82;font-size:.73rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+    .under{display:inline-flex;width:max-content;margin-top:18px;padding:7px 10px;border:1px solid rgba(216,182,110,.19);border-radius:999px;background:rgba(216,182,110,.05);color:#d8b66e;font-size:.62rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+
+    .lock-screen{
+      position:fixed;inset:0;z-index:4000;display:grid;place-items:center;padding:20px;
+      background:
+        linear-gradient(rgba(1,7,12,.76),rgba(1,7,12,.92)),
+        url("../assets/abyx-hero-egypt.webp") center/cover no-repeat;
+      backdrop-filter:blur(10px)
+    }
+    .lock-screen[hidden]{display:none!important}
+    .lock-card{
+      width:min(430px,100%);padding:30px 26px 24px;border:1px solid rgba(216,182,110,.26);border-radius:17px;
+      background:linear-gradient(180deg,rgba(8,24,38,.98),rgba(3,12,21,.99));box-shadow:0 38px 120px rgba(0,0,0,.7);text-align:center
+    }
+    .lock-emblem{width:68px;height:68px;margin:0 auto 18px;display:grid;place-items:center;border:1px solid rgba(102,229,255,.25);background:linear-gradient(145deg,rgba(102,229,255,.13),rgba(216,182,110,.06));clip-path:polygon(50% 0,100% 26%,100% 74%,50% 100%,0 74%,0 26%);color:#66e5ff;font-size:1.7rem;font-weight:950}
+    .lock-card h2{margin:0;font-size:1.75rem}
+    .lock-card>p{margin:9px 0 20px;color:#8fa7b7;line-height:1.55}
+    .lock-form{display:grid;gap:10px}
+    .lock-input{height:50px;padding:0 14px;border:1px solid rgba(102,229,255,.16);border-radius:9px;background:rgba(1,8,14,.72);color:#fff;outline:none;text-align:center;letter-spacing:.12em}
+    .lock-input:focus{border-color:rgba(102,229,255,.48);box-shadow:0 0 0 3px rgba(102,229,255,.06)}
+    .lock-submit{height:50px;border:0;border-radius:9px;background:linear-gradient(135deg,#66e5ff,#aef3ff);color:#031019;font-weight:950;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+    .lock-error{min-height:19px;margin:2px 0 0!important;color:#ff7f8d!important;font-size:.78rem}
+    .back-home{display:inline-block;margin-top:15px;color:#829aaa;font-size:.76rem}
+    .back-home:hover{color:#fff}
+
+    footer{position:relative;z-index:2;padding:26px 0 34px;color:#617a8b;font-size:.78rem}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(102,229,255,.08);padding-top:24px}
+    @media(max-width:920px){.nav-links a:not(.active){display:none}.tools-grid{grid-template-columns:1fr 1fr}.tool-card:last-child{grid-column:1/-1}}
+    @media(max-width:640px){
+      .shell{width:min(100% - 26px,var(--max))}.nav{min-height:70px}.topbar .brand small{display:none}.nav-links{display:none}
+      main{padding-top:108px}.hero{padding:36px 22px;min-height:310px;border-radius:15px}
+      .tools-head{align-items:flex-start;flex-direction:column}.tools-grid{grid-template-columns:1fr}.tool-card:last-child{grid-column:auto}
+      .tool-card{min-height:285px}.foot{align-items:flex-start;flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a href="../" class="brand" aria-label="ABYX home">
+        <span class="brand-mark">A</span>
+        <span>ABYX<small data-i18n="brandSub">Dark War • Alliance Hub</small></span>
+      </a>
+      <div class="nav-actions">
+        <nav class="nav-links" aria-label="ABYX navigation">
+          <a href="../season-guide/" data-i18n="seasonGuide">Season Guide</a>
+          <a href="../#news-guides" data-i18n="newsGuides">News & Guides</a>
+          <a class="active" href="./" data-i18n="leaderTools">Leader Tools 🔒</a>
+          <a href="../#hub" data-i18n="hub">Hub</a>
+        </nav>
+        <div class="lang-picker" id="langPicker">
+          <button class="lang-current" id="langCurrent" type="button" aria-haspopup="true" aria-expanded="false">EN</button>
+          <div class="lang-menu" role="menu" aria-label="Language">
+            <button class="lang-option" type="button" data-lang="en"><span>English</span><span class="lang-code">EN</span></button>
+            <button class="lang-option" type="button" data-lang="fr"><span>Français</span><span class="lang-code">FR</span></button>
+            <button class="lang-option" type="button" data-lang="it"><span>Italiano</span><span class="lang-code">IT</span></button>
+            <button class="lang-option" type="button" data-lang="de"><span>Deutsch</span><span class="lang-code">DE</span></button>
+            <button class="lang-option" type="button" data-lang="pl"><span>Polski</span><span class="lang-code">PL</span></button>
+            <button class="lang-option" type="button" data-lang="ru"><span>Русский</span><span class="lang-code">RU</span></button>
+            <button class="lang-option" type="button" data-lang="uk"><span>Українська</span><span class="lang-code">UA</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lock-screen" id="lockScreen">
+    <div class="lock-card">
+      <div class="lock-emblem">A</div>
+      <h2 data-i18n="lockTitle">Leader access</h2>
+      <p data-i18n="lockText">This area is reserved for ABYX leadership.</p>
+      <form class="lock-form" id="lockForm">
+        <input class="lock-input" id="passwordInput" type="password" autocomplete="current-password" placeholder="Password" data-placeholder="password">
+        <button class="lock-submit" type="submit" data-i18n="unlock">Unlock</button>
+        <p class="lock-error" id="lockError" aria-live="polite"></p>
+      </form>
+      <a class="back-home" href="../" data-i18n="backHome">← Back to ABYX</a>
+    </div>
+  </div>
+
+  <main>
+    <div class="shell">
+      <section class="hero">
+        <p class="eyebrow" data-i18n="eyebrow">Restricted Area • ABYX Command</p>
+        <h1>Leader <span>Tools</span></h1>
+        <p class="lead" data-i18n="lead">Rally planning, alliance communication and upcoming command utilities gathered in one protected space.</p>
+      </section>
+
+      <section>
+        <div class="tools-head">
+          <div>
+            <p class="eyebrow" data-i18n="toolbox">Command Toolbox</p>
+            <h2 data-i18n="chooseTool">Choose your tool</h2>
+          </div>
+          <p data-i18n="toolsIntro">Fast access to the utilities used by ABYX leadership.</p>
+        </div>
+
+        <div class="tools-grid">
+          <a class="tool-card" href="https://frankyrallytool-maker.github.io/franky-rally-tool/" target="_blank" rel="noopener">
+            <div>
+              <div class="tool-icon">⚔</div>
+              <span class="tool-tag" data-i18n="rallyTag">Rally Planning</span>
+              <h3>Franky Rally Tool</h3>
+              <p data-i18n="rallyDesc">Prepare and optimize alliance rallies with the current Franky tool.</p>
+            </div>
+            <div class="tool-link" data-i18n="openTool">Open tool →</div>
+          </a>
+
+          <a class="tool-card gold" href="https://frankyrallytool-maker.github.io/franky-rally-tool/message-builder.html" target="_blank" rel="noopener">
+            <div>
+              <div class="tool-icon">✦</div>
+              <span class="tool-tag" data-i18n="messageTag">Alliance Communication</span>
+              <h3>ABYX Message Forge</h3>
+              <p data-i18n="messageDesc">Create polished Dark War alliance messages with formatting, colors and ready-to-copy game code.</p>
+            </div>
+            <div class="tool-link" data-i18n="openForge">Open forge →</div>
+          </a>
+
+          <div class="tool-card disabled" aria-disabled="true">
+            <div>
+              <div class="tool-icon">⌬</div>
+              <span class="tool-tag" data-i18n="simTag">Strategy</span>
+              <h3>Plan Simulator</h3>
+              <p data-i18n="simDesc">Future planning and simulation workspace for ABYX leadership.</p>
+              <span class="under" data-i18n="construction">Under construction</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="shell foot">
+      <span>ABYX • Dark War: Survival</span>
+      <span data-i18n="footer">Leader Tools • Restricted Access</span>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    "use strict";
+    var LANG_KEY="abyx_lang";
+    var AUTH_KEY="abyx_leader_unlocked";
+    var PASS_HASH="99ad0c262ec5c6d3c9575fdeea969eece8655cdd759547ef1db28cd87e37108d";
+    var labels={en:"EN",fr:"FR",it:"IT",de:"DE",pl:"PL",ru:"RU",uk:"UA"};
+    var tr={
+      en:{brandSub:"Dark War • Alliance Hub",seasonGuide:"Season Guide",newsGuides:"News & Guides",leaderTools:"Leader Tools 🔒",hub:"Hub",lockTitle:"Leader access",lockText:"This area is reserved for ABYX leadership.",password:"Password",unlock:"Unlock",bad:"Incorrect password.",backHome:"← Back to ABYX",eyebrow:"Restricted Area • ABYX Command",lead:"Rally planning, alliance communication and upcoming command utilities gathered in one protected space.",toolbox:"Command Toolbox",chooseTool:"Choose your tool",toolsIntro:"Fast access to the utilities used by ABYX leadership.",rallyTag:"Rally Planning",rallyDesc:"Prepare and optimize alliance rallies with the current Franky tool.",messageTag:"Alliance Communication",messageDesc:"Create polished Dark War alliance messages with formatting, colors and ready-to-copy game code.",simTag:"Strategy",simDesc:"Future planning and simulation workspace for ABYX leadership.",construction:"Under construction",openTool:"Open tool →",openForge:"Open forge →",footer:"Leader Tools • Restricted Access"},
+      fr:{brandSub:"Dark War • Hub d’alliance",seasonGuide:"Guide de saison",newsGuides:"Infos & Guides",leaderTools:"Outils Leaders 🔒",hub:"Hub",lockTitle:"Accès Leaders",lockText:"Cet espace est réservé au commandement ABYX.",password:"Mot de passe",unlock:"Déverrouiller",bad:"Mot de passe incorrect.",backHome:"← Retour à ABYX",eyebrow:"Zone restreinte • Commandement ABYX",lead:"Planification des rallyes, communication d’alliance et futurs outils de commandement réunis dans un espace protégé.",toolbox:"Boîte à outils du commandement",chooseTool:"Choisissez votre outil",toolsIntro:"Accès rapide aux utilitaires utilisés par les leaders ABYX.",rallyTag:"Planification Rally",rallyDesc:"Préparez et optimisez les rallyes de l’alliance avec l’outil Franky actuel.",messageTag:"Communication Alliance",messageDesc:"Créez des messages Dark War soignés avec mise en forme, couleurs et code prêt à copier dans le jeu.",simTag:"Stratégie",simDesc:"Futur espace de planification et de simulation pour le commandement ABYX.",construction:"En construction",openTool:"Ouvrir l’outil →",openForge:"Ouvrir la forge →",footer:"Outils Leaders • Accès restreint"},
+      it:{brandSub:"Dark War • Hub dell’alleanza",seasonGuide:"Guida stagione",newsGuides:"Notizie & Guide",leaderTools:"Strumenti Leader 🔒",hub:"Hub",lockTitle:"Accesso Leader",lockText:"Quest’area è riservata alla leadership ABYX.",password:"Password",unlock:"Sblocca",bad:"Password errata.",backHome:"← Torna ad ABYX",eyebrow:"Area riservata • Comando ABYX",lead:"Pianificazione rally, comunicazione dell’alleanza e futuri strumenti di comando in uno spazio protetto.",toolbox:"Strumenti di comando",chooseTool:"Scegli lo strumento",toolsIntro:"Accesso rapido agli strumenti della leadership ABYX.",rallyTag:"Pianificazione Rally",rallyDesc:"Prepara e ottimizza i rally con l’attuale Franky Rally Tool.",messageTag:"Comunicazione Alleanza",messageDesc:"Crea messaggi Dark War curati con formattazione, colori e codice pronto da copiare.",simTag:"Strategia",simDesc:"Futuro spazio di pianificazione e simulazione per la leadership ABYX.",construction:"In costruzione",openTool:"Apri strumento →",openForge:"Apri forge →",footer:"Leader Tools • Accesso riservato"},
+      de:{brandSub:"Dark War • Allianz-Hub",seasonGuide:"Saison-Guide",newsGuides:"News & Guides",leaderTools:"Leader-Tools 🔒",hub:"Hub",lockTitle:"Leader-Zugang",lockText:"Dieser Bereich ist der ABYX-Führung vorbehalten.",password:"Passwort",unlock:"Entsperren",bad:"Falsches Passwort.",backHome:"← Zurück zu ABYX",eyebrow:"Geschützter Bereich • ABYX-Kommando",lead:"Rally-Planung, Allianz-Kommunikation und zukünftige Kommando-Tools an einem geschützten Ort.",toolbox:"Kommando-Werkzeuge",chooseTool:"Tool auswählen",toolsIntro:"Schneller Zugriff auf die Werkzeuge der ABYX-Führung.",rallyTag:"Rally-Planung",rallyDesc:"Rallys mit dem aktuellen Franky Rally Tool vorbereiten und optimieren.",messageTag:"Allianz-Kommunikation",messageDesc:"Erstelle formatierte Dark-War-Nachrichten mit Farben und kopierfertigem Spielcode.",simTag:"Strategie",simDesc:"Zukünftiger Planungs- und Simulationsbereich für die ABYX-Führung.",construction:"Im Aufbau",openTool:"Tool öffnen →",openForge:"Forge öffnen →",footer:"Leader Tools • Geschützter Zugang"},
+      pl:{brandSub:"Dark War • Centrum sojuszu",seasonGuide:"Przewodnik sezonu",newsGuides:"Aktualności i poradniki",leaderTools:"Narzędzia liderów 🔒",hub:"Hub",lockTitle:"Dostęp liderów",lockText:"Ta strefa jest przeznaczona dla dowództwa ABYX.",password:"Hasło",unlock:"Odblokuj",bad:"Nieprawidłowe hasło.",backHome:"← Powrót do ABYX",eyebrow:"Strefa chroniona • Dowództwo ABYX",lead:"Planowanie rajdów, komunikacja sojuszu i przyszłe narzędzia dowodzenia w jednym chronionym miejscu.",toolbox:"Narzędzia dowodzenia",chooseTool:"Wybierz narzędzie",toolsIntro:"Szybki dostęp do narzędzi używanych przez liderów ABYX.",rallyTag:"Planowanie Rally",rallyDesc:"Przygotuj i zoptymalizuj rajdy za pomocą Franky Rally Tool.",messageTag:"Komunikacja Sojuszu",messageDesc:"Twórz dopracowane wiadomości Dark War z formatowaniem, kolorami i kodem gotowym do skopiowania.",simTag:"Strategia",simDesc:"Przyszła przestrzeń planowania i symulacji dla dowództwa ABYX.",construction:"W budowie",openTool:"Otwórz narzędzie →",openForge:"Otwórz forge →",footer:"Leader Tools • Dostęp chroniony"},
+      ru:{brandSub:"Dark War • Центр альянса",seasonGuide:"Гайд сезона",newsGuides:"Новости и гайды",leaderTools:"Инструменты лидеров 🔒",hub:"Хаб",lockTitle:"Доступ лидеров",lockText:"Этот раздел предназначен для руководства ABYX.",password:"Пароль",unlock:"Открыть",bad:"Неверный пароль.",backHome:"← Назад в ABYX",eyebrow:"Закрытая зона • Командование ABYX",lead:"Планирование ралли, связь альянса и будущие инструменты командования в одном защищённом разделе.",toolbox:"Инструменты командования",chooseTool:"Выберите инструмент",toolsIntro:"Быстрый доступ к инструментам руководства ABYX.",rallyTag:"Планирование Rally",rallyDesc:"Готовьте и оптимизируйте ралли с текущим Franky Rally Tool.",messageTag:"Связь Альянса",messageDesc:"Создавайте оформленные сообщения Dark War с цветами и кодом для копирования.",simTag:"Стратегия",simDesc:"Будущая зона планирования и симуляции для руководства ABYX.",construction:"В разработке",openTool:"Открыть инструмент →",openForge:"Открыть forge →",footer:"Leader Tools • Закрытый доступ"},
+      uk:{brandSub:"Dark War • Центр альянсу",seasonGuide:"Гайд сезону",newsGuides:"Новини та гайди",leaderTools:"Інструменти лідерів 🔒",hub:"Хаб",lockTitle:"Доступ лідерів",lockText:"Цей розділ призначений для керівництва ABYX.",password:"Пароль",unlock:"Відкрити",bad:"Неправильний пароль.",backHome:"← Назад до ABYX",eyebrow:"Закрита зона • Командування ABYX",lead:"Планування rally, комунікація альянсу та майбутні інструменти командування в одному захищеному просторі.",toolbox:"Інструменти командування",chooseTool:"Оберіть інструмент",toolsIntro:"Швидкий доступ до інструментів керівництва ABYX.",rallyTag:"Планування Rally",rallyDesc:"Готуйте й оптимізуйте rally за допомогою Franky Rally Tool.",messageTag:"Комунікація Альянсу",messageDesc:"Створюйте оформлені повідомлення Dark War з кольорами та кодом для копіювання.",simTag:"Стратегія",simDesc:"Майбутній простір планування та симуляції для керівництва ABYX.",construction:"У розробці",openTool:"Відкрити інструмент →",openForge:"Відкрити forge →",footer:"Leader Tools • Закритий доступ"}
+    };
+
+    var langPicker=document.getElementById("langPicker");
+    var langCurrent=document.getElementById("langCurrent");
+    function currentLang(){
+      var s=null;try{s=localStorage.getItem(LANG_KEY)}catch(_){}
+      if(s&&tr[s])return s;
+      var b=(navigator.language||"en").slice(0,2).toLowerCase();
+      return tr[b]?b:"en";
+    }
+    function setLang(lang){
+      if(!tr[lang])lang="en";
+      document.documentElement.lang=lang;
+      var d=tr[lang];
+      document.querySelectorAll("[data-i18n]").forEach(function(el){
+        var k=el.getAttribute("data-i18n");if(d[k])el.textContent=d[k];
+      });
+      var pi=document.getElementById("passwordInput");if(pi)pi.placeholder=d.password;
+      langCurrent.textContent=labels[lang]||lang.toUpperCase();
+      document.querySelectorAll(".lang-option").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-lang")===lang)});
+      try{localStorage.setItem(LANG_KEY,lang)}catch(_){}
+    }
+    langCurrent.addEventListener("click",function(e){e.stopPropagation();langPicker.classList.toggle("open");langCurrent.setAttribute("aria-expanded",langPicker.classList.contains("open")?"true":"false")});
+    document.querySelectorAll(".lang-option").forEach(function(b){b.addEventListener("click",function(){setLang(b.getAttribute("data-lang"));langPicker.classList.remove("open");langCurrent.setAttribute("aria-expanded","false")})});
+    document.addEventListener("click",function(e){if(!langPicker.contains(e.target)){langPicker.classList.remove("open");langCurrent.setAttribute("aria-expanded","false")}});
+    setLang(currentLang());
+
+    var lock=document.getElementById("lockScreen");
+    var form=document.getElementById("lockForm");
+    var input=document.getElementById("passwordInput");
+    var error=document.getElementById("lockError");
+    function unlocked(){try{return sessionStorage.getItem(AUTH_KEY)==="1"}catch(_){return false}}
+    function showUnlocked(){lock.hidden=true;document.body.style.overflow=""}
+    function showLocked(){lock.hidden=false;document.body.style.overflow="hidden";setTimeout(function(){input.focus()},60)}
+    async function sha256(s){
+      var data=new TextEncoder().encode(s);
+      var hash=await crypto.subtle.digest("SHA-256",data);
+      return Array.from(new Uint8Array(hash)).map(function(b){return b.toString(16).padStart(2,"0")}).join("");
+    }
+    if(unlocked())showUnlocked();else showLocked();
+    form.addEventListener("submit",async function(e){
+      e.preventDefault();error.textContent="";
+      try{
+        var hash=await sha256(input.value);
+        if(hash===PASS_HASH){
+          try{sessionStorage.setItem(AUTH_KEY,"1")}catch(_){}
+          input.value="";showUnlocked();
+        }else{
+          error.textContent=tr[document.documentElement.lang||"en"].bad||tr.en.bad;
+          input.select();
+        }
+      }catch(_){
+        error.textContent=tr[document.documentElement.lang||"en"].bad||tr.en.bad;
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
