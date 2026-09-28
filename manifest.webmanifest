@@ -2,21 +2,25 @@
   "name": "ABYX ALLIANCE HUB",
   "short_name": "ABYX",
   "description": "Dark War Survival alliance hub",
-  "start_url": "./?appv=3",
-  "scope": "./",
+  "start_url": "/?appv=5",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#020811",
   "theme_color": "#020811",
   "icons": [
     {
-      "src": "./abyx-icon-192.png",
+      "src": "/abyx-icon-192.svg",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
-      "src": "./abyx-icon-512.png",
+      "src": "/abyx-icon-512.svg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "id": "/",
+  "prefer_related_applications": false
 }
