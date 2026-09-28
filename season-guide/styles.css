@@ -459,3 +459,132 @@ main{width:min(var(--max),calc(100% - 34px));margin:0 auto}
 @media(prefers-reduced-motion:reduce){
   .hero:before{animation:none!important}
 }
+
+
+/* =========================================================
+   ABYX GUIDE — V2.1 FRAMED PANELS
+   Restore strong visual frames while keeping the abyssal skin
+   ========================================================= */
+.systems-section,
+.roadmap-section{
+  position:relative;
+  margin:0 0 30px;
+  padding:34px 32px 38px;
+  border:1px solid rgba(102,229,255,.18);
+  border-radius:16px;
+  background:
+    linear-gradient(180deg,rgba(8,23,37,.86),rgba(3,12,21,.94)),
+    radial-gradient(circle at 0 0,rgba(102,229,255,.06),transparent 34%);
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.025);
+  overflow:hidden;
+}
+.systems-section:before,
+.roadmap-section:before{
+  content:"";
+  position:absolute;
+  left:0;top:0;
+  width:130px;height:2px;
+  background:linear-gradient(90deg,#66e5ff,#d8b66e,transparent);
+  box-shadow:0 0 18px rgba(102,229,255,.36);
+}
+.systems-section:after,
+.roadmap-section:after{
+  content:"";
+  position:absolute;
+  right:18px;top:18px;
+  width:26px;height:26px;
+  border-top:1px solid rgba(216,182,110,.42);
+  border-right:1px solid rgba(216,182,110,.42);
+  pointer-events:none;
+}
+
+/* Individual system cards */
+.system-card{
+  border:1px solid rgba(102,229,255,.28)!important;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(255,255,255,.018)!important;
+}
+.system-card:hover{
+  border-color:rgba(102,229,255,.58)!important;
+  box-shadow:
+    0 28px 70px rgba(0,0,0,.48),
+    0 0 24px rgba(102,229,255,.08)!important;
+}
+
+/* Week panels */
+.week-card,
+.week-row:nth-child(odd) .week-card,
+.week-row:nth-child(even) .week-card{
+  position:relative;
+  border:1px solid rgba(102,229,255,.25)!important;
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.018)!important;
+}
+.week-card:before{
+  content:"";
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:2px;
+  border-radius:13px 0 0 13px;
+  background:linear-gradient(180deg,#66e5ff,rgba(102,229,255,.08));
+  opacity:.72;
+}
+.week-row.is-current .week-card{
+  border-color:rgba(216,182,110,.52)!important;
+  box-shadow:
+    0 25px 68px rgba(0,0,0,.44),
+    0 0 28px rgba(216,182,110,.08),
+    inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+.week-row.is-current .week-card:before{
+  background:linear-gradient(180deg,#d8b66e,#66e5ff);
+  opacity:1;
+}
+
+/* Event rows */
+.event-card{
+  border:1px solid rgba(102,229,255,.19)!important;
+  background:linear-gradient(90deg,rgba(7,22,35,.92),rgba(4,14,24,.84))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.015);
+}
+.event-card:hover{
+  border-color:rgba(102,229,255,.45)!important;
+  background:linear-gradient(90deg,rgba(10,31,47,.96),rgba(5,18,30,.92))!important;
+}
+.event-card.no-detail{
+  border-color:rgba(216,182,110,.13)!important;
+}
+
+/* Details inside the modal */
+.detail-fact-card{
+  border:1px solid rgba(102,229,255,.18)!important;
+  border-radius:10px;
+}
+.detail-tip{
+  border:1px solid rgba(216,182,110,.16)!important;
+  border-radius:10px;
+}
+
+/* Footer note frame */
+.roadmap-note{
+  border:1px solid rgba(216,182,110,.24)!important;
+  border-radius:11px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.018);
+}
+
+@media(max-width:760px){
+  .systems-section,
+  .roadmap-section{
+    margin-bottom:20px;
+    padding:24px 16px 28px;
+    border-radius:13px;
+  }
+  .systems-section:after,
+  .roadmap-section:after{
+    right:12px;top:12px;width:20px;height:20px;
+  }
+}
