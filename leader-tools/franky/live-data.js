@@ -584,15 +584,15 @@
     if (!normalized || normalized === "none") return "";
 
     const iconMap = {
-      fighter: "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Cpath%20d%3D%22M24%204%2038%2010v11c0%2010-6%2018-14%2023C16%2039%2010%2031%2010%2021V10Z%22%20fill%3D%22%2310283b%22%20stroke%3D%22%235ed7ff%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22m16%2031%2016-16M18%2015l15%2016%22%20stroke%3D%22%23dff8ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22m14%2034%205-1-4-4Zm20%200-5-1%204-4Z%22%20fill%3D%22%235ed7ff%22%2F%3E%3C%2Fsvg%3E",
-      shooter: "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2217%22%20fill%3D%22%232d1b0e%22%20stroke%3D%22%23ff9d2e%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%229%22%20fill%3D%22none%22%20stroke%3D%22%23ffd08a%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%223.5%22%20fill%3D%22%23ff9d2e%22%2F%3E%3Cpath%20d%3D%22M24%203v8M24%2037v8M3%2024h8M37%2024h8%22%20stroke%3D%22%23ffd08a%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
-      rider: "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2225%22%20r%3D%2213%22%20fill%3D%22%230d2b26%22%20stroke%3D%22%2358e1c2%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M24%207v10m0%2014v10M7%2025h10m14%200h10%22%20stroke%3D%22%23bfffee%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22m20%2024%205-9%204%208-5%2010Z%22%20fill%3D%22%2358e1c2%22%2F%3E%3C%2Fsvg%3E"
+      fighter: "/leader-tools/franky/assets/troops/fighter.png?v=7",
+      shooter: "/leader-tools/franky/assets/troops/shooter.png?v=7",
+      rider: "/leader-tools/franky/assets/troops/rider.png?v=7"
     };
 
     const src = iconMap[normalized];
     if (!src) return "";
 
-    return '<img class="troop-icon troop-icon-' + normalized + '" data-troop="' + normalized + '" src="' + src + '" alt="' + normalized + '" loading="eager" decoding="sync">';
+    return '<img class="troop-icon troop-icon-' + normalized + '" data-troop="' + normalized + '" src="' + src + '" width="24" height="24" alt="' + normalized + '" loading="eager" decoding="sync">';
   }
 
   function troopIndexKey(playerName, apcNo) {
