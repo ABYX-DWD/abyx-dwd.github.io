@@ -12,48 +12,63 @@
   <div class="page-glow page-glow-left" aria-hidden="true"></div>
   <div class="page-glow page-glow-right" aria-hidden="true"></div>
 
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="434 Ragnarok Road Map">
-      <span class="brand-emblem">☥</span>
-      <span class="brand-copy">
-        <strong>434</strong>
-        <small>RAGNAROK · SEASON 6</small>
-      </span>
-    </a>
+  <header class="abyx-topbar">
+    <div class="abyx-shell abyx-nav">
+      <a href="../" class="abyx-brand" aria-label="ABYX home">
+        <span class="abyx-brand-mark">A</span>
+        <span>ABYX<small data-shell-i18n="brandSub">Dark War • Alliance Hub</small></span>
+      </a>
 
-    <div class="topbar-tools">
-      <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="#roadmap" data-i18n="navRoadmap">Road Map</a>
-        <a href="#systems" data-i18n="navSystems">Season Systems</a>
-      </nav>
+      <div class="abyx-nav-actions">
+        <nav class="abyx-nav-links" aria-label="ABYX navigation">
+          <a href="./" class="is-active" data-shell-i18n="seasonGuide">Season Guide</a>
+          <a href="../#news-guides" data-shell-i18n="newsGuides">News & Guides</a>
+          <a class="abyx-leader-nav" href="../#leader-tools" data-shell-i18n="leaderTools">Leader Tools 🔒</a>
+          <a class="abyx-nav-cta" href="../#hub" data-shell-i18n="enterHub">Enter Hub</a>
+        </nav>
 
-      <button class="search-open" id="searchOpen" type="button" aria-label="Search">
-        <span aria-hidden="true">⌕</span>
-        <span class="search-open-label" data-i18n="search">Search</span>
-      </button>
-
-      <label class="language-picker" for="languageSelect">
-        <span aria-hidden="true">◎</span>
-        <select id="languageSelect" aria-label="Language">
-          <option value="en">EN</option>
-          <option value="fr">FR</option>
-          <option value="it">IT</option>
-          <option value="de">DE</option>
-          <option value="pl">PL</option>
-        </select>
-      </label>
-
-      <button class="nav-toggle" type="button" aria-controls="mobileNav" aria-expanded="false">
-        <span></span><span></span><span></span>
-        <span class="sr-only">Open navigation</span>
-      </button>
+        <div class="abyx-lang-picker" id="abyxLangPicker">
+          <button class="abyx-lang-current" id="abyxLangCurrent" type="button" aria-haspopup="true" aria-expanded="false">EN</button>
+          <div class="abyx-lang-menu" id="abyxLangMenu" role="menu" aria-label="Language">
+            <button class="abyx-lang-option" type="button" data-lang="en"><span>English</span><span class="abyx-lang-code">EN</span></button>
+            <button class="abyx-lang-option" type="button" data-lang="fr"><span>Français</span><span class="abyx-lang-code">FR</span></button>
+            <button class="abyx-lang-option" type="button" data-lang="it"><span>Italiano</span><span class="abyx-lang-code">IT</span></button>
+            <button class="abyx-lang-option" type="button" data-lang="de"><span>Deutsch</span><span class="abyx-lang-code">DE</span></button>
+            <button class="abyx-lang-option" type="button" data-lang="pl"><span>Polski</span><span class="abyx-lang-code">PL</span></button>
+            <button class="abyx-lang-option" type="button" data-lang="ru"><span>Русский</span><span class="abyx-lang-code">RU</span></button>
+            <button class="abyx-lang-option" type="button" data-lang="uk"><span>Українська</span><span class="abyx-lang-code">UA</span></button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation" hidden>
-    <a href="#roadmap" data-i18n="navRoadmap">Road Map</a>
-    <a href="#systems" data-i18n="navSystems">Season Systems</a>
-  </nav>
+  <div class="guide-toolbar">
+    <div class="guide-toolbar-inner">
+      <a class="guide-context" href="#top">
+        <span aria-hidden="true">☥</span>
+        <strong>434 · RAGNAROK · SEASON 6</strong>
+      </a>
+      <nav class="guide-nav" aria-label="Guide navigation">
+        <a href="#roadmap" data-i18n="navRoadmap">Road Map</a>
+        <a href="#systems" data-i18n="navSystems">Season Systems</a>
+        <button class="search-open" id="searchOpen" type="button" aria-label="Search">
+          <span aria-hidden="true">⌕</span>
+          <span class="search-open-label" data-i18n="search">Search</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <select id="languageSelect" class="sr-only" aria-hidden="true" tabindex="-1">
+    <option value="en">EN</option>
+    <option value="fr">FR</option>
+    <option value="it">IT</option>
+    <option value="de">DE</option>
+    <option value="pl">PL</option>
+    <option value="ru">RU</option>
+    <option value="uk">UA</option>
+  </select>
 
   <main id="top">
     <section class="hero">
