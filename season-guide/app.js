@@ -210,19 +210,18 @@
 
   function updateSeasonProgress(){
     const start=new Date('2026-09-22T00:00:00'), end=new Date('2026-11-02T23:59:59'), now=new Date();
-    let pct=0,state='';
+    let state='';
     if(now<start){
       const diff=Math.ceil((start-now)/86400000);
       state=diff<=0?tr().startsToday:tr().startsIn.replace('{n}',diff);
-    }else if(now>end){pct=100;state=tr().seasonEnded;}
-    else{
-      pct=Math.max(0,Math.min(100,((now-start)/(end-start))*100));
+    }else if(now>end){
+      state=tr().seasonEnded;
+    }else{
       const current=weeks.find(w=>now>=new Date(w.start+'T00:00:00')&&now<=new Date(w.end+'T23:59:59'));
       state=tr().seasonLive.replace('{n}',current?current.n:'');
     }
-    $('#seasonState').textContent=state;
-    $('#seasonProgressLabel').textContent=Math.round(pct)+'%';
-    $('#seasonProgressFill').style.width=pct+'%';
+    const el=$('#seasonState');
+    if(el) el.textContent=state;
   }
 
   function buildSearch(){
