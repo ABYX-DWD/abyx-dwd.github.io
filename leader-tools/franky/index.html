@@ -258,6 +258,10 @@ select{
     z-index:50;
     pointer-events:auto!important;
   }
+  /* Keep the player autocomplete dropdown above the player grid.
+     The grid comes later in the DOM, so equal stacking levels can hide the dropdown on touch layouts. */
+  #attendance .player-filter{z-index:90}
+  #attendance #playersList{z-index:40}
   #attendance select,
   #attendance input,
   #attendance button,
@@ -560,7 +564,7 @@ document.getElementById("itBtn").onclick=()=>{lang="it";renderAll()};
 document.getElementById("deBtn").onclick=()=>{lang="de";renderAll()};
 renderAll();
 </script>
-<script src="./live-data.js?v=53"></script>
+<script src="./live-data.js?v=54"></script>
 <script src="./image-generator.js?v=18"></script>
 <script src="./floating-buttons.js?v=1"></script>
 <script>
