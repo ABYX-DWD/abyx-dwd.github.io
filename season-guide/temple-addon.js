@@ -1,6 +1,8 @@
 (() => {
   'use strict';
 
+  const THUMB_URL = 'assets/divine-temple-thumb.webp?v=1';
+
   const TEMPLATE = `
     <div id="templeInfographic" class="temple-infographic" hidden aria-label="Divine Temples Quick Guide">
       <header class="temple-guide-hero">
@@ -118,6 +120,15 @@
     sheet.insertAdjacentHTML('beforeend', TEMPLATE);
   }
 
+  function applyTempleThumbnail() {
+    document.querySelectorAll('.system-card[data-art="4"] .system-art').forEach((art) => {
+      art.style.backgroundImage = `url("${THUMB_URL}")`;
+      art.style.backgroundSize = 'cover';
+      art.style.backgroundPosition = 'center 45%';
+      art.style.backgroundRepeat = 'no-repeat';
+    });
+  }
+
   function isTempleDetail() {
     const title = document.getElementById('detailTitle');
     return !!title && title.textContent.trim().toLowerCase() === 'divine temples';
@@ -142,14 +153,21 @@
 
   function init() {
     ensureInfographic();
+    applyTempleThumbnail();
 
     const modal = document.getElementById('detailModal');
     const title = document.getElementById('detailTitle');
+    const systemGrid = document.getElementById('systemGrid');
     if (!modal) return;
 
     const observer = new MutationObserver(() => requestAnimationFrame(syncTempleMode));
     observer.observe(modal, { attributes: true, attributeFilter: ['hidden'] });
     if (title) observer.observe(title, { childList: true, characterData: true, subtree: true });
+
+    if (systemGrid) {
+      const gridObserver = new MutationObserver(() => requestAnimationFrame(applyTempleThumbnail));
+      gridObserver.observe(systemGrid, { childList: true, subtree: true });
+    }
 
     document.addEventListener('click', (event) => {
       if (event.target.closest('.system-card, .event-card, .search-result')) {
