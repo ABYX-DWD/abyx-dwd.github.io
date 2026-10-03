@@ -1,0 +1,197 @@
+/* Divine Temples — Season Guide custom card + infographic popup */
+.system-card[data-art="4"]{
+  border-color:rgba(244,181,61,.44);
+  box-shadow:inset 0 0 0 1px rgba(255,220,125,.04),0 18px 44px rgba(0,0,0,.28);
+}
+.system-card[data-art="4"] .system-art{
+  opacity:1;
+  filter:saturate(1.08) contrast(1.05) brightness(1.02);
+  background-position:100% 0%;
+}
+.system-card[data-art="4"] .system-art::after{
+  background:linear-gradient(180deg,rgba(8,4,2,.02),rgba(22,10,2,.24) 68%,rgba(15,7,2,.82));
+}
+.system-card[data-art="4"] .system-copy small{color:#f2b63d}
+.system-card[data-art="4"] .system-icon{
+  color:#ffd86f;border-color:rgba(255,209,97,.42);background:rgba(25,12,3,.92);
+  box-shadow:0 0 24px rgba(242,182,61,.16)
+}
+
+.detail-sheet.temple-infographic-mode{
+  width:min(1160px,calc(100% - 20px));
+  max-height:92vh;
+  margin:4vh auto 0;
+  padding:12px;
+  overflow:auto;
+  border-color:rgba(245,181,49,.58);
+  background:#090603;
+  box-shadow:0 40px 120px rgba(0,0,0,.8),0 0 60px rgba(226,130,20,.12);
+}
+.detail-sheet.temple-infographic-mode::before{
+  inset:7px;
+  border:1px solid rgba(244,181,61,.20);
+  background:none;
+}
+.detail-sheet.temple-infographic-mode>.detail-media,
+.detail-sheet.temple-infographic-mode>#detailKicker,
+.detail-sheet.temple-infographic-mode>#detailTitle,
+.detail-sheet.temple-infographic-mode>#detailLead,
+.detail-sheet.temple-infographic-mode>#detailFacts,
+.detail-sheet.temple-infographic-mode>#detailTips{
+  display:none!important;
+}
+.detail-sheet.temple-infographic-mode .detail-close{
+  position:sticky;
+  float:right;
+  top:8px;
+  right:8px;
+  margin:6px 6px -44px 0;
+  z-index:20;
+  border-color:rgba(255,215,116,.45);
+  background:rgba(18,8,2,.86);
+  color:#ffe39c;
+  backdrop-filter:blur(8px);
+}
+
+.temple-infographic{
+  --tg:#f2b63d;
+  --tg2:#ffe39a;
+  --ta:#d87516;
+  --td:#0a0603;
+  position:relative;
+  z-index:1;
+  color:#fff3dc;
+  border:1px solid rgba(242,182,61,.36);
+  border-radius:18px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(255,173,43,.14),transparent 32%),
+    linear-gradient(180deg,#160c05 0%,#0b0704 35%,#090603 100%);
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+.temple-infographic::before,
+.temple-infographic::after{
+  content:"";position:absolute;pointer-events:none;z-index:8;
+  border-color:rgba(242,182,61,.62);border-style:solid;
+}
+.temple-infographic::before{inset:7px;border-width:1px;border-radius:13px}
+.temple-infographic::after{inset:13px;border-width:1px 0;border-color:rgba(242,182,61,.12)}
+
+.temple-guide-hero{
+  position:relative;
+  min-height:250px;
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);
+  align-items:center;
+  gap:20px;
+  padding:34px 38px 26px;
+  overflow:hidden;
+  border-bottom:1px solid rgba(242,182,61,.32);
+  background:
+    linear-gradient(90deg,rgba(9,5,2,.96) 0%,rgba(18,8,2,.88) 43%,rgba(20,9,2,.28) 72%,rgba(8,4,2,.10) 100%),
+    url("https://raw.githubusercontent.com/frankyrallytool-maker/434-season-guide/main/assets/topics/topics-sprite.webp") 100% 0% / 500% 300% no-repeat;
+}
+.temple-guide-hero::after{
+  content:"";position:absolute;inset:auto 0 0;height:64px;
+  background:linear-gradient(180deg,transparent,#090603);
+  pointer-events:none;
+}
+.temple-guide-brand{position:relative;z-index:2;max-width:700px}
+.temple-guide-season{display:inline-block;color:#e4b050;font-size:10px;font-weight:900;letter-spacing:.22em}
+.temple-guide-brand h2{
+  max-width:none!important;
+  margin:5px 0 7px!important;
+  color:transparent!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:clamp(44px,7vw,78px)!important;
+  line-height:.9!important;
+  letter-spacing:-.035em;
+  background:linear-gradient(180deg,#fff3bd 0%,#ffc94d 34%,#d97917 70%,#8f4508 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-stroke:1px rgba(255,225,139,.32);
+  filter:drop-shadow(0 4px 0 #371803);
+}
+.temple-guide-ribbon{
+  width:max-content;min-width:260px;padding:7px 28px;margin-top:12px;
+  clip-path:polygon(7% 0,93% 0,100% 50%,93% 100%,7% 100%,0 50%);
+  border:1px solid var(--tg);
+  background:linear-gradient(180deg,#241208,#0d0704);
+  color:#ffdb7b;text-align:center;font-family:Georgia,serif;font-weight:900;font-size:20px;letter-spacing:.06em;
+  box-shadow:inset 0 0 18px rgba(242,182,61,.06)
+}
+.temple-guide-brand>p{margin:14px 0 0;color:#bfa46f;font-size:9px;font-weight:800;letter-spacing:.18em}
+.temple-guide-brand>p b{color:#e29b2e;margin:0 6px}
+
+.temple-guide-visual{position:relative;z-index:1;min-height:190px;align-self:stretch;opacity:.92}
+.temple-sun{position:absolute;width:150px;height:150px;border-radius:50%;right:82px;top:12px;background:radial-gradient(circle,#fff3bd 0 8%,#ffbd3f 28%,rgba(232,114,14,.25) 58%,transparent 72%);filter:blur(.2px)}
+.temple-pyramid{position:absolute;bottom:8px;width:0;height:0;border-left:100px solid transparent;border-right:100px solid transparent;border-bottom:135px solid rgba(120,54,12,.78);filter:drop-shadow(0 -1px 0 rgba(242,182,61,.35))}
+.temple-pyramid-a{right:116px;transform:scale(.76)}
+.temple-pyramid-b{right:-8px;transform:scale(.58)}
+.temple-shrine{position:absolute;right:55px;bottom:0;width:120px;height:126px;border:2px solid #c97719;background:linear-gradient(180deg,#5a2d0c,#1d0d04);box-shadow:0 0 28px rgba(243,168,44,.18),inset 0 0 30px rgba(255,184,52,.08)}
+.temple-shrine::before,.temple-shrine::after{content:"";position:absolute;bottom:-8px;width:16px;height:140px;background:linear-gradient(#8a4814,#2a1205);border:1px solid #d28b28}
+.temple-shrine::before{left:-19px}.temple-shrine::after{right:-19px}
+.temple-shrine i{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;font-size:58px;color:#ffd66e;text-shadow:0 0 22px rgba(255,192,70,.6)}
+.temple-anubis{position:absolute;right:168px;bottom:3px;color:#17130f;font-size:76px;filter:drop-shadow(0 0 1px #e6a63e) drop-shadow(0 8px 8px rgba(0,0,0,.8));transform:scaleX(.74)}
+
+.temple-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:10px 10px 8px}
+.temple-step{position:relative;min-height:245px;padding:20px 18px 18px;border:1px solid rgba(242,182,61,.34);border-radius:12px;background:linear-gradient(180deg,rgba(39,20,7,.94),rgba(12,7,4,.97));overflow:hidden;box-shadow:inset 0 0 26px rgba(242,182,61,.025)}
+.temple-step::after{content:"";position:absolute;right:-44px;bottom:-55px;width:140px;height:140px;border-radius:50%;border:1px solid rgba(242,182,61,.08);box-shadow:0 0 0 18px rgba(242,182,61,.018)}
+.temple-step-number{position:absolute;left:10px;top:10px;width:44px;height:44px;display:grid;place-items:center;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);border:1px solid #d98f23;background:#1b0c03;color:#ffd778;font:900 27px Georgia,serif;box-shadow:0 0 18px rgba(242,182,61,.10)}
+.temple-step-icon{height:72px;display:grid;place-items:center;margin:22px 0 5px;color:#efb448;font-size:54px;text-shadow:0 0 25px rgba(255,188,61,.12)}
+.temple-step h3{margin:0 0 10px;padding-top:7px;border-top:1px solid rgba(242,182,61,.15);color:#ffe5a2;font-family:Georgia,serif;font-size:20px;text-align:center;letter-spacing:.02em}
+.temple-step p{margin:0;color:#dfd2bf;font-size:12px;line-height:1.45;text-align:center}
+.temple-step p mark{background:none;color:#ffd33d;font-weight:900}
+.temple-step p strong{color:#f6ddb0}
+
+.temple-info-grid{display:grid;grid-template-columns:1.05fr .9fr 1.18fr 1.12fr;gap:8px;padding:0 10px 10px}
+.temple-panel{border:1px solid rgba(242,182,61,.32);border-radius:11px;background:linear-gradient(180deg,rgba(30,16,7,.94),rgba(9,6,4,.98));overflow:hidden}
+.temple-panel-title{height:44px;display:flex;align-items:center;gap:9px;padding:0 12px;border-bottom:1px solid rgba(242,182,61,.32);background:linear-gradient(180deg,#25130a,#100905)}
+.temple-panel-title>span{color:#ffc95b;font-size:22px}.temple-panel-title h3{margin:0;color:#ffe4a0;font-family:Georgia,serif;font-size:18px;letter-spacing:.025em}
+
+.temple-rules ol{list-style:none;margin:0;padding:9px 10px 12px;display:grid;gap:7px}
+.temple-rules li{display:grid;grid-template-columns:34px 1fr;align-items:center;gap:8px;color:#e7ddd0;font-size:11px;line-height:1.35}
+.temple-rules li>b{width:30px;height:30px;display:grid;place-items:center;border:1px solid rgba(242,182,61,.30);border-radius:7px;background:#160a03;color:#ffd66f;font:900 19px Georgia,serif}
+.temple-rules strong{color:#ffe09a}
+
+.temple-refresh>p,.temple-chest>p{margin:10px 12px;color:#d7c8b6;font-size:11px;line-height:1.4}
+.temple-cost-list{display:grid;gap:4px;padding:0 12px 12px}
+.temple-cost-list>div{display:grid;grid-template-columns:42px 1fr;align-items:center;min-height:37px;border:1px solid rgba(242,182,61,.20);border-radius:7px;background:#0d0906}
+.temple-cost-list b{display:grid;place-items:center;height:100%;border-right:1px solid rgba(242,182,61,.18);color:#ffd56b;font:900 18px Georgia,serif}
+.temple-cost-list strong{padding-left:12px;color:#f5eee4;font-size:12px}.temple-cost-list i{font-style:normal;color:#ff4360;text-shadow:0 0 8px rgba(255,67,96,.3)}
+
+.temple-tasks ul{list-style:none;margin:0;padding:8px 10px;display:grid;gap:2px}
+.temple-tasks li{display:grid;grid-template-columns:26px 1fr;align-items:center;min-height:29px;color:#eee5d9;font-size:10.5px;border-bottom:1px solid rgba(242,182,61,.08)}
+.temple-tasks li>span{color:#ffc44c;font-weight:900;font-size:15px;text-align:center}.temple-tasks small{display:block;color:#a89782;font-size:9px}
+.temple-tier-note{margin:3px 9px 9px;padding:8px;border:1px solid #dc941e;border-radius:7px;background:linear-gradient(180deg,#4a2607,#1c0d03);color:#ffd437;font-size:10px;font-weight:900;text-align:center;box-shadow:0 0 14px rgba(255,182,38,.10)}
+
+.temple-side-stack{display:grid;grid-template-rows:auto 1fr;gap:8px}
+.temple-rewards{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:2px 10px 12px}
+.temple-rewards span{aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(255,202,75,.43);border-radius:8px;background:radial-gradient(circle at 50% 28%,rgba(255,192,62,.22),rgba(38,14,4,.95));color:#fff0aa;font-size:22px;box-shadow:inset 0 0 14px rgba(255,164,30,.08)}
+.temple-rune-copy{display:grid;grid-template-columns:82px 1fr;align-items:center;gap:8px;padding:16px 12px}
+.temple-rune-icon{width:72px;height:72px;display:grid;place-items:center;transform:rotate(-22deg);color:#7dd8ff;font-size:56px;text-shadow:0 0 6px #3aa8ff,0 0 16px rgba(64,160,255,.65)}
+.temple-rune-copy p{margin:0;color:#e4d9cb;font-size:11px;line-height:1.4}.temple-rune-copy strong{color:#ffe09a}.temple-rune-copy small{color:#a7957f}
+
+.temple-guide-footer{min-height:70px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:12px 22px;border-top:1px solid rgba(242,182,61,.34);background:linear-gradient(180deg,#170c05,#090603);color:#d59a33}
+.temple-guide-footer>span:first-child{font-size:32px;color:#ffd66d}.temple-guide-footer strong{justify-self:center;font-family:Georgia,serif;font-size:18px;letter-spacing:.25em;color:#ffd77a}.temple-guide-footer>span:last-child{font-size:9px;font-weight:900;letter-spacing:.18em;color:#b79052}
+
+@media(max-width:980px){
+  .temple-guide-hero{grid-template-columns:1fr 280px;padding:28px 24px 22px}
+  .temple-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .temple-info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:680px){
+  .detail-sheet.temple-infographic-mode{width:calc(100% - 8px);max-height:94vh;margin:2vh auto 0;padding:5px;border-radius:12px}
+  .temple-infographic{border-radius:10px}
+  .temple-guide-hero{min-height:250px;grid-template-columns:1fr;padding:28px 18px 18px;background:linear-gradient(180deg,rgba(10,5,2,.80),rgba(10,5,2,.94)),url("https://raw.githubusercontent.com/frankyrallytool-maker/434-season-guide/main/assets/topics/topics-sprite.webp") 100% 0% / 500% 300% no-repeat}
+  .temple-guide-visual{display:none}
+  .temple-guide-brand h2{font-size:clamp(42px,13vw,65px)!important}
+  .temple-guide-ribbon{min-width:0;width:88%;font-size:17px}
+  .temple-guide-brand>p{line-height:1.7}
+  .temple-steps{grid-template-columns:1fr;padding:7px}
+  .temple-step{min-height:0;padding:15px 14px 14px;display:grid;grid-template-columns:54px 48px 1fr;grid-template-rows:auto auto;align-items:center;gap:0 8px}
+  .temple-step-number{position:relative;left:auto;top:auto;grid-row:1 / 3;width:40px;height:40px;font-size:22px}
+  .temple-step-icon{height:auto;margin:0;font-size:30px}.temple-step h3{margin:0;text-align:left;padding:0;border:0;font-size:17px}.temple-step p{grid-column:2 / 4;margin-top:7px;text-align:left;font-size:11px}
+  .temple-info-grid{grid-template-columns:1fr;padding:0 7px 7px}
+  .temple-panel-title h3{font-size:17px}
+  .temple-guide-footer{grid-template-columns:auto 1fr;padding:10px 14px}.temple-guide-footer>span:last-child{display:none}.temple-guide-footer strong{font-size:14px;letter-spacing:.14em}
+}
