@@ -2,6 +2,12 @@
   'use strict';
 
   const THUMB_URL = 'assets/divine-temple-thumb.webp?v=1';
+  const SOURCE_URL = 'assets/divine-temple-source.webp?v=2';
+
+  const crop = (name, label, aspect, width, left, top, height='118px') => `
+    <figure class="temple-source-crop temple-source-${name}" style="position:relative;width:100%;height:${height};margin:8px 0 12px;overflow:hidden;border:1px solid rgba(242,182,61,.22);border-radius:10px;background:#120904;">
+      <img src="${SOURCE_URL}" alt="${label}" loading="eager" style="position:absolute;max-width:none;width:${width}%;height:auto;left:${left}%;top:${top}%;display:block;" />
+    </figure>`;
 
   const TEMPLATE = `
     <div id="templeInfographic" class="temple-infographic" hidden aria-label="Divine Temples Quick Guide">
@@ -24,25 +30,25 @@
       <section class="temple-steps" aria-label="Divine Temple progression">
         <article class="temple-step">
           <span class="temple-step-number">1</span>
-          <div class="temple-step-icon">𓉐</div>
+          ${crop('overview','Divine Ruins overview','283/371',443.11,-12.367,-78.976,'132px')}
           <h3>OVERVIEW</h3>
           <p>Eight Divine Ruins are located in the <strong>Origin Lands</strong>. These ruins release <mark>Ruin Tasks</mark> daily.</p>
         </article>
         <article class="temple-step">
           <span class="temple-step-number">2</span>
-          <div class="temple-step-icon">☑</div>
+          ${crop('tasks','Ruin task parchment','276/371',454.348,-125.362,-78.976,'132px')}
           <h3>DO TASKS</h3>
           <p>Complete tasks to earn survivors <mark>Affinity</mark> with the ruins.</p>
         </article>
         <article class="temple-step">
           <span class="temple-step-number">3</span>
-          <div class="temple-step-icon">△</div>
+          ${crop('affinity','Affinity progression','286/371',438.462,-222.727,-78.976,'132px')}
           <h3>INCREASE AFFINITY</h3>
           <p>As survivors' Affinity increases, they receive blessing bonuses: <mark>Affinity Buffs</mark>.</p>
         </article>
         <article class="temple-step">
           <span class="temple-step-number">4</span>
-          <div class="temple-step-icon">▣</div>
+          ${crop('rewards','Divine rewards chest','289/371',433.91,-323.183,-78.976,'132px')}
           <h3>GET REWARDS</h3>
           <p>Reaching certain Affinity levels grants powerful <mark>Divine Artifacts</mark>.</p>
         </article>
@@ -51,6 +57,7 @@
       <div class="temple-info-grid">
         <section class="temple-panel temple-rules">
           <div class="temple-panel-title"><span>☷</span><h3>TASK RULES</h3></div>
+          ${crop('rules','Divine Temple task rules','292/405',429.452,-10.616,-166.667,'128px')}
           <ol>
             <li><b>1</b><span>Accept tasks from up to <strong>2 different Divine Ruins</strong> per day.</span></li>
             <li><b>2</b><span>Each ruin releases only <strong>one task per day</strong>.</span></li>
@@ -62,6 +69,7 @@
 
         <section class="temple-panel temple-refresh">
           <div class="temple-panel-title"><span>⟳</span><h3>REFRESH COST</h3></div>
+          ${crop('refresh','Refresh cost table','269/405',466.171,-122.305,-166.667,'128px')}
           <p>To choose a different task. The first two refreshes are free.</p>
           <div class="temple-cost-list">
             <div><b>1</b><strong>Free</strong></div>
@@ -75,6 +83,7 @@
 
         <section class="temple-panel temple-tasks">
           <div class="temple-panel-title"><span>⚔</span><h3>TASK EXAMPLES</h3></div>
+          ${crop('examples','Task examples','284/405',441.549,-213.028,-166.667,'128px')}
           <ul>
             <li><span>☠</span>Kill Mummies / Corrupted</li>
             <li><span>»</span>Use speedups <small>(training, research, construction)</small></li>
@@ -92,6 +101,7 @@
         <aside class="temple-side-stack">
           <section class="temple-panel temple-chest">
             <div class="temple-panel-title"><span>▣</span><h3>BLESSED CHEST</h3></div>
+            ${crop('chest','Blessed chest and reward icons','318/272',394.34,-283.333,-247.794,'118px')}
             <p>Complete tasks to receive mysterious chests with rich rewards.</p>
             <div class="temple-rewards" aria-label="Example rewards">
               <span>🎫</span><span>✪</span><span>🧩</span><span>◉</span>
@@ -101,6 +111,7 @@
 
           <section class="temple-panel temple-runes">
             <div class="temple-panel-title"><span>⚚</span><h3>RUNES</h3></div>
+            ${crop('runes','Runes and ancient relic upgrade','319/131',393.103,-282.132,-724.427,'88px')}
             <div class="temple-rune-copy">
               <div class="temple-rune-icon">✧</div>
               <p>Used to upgrade <strong>ancient relic levels</strong>.<br><small>Runes will be recycled after the season ends.</small></p>
@@ -144,11 +155,8 @@
     const active = !modal.hidden && isTempleDetail();
     sheet.classList.toggle('temple-infographic-mode', active);
     infographic.hidden = !active;
-    if (active) {
-      sheet.setAttribute('aria-label', 'Divine Temples Quick Guide');
-    } else {
-      sheet.removeAttribute('aria-label');
-    }
+    if (active) sheet.setAttribute('aria-label', 'Divine Temples Quick Guide');
+    else sheet.removeAttribute('aria-label');
   }
 
   function init() {
@@ -161,26 +169,21 @@
     if (!modal) return;
 
     const observer = new MutationObserver(() => requestAnimationFrame(syncTempleMode));
-    observer.observe(modal, { attributes: true, attributeFilter: ['hidden'] });
-    if (title) observer.observe(title, { childList: true, characterData: true, subtree: true });
+    observer.observe(modal, { attributes:true, attributeFilter:['hidden'] });
+    if (title) observer.observe(title, { childList:true, characterData:true, subtree:true });
 
     if (systemGrid) {
       const gridObserver = new MutationObserver(() => requestAnimationFrame(applyTempleThumbnail));
-      gridObserver.observe(systemGrid, { childList: true, subtree: true });
+      gridObserver.observe(systemGrid, { childList:true, subtree:true });
     }
 
     document.addEventListener('click', (event) => {
-      if (event.target.closest('.system-card, .event-card, .search-result')) {
-        requestAnimationFrame(syncTempleMode);
-      }
+      if (event.target.closest('.system-card, .event-card, .search-result')) requestAnimationFrame(syncTempleMode);
     });
 
     syncTempleMode();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once:true });
+  else init();
 })();
