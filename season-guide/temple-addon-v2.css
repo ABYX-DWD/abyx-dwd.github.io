@@ -1,0 +1,85 @@
+/* Divine Temples v2 — source-art enhancements */
+.system-card[data-art="4"] .system-art{
+  background-position:center 10%!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
+
+.temple-step-source{
+  height:auto!important;
+  display:block!important;
+  margin:15px 0 10px!important;
+  padding:0!important;
+  text-shadow:none!important;
+}
+.temple-step-source .temple-source-crop{
+  min-height:112px;
+}
+
+.temple-source-crop,
+.temple-source-inline{
+  position:relative;
+  display:block;
+  overflow:hidden;
+  background:#120804;
+}
+.temple-source-crop{
+  width:100%;
+  aspect-ratio:var(--ratio);
+  border:1px solid rgba(242,182,61,.28);
+  border-radius:10px;
+  box-shadow:inset 0 0 22px rgba(242,182,61,.05),0 8px 20px rgba(0,0,0,.26);
+}
+.temple-source-inline{
+  width:100%;
+  height:100%;
+  border-radius:6px;
+}
+.temple-source-crop img,
+.temple-source-inline img{
+  position:absolute;
+  width:var(--iw)!important;
+  max-width:none!important;
+  height:auto!important;
+  left:var(--il)!important;
+  top:var(--it)!important;
+  display:block;
+  filter:saturate(1.03) contrast(1.03);
+}
+
+.temple-panel-source-icon{
+  padding:0!important;
+  overflow:hidden!important;
+  background:#140903!important;
+}
+.temple-panel-source-icon .temple-source-inline{
+  border:0;
+}
+
+.temple-panel-source{
+  margin:9px 10px 4px;
+}
+.temple-panel-source.refresh-art .temple-source-crop{
+  max-height:80px;
+}
+.temple-panel-source.chest-art .temple-source-crop{
+  max-height:138px;
+}
+.temple-panel-source.runes-art .temple-source-crop{
+  max-height:92px;
+}
+
+.temple-step .temple-source-crop::after,
+.temple-panel-source .temple-source-crop::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,211,112,.03),rgba(7,3,1,.18));
+}
+
+@media(max-width:760px){
+  .system-card[data-art="4"] .system-art{background-position:center 7%!important}
+  .temple-step-source .temple-source-crop{min-height:145px}
+  .temple-panel-source{margin:8px 9px 3px}
+}
