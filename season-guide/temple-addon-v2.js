@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const SRC = 'assets/divine-temple-source.webp?v=1';
+  const SRC = 'assets/divine-temple-source.webp?v=2';
   const BASE = 1254;
 
   const crops = {
@@ -27,7 +27,7 @@
     const iw = ((BASE/w)*100).toFixed(2);
     const il = (-(x/w)*100).toFixed(2);
     const it = (-(y/h)*100).toFixed(2);
-    return `<span class="${cls}" style="--ratio:${ratio};--iw:${iw}%;--il:${il}%;--it:${it}%"><img src="${SRC}" alt="${alt || ''}" loading="lazy"></span>`;
+    return `<span class="${cls}" style="--ratio:${ratio};--iw:${iw}%;--il:${il}%;--it:${it}%"><img src="${SRC}" alt="${alt || ''}" loading="eager" decoding="async"></span>`;
   }
 
   function fixTempleThumbnail() {
