@@ -9,7 +9,7 @@
     rewards: 'assets/temple-rewards.webp?v=4',
     refresh: 'assets/temple-refresh.webp?v=5',
     chest: 'assets/temple-chest.webp?v=4',
-    rune: 'assets/temple-rune.webp?v=5'
+    rune: 'assets/temple-rune.webp?v=6'
   };
 
   const art = (src, alt, fit = 'cover', height = '150px') => `
