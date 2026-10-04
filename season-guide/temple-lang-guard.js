@@ -24,13 +24,13 @@ function loadImageLayer(){
   if(!document.querySelector('link[data-temple-extra-images]')){
     const link=document.createElement('link');
     link.rel='stylesheet';
-    link.href='temple-extra-images.css?v=1';
+    link.href='temple-extra-images.css?v=2';
     link.dataset.templeExtraImages='1';
     document.head.appendChild(link);
   }
   if(!document.querySelector('script[data-temple-extra-images]')){
     const script=document.createElement('script');
-    script.src='temple-extra-images.js?v=1';
+    script.src='temple-extra-images.js?v=2';
     script.dataset.templeExtraImages='1';
     document.body.appendChild(script);
   }
@@ -40,7 +40,7 @@ function loadExtra(){
   if(!document.querySelector('link[data-temple-extra]')){
     const link=document.createElement('link');
     link.rel='stylesheet';
-    link.href='temple-extra.css?v=2';
+    link.href='temple-extra.css?v=3';
     link.dataset.templeExtra='1';
     document.head.appendChild(link);
   }
@@ -63,7 +63,7 @@ function loadExtra(){
       return baseObserve.call(this,target,options);
     };
     const script=document.createElement('script');
-    script.src='temple-extra.js?v=2';
+    script.src='temple-extra.js?v=3';
     script.dataset.templeExtra='1';
     script.addEventListener('load',loadImageLayer,{once:true});
     document.body.appendChild(script);
