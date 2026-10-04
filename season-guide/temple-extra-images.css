@@ -1,23 +1,26 @@
-/* Real image layer for Divine Temple extra sections */
+/* Real cropped-image layer for Divine Temple extra sections */
 .temple-extra-sprite{
-  background-image:url('assets/temple-extra-sprite.webp?v=1') !important;
+  background-image:url('assets/temple-extra-sprite.webp?v=2') !important;
   background-repeat:no-repeat !important;
   background-size:200% 600% !important;
   background-color:#120804 !important;
   color:transparent !important;
 }
+
+/* Small illustrative crops, not full infographic screenshots */
 .temple-quest-card .quest-visual.temple-extra-sprite{
-  height:250px !important;
+  height:138px !important;
   display:block !important;
   padding:0 !important;
   border-bottom:1px solid rgba(242,182,61,.22) !important;
 }
 .temple-buff-card .temple-buff-visual.temple-extra-sprite{
-  height:180px !important;
+  height:108px !important;
   display:block !important;
   padding:0 !important;
   border-bottom:1px solid rgba(242,182,61,.18) !important;
 }
+
 .sprite-qmenu{background-position:0% 0% !important}
 .sprite-qchoose{background-position:100% 0% !important}
 .sprite-qoptions{background-position:0% 20% !important}
@@ -29,11 +32,12 @@
 .sprite-nephthys{background-position:0% 80% !important}
 .sprite-sobek{background-position:100% 80% !important}
 .sprite-isis{background-position:0% 100% !important}
+
 @media(max-width:900px){
-  .temple-quest-card .quest-visual.temple-extra-sprite{height:220px !important}
-  .temple-buff-card .temple-buff-visual.temple-extra-sprite{height:170px !important}
+  .temple-quest-card .quest-visual.temple-extra-sprite{height:126px !important}
+  .temple-buff-card .temple-buff-visual.temple-extra-sprite{height:102px !important}
 }
 @media(max-width:620px){
-  .temple-quest-card .quest-visual.temple-extra-sprite{height:240px !important}
-  .temple-buff-card .temple-buff-visual.temple-extra-sprite{height:160px !important}
+  .temple-quest-card .quest-visual.temple-extra-sprite{height:118px !important}
+  .temple-buff-card .temple-buff-visual.temple-extra-sprite{height:96px !important}
 }
