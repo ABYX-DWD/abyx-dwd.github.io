@@ -7,9 +7,9 @@
     tasks: 'assets/temple-tasks.webp?v=4',
     affinity: 'assets/temple-affinity.webp?v=4',
     rewards: 'assets/temple-rewards.webp?v=4',
-    refresh: 'assets/temple-refresh.webp?v=4',
+    refresh: 'assets/temple-refresh.webp?v=5',
     chest: 'assets/temple-chest.webp?v=4',
-    rune: 'assets/temple-rune.webp?v=4'
+    rune: 'assets/temple-rune.webp?v=5'
   };
 
   const art = (src, alt, fit = 'cover', height = '150px') => `
@@ -113,7 +113,7 @@
 
           <section class="temple-panel temple-runes">
             <div class="temple-panel-title"><span>⚚</span><h3>RUNES</h3></div>
-            ${art(ART.rune, 'Rune used for Ancient Relic upgrades', 'contain', '100px')}
+            ${art(ART.rune, 'Rune used for Ancient Relic upgrades', 'contain', '115px')}
             <div class="temple-rune-copy">
               <div class="temple-rune-icon">✧</div>
               <p>Used to upgrade <strong>ancient relic levels</strong>.<br><small>Runes will be recycled after the season ends.</small></p>
