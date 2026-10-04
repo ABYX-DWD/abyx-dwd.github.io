@@ -20,9 +20,26 @@ function moveProTips(){
   tips.style.marginBottom='14px';
 }
 
+function loadExtra(){
+  if(!document.querySelector('link[data-temple-extra]')){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='temple-extra.css?v=1';
+    link.dataset.templeExtra='1';
+    document.head.appendChild(link);
+  }
+  if(!document.querySelector('script[data-temple-extra]')){
+    const script=document.createElement('script');
+    script.src='temple-extra.js?v=1';
+    script.dataset.templeExtra='1';
+    document.body.appendChild(script);
+  }
+}
+
 function later(){requestAnimationFrame(()=>requestAnimationFrame(moveProTips));}
 
 function init(){
+  loadExtra();
   const root=document.getElementById('templeInfographic');
   if(root)new MutationObserver(later).observe(root,{childList:true});
   const modal=document.getElementById('detailModal');
