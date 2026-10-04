@@ -28,12 +28,23 @@ function loadExtra(){
     link.dataset.templeExtra='1';
     document.head.appendChild(link);
   }
-  if(!document.querySelector('script[data-temple-extra]')){
+  if(document.querySelector('script[data-temple-extra]'))return;
+  setTimeout(()=>{
+    const baseObserve=MutationObserver.prototype.observe;
+    let once=true;
+    MutationObserver.prototype.observe=function(target,options){
+      if(once&&target&&target.matches&&target.matches('#detailModal .detail-sheet')&&options&&options.childList){
+        once=false;
+        MutationObserver.prototype.observe=baseObserve;
+        options=Object.assign({},options,{subtree:false});
+      }
+      return baseObserve.call(this,target,options);
+    };
     const script=document.createElement('script');
     script.src='temple-extra.js?v=1';
     script.dataset.templeExtra='1';
     document.body.appendChild(script);
-  }
+  },0);
 }
 
 function later(){requestAnimationFrame(()=>requestAnimationFrame(moveProTips));}
