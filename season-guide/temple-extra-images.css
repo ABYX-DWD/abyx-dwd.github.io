@@ -6,38 +6,8 @@
   background-color:#120804 !important;
   color:transparent !important;
 }
-
-/* Small illustrative crops, not full infographic screenshots */
-.temple-quest-card .quest-visual.temple-extra-sprite{
-  height:138px !important;
-  display:block !important;
-  padding:0 !important;
-  border-bottom:1px solid rgba(242,182,61,.22) !important;
-}
-.temple-buff-card .temple-buff-visual.temple-extra-sprite{
-  height:108px !important;
-  display:block !important;
-  padding:0 !important;
-  border-bottom:1px solid rgba(242,182,61,.18) !important;
-}
-
-.sprite-qmenu{background-position:0% 0% !important}
-.sprite-qchoose{background-position:100% 0% !important}
-.sprite-qoptions{background-position:0% 20% !important}
-.sprite-shou{background-position:100% 20% !important}
-.sprite-seth{background-position:0% 40% !important}
-.sprite-nout{background-position:100% 40% !important}
-.sprite-tefnout{background-position:0% 60% !important}
-.sprite-geb{background-position:100% 60% !important}
-.sprite-nephthys{background-position:0% 80% !important}
-.sprite-sobek{background-position:100% 80% !important}
-.sprite-isis{background-position:0% 100% !important}
-
-@media(max-width:900px){
-  .temple-quest-card .quest-visual.temple-extra-sprite{height:126px !important}
-  .temple-buff-card .temple-buff-visual.temple-extra-sprite{height:102px !important}
-}
-@media(max-width:620px){
-  .temple-quest-card .quest-visual.temple-extra-sprite{height:118px !important}
-  .temple-buff-card .temple-buff-visual.temple-extra-sprite{height:96px !important}
-}
+.temple-quest-card .quest-visual.temple-extra-sprite{height:138px!important;display:block!important;padding:0!important;border-bottom:1px solid rgba(242,182,61,.22)!important}
+.temple-buff-card .temple-buff-visual.temple-extra-sprite{height:108px!important;display:block!important;padding:0!important;border-bottom:1px solid rgba(242,182,61,.18)!important}
+.sprite-qmenu{background-position:0% 0%!important}.sprite-qchoose{background-position:100% 0%!important}.sprite-qoptions{background-position:0% 20%!important}.sprite-shou{background-position:100% 20%!important}.sprite-seth{background-position:0% 40%!important}.sprite-nout{background-position:100% 40%!important}.sprite-tefnout{background-position:0% 60%!important}.sprite-geb{background-position:100% 60%!important}.sprite-nephthys{background-position:0% 80%!important}.sprite-sobek{background-position:100% 80%!important}.sprite-isis{background-position:0% 100%!important}
+@media(max-width:900px){.temple-quest-card .quest-visual.temple-extra-sprite{height:126px!important}.temple-buff-card .temple-buff-visual.temple-extra-sprite{height:102px!important}}
+@media(max-width:620px){.temple-quest-card .quest-visual.temple-extra-sprite{height:118px!important}.temple-buff-card .temple-buff-visual.temple-extra-sprite{height:96px!important}}
