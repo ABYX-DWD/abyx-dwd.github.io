@@ -1,123 +1,182 @@
-/* Divine Temples — clean Temple Quest guide rows */
+/* Divine Temples — crisp Temple Quest illustrations */
 #templeQuestExtra .temple-quest-grid{
   display:grid!important;
   grid-template-columns:1fr!important;
   gap:10px!important;
 }
-
 #templeQuestExtra .temple-quest-card{
   position:relative!important;
   display:grid!important;
-  grid-template-columns:104px minmax(0,1fr)!important;
+  grid-template-columns:210px minmax(0,1fr)!important;
   align-items:center!important;
-  gap:15px!important;
-  min-height:116px!important;
-  padding:11px 14px 11px 11px!important;
+  gap:18px!important;
+  min-height:132px!important;
+  padding:12px 16px 12px 12px!important;
   overflow:hidden!important;
   border:1px solid rgba(242,182,61,.24)!important;
   border-radius:14px!important;
-  background:
-    radial-gradient(circle at 0% 50%,rgba(242,182,61,.065),transparent 28%),
-    linear-gradient(180deg,rgba(17,10,6,.99),rgba(8,6,5,.995))!important;
+  background:linear-gradient(180deg,rgba(17,10,6,.99),rgba(8,6,5,.995))!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.02),0 8px 22px rgba(0,0,0,.16)!important;
 }
-
-#templeQuestExtra .temple-quest-card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(90deg,rgba(255,199,77,.025),transparent 28%);
-}
-
-#templeQuestExtra .quest-visual.temple-extra-sprite{
-  width:104px!important;
-  height:88px!important;
+#templeQuestExtra .quest-ui-shell{
+  position:relative!important;
+  width:210px!important;
+  height:108px!important;
   margin:0!important;
   padding:0!important;
-  display:block!important;
-  align-self:center!important;
-  border:1px solid rgba(255,211,111,.32)!important;
-  border-radius:12px!important;
   overflow:hidden!important;
-  background-size:200% 600%!important;
-  background-repeat:no-repeat!important;
-  background-color:#110904!important;
-  box-shadow:0 6px 16px rgba(0,0,0,.32),inset 0 0 0 1px rgba(255,255,255,.018)!important;
-  filter:saturate(.9) contrast(1.04) brightness(.92)!important;
+  border:1px solid rgba(255,211,111,.34)!important;
+  border-radius:12px!important;
+  background:linear-gradient(145deg,#d6aa67,#9c672e)!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.34)!important;
 }
-
 #templeQuestExtra .temple-quest-num{
-  top:8px!important;
-  left:8px!important;
+  z-index:6!important;
+  top:7px!important;
+  left:7px!important;
   width:31px!important;
   height:31px!important;
+  background:#140a04!important;
   border:1px solid #e5a233!important;
-  background:rgba(20,10,4,.96)!important;
   color:#ffd36a!important;
   font:900 18px Georgia,serif!important;
   box-shadow:0 4px 12px rgba(0,0,0,.38)!important;
 }
-
-#templeQuestExtra .temple-quest-copy{
-  min-width:0!important;
-  padding:2px 0!important;
-}
-
+#templeQuestExtra .temple-quest-copy{padding:2px 0!important}
 #templeQuestExtra .temple-quest-copy h4{
-  margin:0 0 6px!important;
+  margin:0 0 7px!important;
   color:#ffe2a0!important;
   font-family:Georgia,serif!important;
-  font-size:17px!important;
-  line-height:1.14!important;
-  letter-spacing:.005em!important;
+  font-size:18px!important;
+  line-height:1.12!important;
 }
-
 #templeQuestExtra .temple-quest-copy p{
   margin:0!important;
   color:#d8cec0!important;
   font-size:11.5px!important;
   line-height:1.48!important;
 }
+#templeQuestExtra .temple-quest-copy strong{color:#ffd05b!important}
+#templeQuestExtra .qv-ui{position:absolute;inset:0;font-family:Arial,sans-serif}
 
-#templeQuestExtra .temple-quest-copy strong{
-  color:#ffd05b!important;
+/* STEP 1 — menu icon */
+#templeQuestExtra .qv-menu{
+  background:
+    radial-gradient(circle at 72% 36%,rgba(255,223,155,.34),transparent 20%),
+    linear-gradient(145deg,#d5a762,#a66c2d);
+}
+#templeQuestExtra .qv-menu-rail{
+  position:absolute;left:22px;top:12px;bottom:12px;width:42px;
+  display:grid;grid-template-rows:repeat(3,1fr);gap:5px;
+}
+#templeQuestExtra .qv-menu-rail span{
+  display:grid;place-items:center;border-radius:50%;
+  border:2px solid rgba(255,245,222,.92);
+  background:#6a4728;color:#fff;font-size:17px;
+  box-shadow:0 2px 7px rgba(0,0,0,.25);
+}
+#templeQuestExtra .qv-menu-rail .is-target{
+  border-color:#ffe23d;
+  box-shadow:0 0 0 5px #c81919,0 0 16px rgba(255,216,46,.70);
+  background:#fff1dd;color:#43240f;font-weight:900;
+}
+#templeQuestExtra .qv-menu-pointer{
+  position:absolute;left:69px;top:55px;
+  font-size:38px;line-height:1;filter:drop-shadow(0 3px 2px rgba(0,0,0,.3));
+  transform:rotate(-14deg)
+}
+#templeQuestExtra .qv-menu-badge{
+  position:absolute;left:56px;top:43px;width:20px;height:20px;
+  display:grid;place-items:center;border-radius:50%;
+  background:#e41414;color:#fff;font-weight:900;font-size:12px;
+  border:2px solid #fff;
 }
 
-/* keep the three illustrations focused on the useful UI area */
-#templeQuestExtra .sprite-qmenu{
-  background-position:0% 0%!important;
+/* STEP 2 — mission rows */
+#templeQuestExtra .qv-list{
+  padding:10px;background:linear-gradient(145deg,#ead3b1,#b8915c);
+  display:grid;gap:7px;
 }
-#templeQuestExtra .sprite-qchoose{
-  background-position:100% 0%!important;
+#templeQuestExtra .qv-mission-row{
+  display:grid;grid-template-columns:37px minmax(0,1fr) 56px;
+  align-items:center;gap:7px;padding:7px 8px;
+  border-radius:9px;background:linear-gradient(90deg,#d97b59,#dca8d8);
+  border:1px solid rgba(106,51,33,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 2px 6px rgba(0,0,0,.12);
 }
-#templeQuestExtra .sprite-qoptions{
-  background-position:0% 20%!important;
+#templeQuestExtra .qv-mission-row.is-alt{background:linear-gradient(90deg,#cb865e,#ddaedb)}
+#templeQuestExtra .qv-hero{
+  display:grid;place-items:center;width:34px;height:34px;border-radius:8px;
+  background:#694227;color:#ffd477;font-size:21px;border:1px solid rgba(255,217,111,.55)
+}
+#templeQuestExtra .qv-mission-copy{display:grid;line-height:1.05;color:#4b2515}
+#templeQuestExtra .qv-mission-copy b{font-size:11px}
+#templeQuestExtra .qv-mission-copy small{font-size:8px;margin-top:3px}
+#templeQuestExtra .qv-go{
+  display:grid;place-items:center;height:29px;border-radius:8px;
+  background:linear-gradient(#27c5c7,#09929f);
+  border:1px solid #087681;color:#fff;font-size:13px;font-weight:900;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 2px 5px rgba(0,0,0,.18)
 }
 
-@media(max-width:620px){
+/* STEP 3 — mission actions */
+#templeQuestExtra .qv-options{
+  padding:10px;background:linear-gradient(145deg,#f0dfc4,#c8a77d);
+  color:#48220f;
+}
+#templeQuestExtra .qv-rank{
+  position:absolute;right:14px;top:8px;color:#ad39d8;
+  font:900 38px Georgia,serif;text-shadow:0 2px 0 #fff6ff;
+}
+#templeQuestExtra .qv-task{
+  width:126px;padding:7px 9px;border-radius:8px;
+  background:#ddb5ec;border:1px solid rgba(123,61,141,.18);line-height:1.05
+}
+#templeQuestExtra .qv-task b{display:block;font-size:11px}
+#templeQuestExtra .qv-task small{display:block;margin-top:3px;font-size:8px}
+#templeQuestExtra .qv-actions{
+  position:absolute;left:10px;right:10px;bottom:33px;
+  display:grid;grid-template-columns:1fr 1fr;gap:7px;
+}
+#templeQuestExtra .qv-actions span{
+  display:grid;place-items:center;height:27px;border-radius:999px;
+  color:#fff;font-weight:900;font-size:10px;border:2px solid rgba(255,255,255,.7);
+}
+#templeQuestExtra .qv-refresh{background:#35a327;box-shadow:0 0 0 3px #d11d1d}
+#templeQuestExtra .qv-accept{background:#20a8be}
+#templeQuestExtra .qv-upgrade{
+  position:absolute;right:10px;bottom:6px;
+  padding:4px 7px;border-radius:7px;background:#19823d;color:#fff;
+  font-size:9px;font-weight:700;
+}
+
+@media(max-width:700px){
   #templeQuestExtra .temple-quest-card{
-    grid-template-columns:82px minmax(0,1fr)!important;
-    gap:10px!important;
-    min-height:104px!important;
-    padding:9px 10px 9px 9px!important;
+    grid-template-columns:140px minmax(0,1fr)!important;
+    gap:11px!important;
+    min-height:116px!important;
+    padding:9px!important;
   }
-  #templeQuestExtra .quest-visual.temple-extra-sprite{
-    width:82px!important;
-    height:76px!important;
-    border-radius:10px!important;
-  }
-  #templeQuestExtra .temple-quest-num{
-    width:27px!important;
-    height:27px!important;
-    font-size:16px!important;
-  }
-  #templeQuestExtra .temple-quest-copy h4{
-    font-size:15.5px!important;
-    margin-bottom:5px!important;
-  }
-  #templeQuestExtra .temple-quest-copy p{
-    font-size:10.5px!important;
-    line-height:1.4!important;
-  }
+  #templeQuestExtra .quest-ui-shell{width:140px!important;height:92px!important}
+  #templeQuestExtra .qv-menu-rail{left:14px;top:10px;bottom:10px;width:34px}
+  #templeQuestExtra .qv-menu-rail span{font-size:14px}
+  #templeQuestExtra .qv-menu-pointer{left:51px;top:49px;font-size:29px}
+  #templeQuestExtra .qv-menu-badge{left:43px;top:38px;width:17px;height:17px;font-size:10px}
+  #templeQuestExtra .qv-list{padding:7px;gap:5px}
+  #templeQuestExtra .qv-mission-row{grid-template-columns:28px minmax(0,1fr) 42px;gap:5px;padding:5px}
+  #templeQuestExtra .qv-hero{width:27px;height:27px;font-size:17px}
+  #templeQuestExtra .qv-mission-copy b{font-size:8px}
+  #templeQuestExtra .qv-mission-copy small{font-size:6.5px}
+  #templeQuestExtra .qv-go{height:24px;font-size:10px}
+  #templeQuestExtra .qv-options{padding:7px}
+  #templeQuestExtra .qv-rank{right:9px;top:5px;font-size:31px}
+  #templeQuestExtra .qv-task{width:83px;padding:5px 6px}
+  #templeQuestExtra .qv-task b{font-size:8px}
+  #templeQuestExtra .qv-task small{font-size:6.5px}
+  #templeQuestExtra .qv-actions{left:7px;right:7px;bottom:28px;gap:5px}
+  #templeQuestExtra .qv-actions span{height:22px;font-size:7px;border-width:1px}
+  #templeQuestExtra .qv-refresh{box-shadow:0 0 0 2px #d11d1d}
+  #templeQuestExtra .qv-upgrade{right:7px;bottom:5px;font-size:7px}
+  #templeQuestExtra .temple-quest-copy h4{font-size:15.5px!important;margin-bottom:5px!important}
+  #templeQuestExtra .temple-quest-copy p{font-size:10.5px!important;line-height:1.4!important}
 }
