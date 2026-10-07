@@ -10,14 +10,14 @@
   var selected,followToday=!/^#day-[1-6]$/.test(location.hash),lastCurrent;
   var img=document.getElementById('guide-image');
   function render(day){
-    selected=day;var data=AbyxDuel.days[day-1],url='assets/day-'+day+'.webp';
-    document.getElementById('day-label').textContent='Day '+day+' • '+data.name;
-    document.getElementById('day-title').textContent=data.theme;
-    document.getElementById('day-summary').textContent=data.summary;
+    selected=day;var locale=abyxDuelLocale();var data=AbyxDuel.days[day-1],url='assets/day-'+day+'.webp';
+    document.getElementById('day-label').textContent=locale.day+' '+day+' • '+locale.names[day-1];
+    document.getElementById('day-title').textContent=locale.themes[day-1];
+    document.getElementById('day-summary').textContent=locale.summaries[day-1];
     document.querySelectorAll('[data-day]').forEach(function(a){a.setAttribute('aria-current',Number(a.dataset.day)===day?'true':'false');});
     document.getElementById('image-error').hidden=true;img.src=url;img.alt='ABYX Alliance Duel Day '+day+' — '+data.name+' tasks';
     var dl=document.getElementById('download');dl.href=url;dl.download='ABYX-VS-Day-'+day+'.webp';document.getElementById('full-size').href=url;
-    var ul=document.createElement('ul');tasks[day-1].forEach(function(t){var li=document.createElement('li');li.textContent=t;ul.appendChild(li);});document.getElementById('task-text').replaceChildren(ul);
+    var ul=document.createElement('ul');(locale.tasks||tasks)[day-1].forEach(function(t){var li=document.createElement('li');li.textContent=t;ul.appendChild(li);});document.getElementById('task-text').replaceChildren(ul);
   }
   function tick(){
     var now=new Date(),current=AbyxDuel.currentDay(now);
@@ -25,11 +25,20 @@
     if(followToday && current!==lastCurrent)render(current||1);
     lastCurrent=current;
     var next=new Date(now);next.setUTCHours(24,0,0,0);var mins=Math.ceil((next-now)/60000);
-    document.getElementById('reset-clock').textContent='Reset in '+Math.floor(mins/60)+'h '+(mins%60)+'m • 00:00 UTC';
+    document.getElementById('reset-clock').textContent=abyxDuelLocale().resetIn+' '+Math.floor(mins/60)+'h '+(mins%60)+'m • 00:00 UTC';
   }
   window.addEventListener('hashchange',function(){var m=location.hash.match(/^#day-([1-6])$/);followToday=!m;if(m)render(Number(m[1]));else{lastCurrent=undefined;tick();}});
   document.querySelectorAll('[data-day]').forEach(function(a){a.addEventListener('click',function(){followToday=false;render(Number(a.dataset.day));});});
   document.getElementById('today').addEventListener('click',function(){followToday=true;history.replaceState(null,'',location.pathname+location.search);lastCurrent=undefined;tick();});
   img.addEventListener('error',function(){document.getElementById('image-error').hidden=false;});
+  function translate(){
+    var locale=abyxDuelLocale();
+    document.querySelectorAll('[data-duel]').forEach(function(el){el.textContent=locale[el.dataset.duel];});
+    document.title=locale.title+' • ABYX';
+    document.querySelectorAll('[data-day]').forEach(function(el){var n=Number(el.dataset.day);el.replaceChildren(document.createTextNode(locale.names[n-1]+' '));var small=document.createElement('small');small.textContent=locale.day+' '+n;el.appendChild(small);});
+    if(selected)render(selected);tick();
+  }
+  window.addEventListener('abyx:language',translate);
+  translate();
   var m=location.hash.match(/^#day-([1-6])$/);if(m)render(Number(m[1]));tick();setInterval(tick,30000);
 })();

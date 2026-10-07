@@ -396,6 +396,7 @@
   <link rel="stylesheet" href="/install.css?v=2">
   <script src="/install.js?v=2" defer></script>
 <link rel="stylesheet" href="./alliance-duel/home-card.css">
+<script src="./alliance-duel/locales.js" defer></script>
 <script src="./alliance-duel/days.js" defer></script>
 <script src="./alliance-duel/home-card.js" defer></script>
 </head>
@@ -774,6 +775,7 @@
           var key=el.getAttribute("data-i18n");
           if(dict[key]!==undefined) el.textContent=dict[key];
         });
+        window.dispatchEvent(new Event("abyx:language"));
         current.textContent=labels[lang]||lang.toUpperCase();
         options.forEach(function(btn){btn.classList.toggle("active",btn.getAttribute("data-lang")===lang);});
         try{localStorage.setItem("abyx_lang",lang);}catch(e){}

@@ -1,8 +1,12 @@
 (function(){
   function update(){
-    var day=AbyxDuel.currentDay();
-    document.getElementById('vs-today').textContent=day===0?'Sunday • Prepare for Monday':'Day '+day+' • '+AbyxDuel.days[day-1].name;
-    document.getElementById('vs-summary').textContent=day===0?'Save construction and research items. Send gatherers to return after Monday’s reset.':AbyxDuel.days[day-1].summary;
+    var day=AbyxDuel.currentDay(),locale=abyxDuelLocale(),card=document.querySelector('.vs-daily');
+    card.querySelector('.section-eyebrow').textContent=locale.guide;
+    card.querySelector('.btn').textContent=locale.cardAction;
+    card.setAttribute('aria-label',locale.title+' — '+locale.cardAction);
+    document.getElementById('vs-today').textContent=day===0?locale.sunday:locale.day+' '+day+' • '+locale.names[day-1];
+    document.getElementById('vs-summary').textContent=day===0?locale.sundayText:locale.summaries[day-1];
   }
-  update(); setInterval(update,60000);
+  window.addEventListener('abyx:language',update);
+  update();setInterval(update,60000);
 })();
