@@ -239,28 +239,33 @@
     .next-season-card{border-color:rgba(216,182,110,.25);background:linear-gradient(150deg,rgba(32,33,44,.85),rgba(6,16,29,.95))}
     .next-season-card .card-icon{color:var(--gold)}
 
-    /* ABYX HUB: atmospheric card artwork. Text and click actions remain above it. */
+    /* ABYX HUB V3 — airy fantasy artwork, optimized responsive card backgrounds. */
     .hub-card{isolation:isolate}
     .hub-card-art{
-      position:absolute;inset:0;width:100%;z-index:0;
-      background-position:82% 42%;background-repeat:no-repeat;background-size:cover;
-      opacity:.8;pointer-events:none;
-      -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.5) 34%,#000 84%),linear-gradient(0deg,transparent 0%,#000 42%);
-      -webkit-mask-composite:source-in;
-      mask-image:linear-gradient(90deg,rgba(0,0,0,.22) 0%,rgba(0,0,0,.75) 35%,#000 70%);
-      transform:scale(1.02);transform-origin:80% 45%;
-      transition:opacity .45s ease,transform .7s cubic-bezier(.2,.7,.2,1),filter .5s ease;
-      filter:saturate(.85) brightness(.84)
+      position:absolute;inset:0;z-index:0;pointer-events:none;
+      background-position:center 46%;background-repeat:no-repeat;background-size:cover;
+      opacity:.96;
+      transform:scale(1.012);
+      transform-origin:76% 50%;
+      transition:transform .6s cubic-bezier(.2,.7,.2,1), filter .4s ease;
+      filter:saturate(.88) contrast(1.03);
     }
-    .hub-card:hover .hub-card-art{opacity:.95;transform:scale(1.05);filter:saturate(1.1) brightness(.98)}
-    .card-news .hub-card-art{background-image:url("./assets/hub/news-guides.webp");background-position:center center;opacity:.8}
-    .card-hive .hub-card-art{background-image:url("./assets/hub/view-the-hive.webp");background-position:center center;opacity:.8}
-    .card-next .hub-card-art{background-image:url("./assets/hub/next-season.webp");background-position:center center;opacity:.8}
-    .card-leader .hub-card-art{background-image:url("./assets/hub/leader-tools.webp");background-position:center center;opacity:.8}
+    .hub-card:hover .hub-card-art{transform:scale(1.065);filter:saturate(.99) contrast(1.04)}
+    .card-news .hub-card-art{background-image:url("./assets/hub/news-guides-v3.webp")}
+    .card-hive .hub-card-art{background-image:url("./assets/hub/view-the-hive-v3.webp")}
+    .card-next .hub-card-art{background-image:url("./assets/hub/next-season-v3.webp")}
+    .card-leader .hub-card-art{background-image:url("./assets/hub/leader-tools-v3.webp")}
     .hub-card .card-top,.hub-card .card-body{z-index:2}
+    .hub-card .card-index{color:#a5dbe5;text-shadow:0 1px 10px rgba(1,14,24,.45)}
+    .hub-card h3{color:#fff;text-shadow:0 2px 14px rgba(0,11,22,.42)}
+    .hub-card p{color:#e7f3f5;text-shadow:0 1px 10px rgba(0,9,18,.5);max-width:515px}
+    .hub-card .card-link{color:#a6f6ff;text-shadow:0 1px 9px rgba(0,9,18,.65)}
+    .hub-card.gold .card-link{color:#ffe1a3}
+    .hub-card .status{background:rgba(5,36,46,.53);color:#d3f8fc;border-color:rgba(165,234,238,.42)}
+    .hub-card.gold .status{color:#ffe2a2;border-color:rgba(255,218,143,.5)}
+    .hub-card .card-icon{background:rgba(4,43,55,.46);border-color:rgba(177,230,237,.35)}
     @media(max-width:700px){
-      .hub-card-art{width:100%;opacity:.65}
-      .hub-card:hover .hub-card-art{opacity:.8}
+      .hub-card-art{background-position:60% center;opacity:.91}
     }
     @media(prefers-reduced-motion:reduce){
       .hub-card-art{transition:none}
@@ -274,16 +279,17 @@
       box-shadow:var(--shadow);transition:.3s cubic-bezier(.2,.7,.2,1)
     }
     .hub-card:before{
-      content:"";position:absolute;inset:0;pointer-events:none;
-      background:linear-gradient(125deg,rgba(102,229,255,.1),transparent 28%),radial-gradient(circle at 100% 100%,rgba(57,183,220,.12),transparent 34%);
-      opacity:.55;transition:.3s ease
+      content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+      background:linear-gradient(90deg,rgba(2,24,35,.82) 0%,rgba(3,27,39,.70) 30%,rgba(8,43,55,.36) 57%,rgba(2,26,37,.12) 100%),
+                 linear-gradient(0deg,rgba(1,17,27,.24) 0%,transparent 50%);
+      opacity:1;transition:background .3s ease
     }
     .hub-card:after{
       content:"";position:absolute;left:0;top:0;width:90px;height:2px;
       background:linear-gradient(90deg,var(--cyan),transparent);box-shadow:0 0 16px rgba(102,229,255,.5)
     }
     .hub-card:hover{transform:translateY(-7px);border-color:rgba(102,229,255,.34);box-shadow:0 34px 90px rgba(0,0,0,.55),0 0 0 1px rgba(102,229,255,.04) inset}
-    .hub-card:hover:before{opacity:1}
+    .hub-card:hover:before{opacity:.92}
     .hive-card{border-color:rgba(102,229,255,.22)}
     .hive-card::after{background:linear-gradient(90deg,#66e5ff,#d8b66e,transparent);box-shadow:0 0 18px rgba(102,229,255,.42)}
     .hive-card .card-icon{color:#d8b66e}
