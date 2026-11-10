@@ -13,8 +13,8 @@ async function load(){var r=await api("GET");var parsed=JSON.parse(decode(r.cont
 async function publish(list,verb){if(!sha)throw Error("Load the published articles first.");var r=await api("PUT",{message:"ABYX News: "+verb,branch:"main",sha:sha,content:encode(JSON.stringify(list,null,2)+"\n")});sha=r.content.sha;posts=list;selection=-1;refresh();message("Published successfully.")}
 async function run(f){try{message("");await f()}catch(e){message(e.message)}}
 document.addEventListener("DOMContentLoaded",function(){
-$("adminToggle").addEventListener("click",function(){$("editorPanel").hidden=!$("editorPanel").hidden;if(!$("editorPanel").hidden&&!grant()){$("adminPassword").focus()}});
-$("unlockForm").addEventListener("submit",function(e){e.preventDefault();message("Open Leader Tools, unlock it using your usual password, then return here and click ADMIN again.");$("adminPassword").value=""});
+$("adminToggle").addEventListener("click",function(){$("editorPanel").hidden=!$("editorPanel").hidden;if(!$("editorPanel").hidden)grant()});
+
 $("loadRemote").addEventListener("click",function(){run(load)});
 $("newPost").addEventListener("click",function(){selection=-1;$("postSelect").value="-1";fill()});
 $("postSelect").addEventListener("change",function(){selection=Number(this.value);fill()});
