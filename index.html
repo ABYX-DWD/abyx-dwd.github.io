@@ -236,6 +236,8 @@
       .data-update-action{white-space:normal;text-align:center}
     }
 
+    .next-season-card{border-color:rgba(216,182,110,.25);background:linear-gradient(150deg,rgba(32,33,44,.85),rgba(6,16,29,.95))}
+    .next-season-card .card-icon{color:var(--gold)}
     .hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
     .hub-card{
       position:relative;min-height:360px;display:flex;flex-direction:column;overflow:hidden;padding:30px;
@@ -409,8 +411,8 @@
       </a>
       <div class="nav-actions">
         <nav class="nav-links" aria-label="Main navigation">
-          <a href="./season-guide/" data-i18n="navSeason">Season Guide</a>
-          <a href="#news-guides" data-i18n="navNews">News & Guides</a>
+          <a href="./news-guides/" data-i18n="navNews">News & Guides</a>
+          <a href="./next-season/" data-i18n="navNextSeason">Next Season</a>
           <a class="leader-nav" href="./leader-tools/" data-i18n="navLeader">Leader Tools 🔒</a>
           <a class="nav-cta" href="#hub" data-i18n="navEnter">Enter Hub</a>
         </nav>
@@ -443,11 +445,11 @@
 
       <div class="shell hero-content">
         <div class="hero-copy">
-          <div class="season-tag" data-i18n="seasonTag">Current Season • Alliance Command Center</div>
+          <div class="season-tag" data-i18n="seasonTag">ABYX • Alliance Command Center</div>
           <h1><span data-i18n="heroLead">Descend into the</span> <span class="abyss" data-i18n="heroAbyss">Abyss</span></h1>
           <p class="hero-sub" data-i18n="heroSub">Welcome to the ABYX hub. Season intelligence, alliance resources and leadership tools gathered in one place for Dark War: Survival.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="./season-guide/"><span data-i18n="openSeason">Open Season Guide</span> <span>→</span></a>
+            <a class="btn btn-primary" href="./news-guides/"><span data-i18n="openSeason">Explore News & Guides</span> <span>→</span></a>
             <a class="btn btn-secondary" href="./leader-tools/"><span data-i18n="leaderAccess">Leader Access</span> <span>🔒</span></a>
           </div>
         </div>
@@ -470,7 +472,7 @@
             <div class="section-eyebrow" data-i18n="commandNetwork">ABYX Command Network</div>
             <h2 data-i18n="hubTitle">Alliance Hub</h2>
           </div>
-          <p data-i18n="hubIntro">Everything useful to the alliance, from the current season walkthrough to the tools reserved for leadership.</p>
+          <p data-i18n="hubIntro">Alliance news, guides, hive placement, the next season and leadership tools.</p>
         </div>
 
 
@@ -510,26 +512,13 @@
         </div>
 
         <div class="hub-grid">
-          <a class="hub-card" id="season-guide" href="./season-guide/">
-            <div class="card-top">
-              <div class="card-icon">𓂀</div>
-              <span class="status" data-i18n="statusSeason">Season</span>
-            </div>
-            <div class="card-body">
-              <div class="card-index" data-i18n="fieldIntel">01 • Field Intelligence</div>
-              <h3 data-i18n="seasonGuide">Season Guide</h3>
-              <p data-i18n="seasonDesc">Interactive objectives, priorities, event guidance and key information for every ABYX member.</p>
-              <div class="card-link" data-i18n="openGuide">Open the guide</div>
-            </div>
-          </a>
-
-          <a class="hub-card" id="news-guides" href="#">
+          <a class="hub-card" id="news-guides" href="./news-guides/">
             <div class="card-top">
               <div class="card-icon">◇</div>
               <span class="status" data-i18n="statusCommunity">Community</span>
             </div>
             <div class="card-body">
-              <div class="card-index" data-i18n="resourcesIndex">02 • Resources</div>
+              <div class="card-index" data-i18n="resourcesIndex">01 • Resources</div>
               <h3 data-i18n="newsGuides">News & Guides</h3>
               <p data-i18n="newsDesc">Alliance announcements, tactical notes and practical guides collected in one place.</p>
               <div class="card-link" data-i18n="exploreResources">Explore resources</div>
@@ -542,13 +531,22 @@
               <span class="status" data-i18n="statusHive">Hive</span>
             </div>
             <div class="card-body">
-              <div class="card-index" data-i18n="hiveIndex">03 • Placement</div>
+              <div class="card-index" data-i18n="hiveIndex">02 • Placement</div>
               <h3 data-i18n="hiveTitle">View the Hive</h3>
               <p data-i18n="hiveDesc">Know your position in the ABYX hive.</p>
               <div class="card-link" data-i18n="hiveLink">Open the hive</div>
             </div>
           </a>
 
+          <a class="hub-card next-season-card" id="next-season" href="./next-season/">
+            <div class="card-top"><div class="card-icon">✦</div><span class="status" data-i18n="statusUpcoming">Coming Soon</span></div>
+            <div class="card-body">
+              <div class="card-index" data-i18n="nextIndex">03 • Upcoming season</div>
+              <h3 data-i18n="nextSeason">NEXT SEASON</h3>
+              <p data-i18n="nextDesc">Everything you need to know! This section will be updated as new information becomes available.</p>
+              <div class="card-link" data-i18n="nextLink">Explore the next season</div>
+            </div>
+          </a>
           <a class="hub-card gold" id="leader-tools" href="./leader-tools/">
             <div class="card-top">
               <div class="card-icon">⌁</div>
