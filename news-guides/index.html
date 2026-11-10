@@ -3,8 +3,7 @@
 <h2 data-i18n="editorHeading">Article management</h2>
 <div id="unlockForm"><p>To manage articles, first unlock Leader Tools with the existing ADMIN password, then return to this page.</p><a class="action" href="../leader-tools/">Unlock in Leader Tools ↗</a></div>
 <div id="editingArea" hidden>
-<p data-i18n="tokenHelp">Publishing requires a GitHub account with write access to ABYX and a fine-grained token with Contents: Read and write. The token is kept in memory only, never saved.</p>
-<label for="githubToken" data-i18n="tokenLabel">GitHub access token (not your password)</label><input id="githubToken" type="password" autocomplete="off" placeholder="github_pat_...">
+<p class="editor-notice" id="publicationNotice">Draft editor only: articles saved here are not published to the website. Automatic publication using the ADMIN password alone requires a separate publishing service.</p>
 <div class="form-row"><button type="button" id="loadRemote" data-i18n="reloadButton">Reload published posts</button><button type="button" id="newPost" data-i18n="newButton">New post</button></div>
 <label for="postSelect" data-i18n="chooseLabel">Edit existing article</label><select id="postSelect"><option value="-1">—</option></select>
 <form id="postForm"><label for="postDate" data-i18n="dateLabel">Date</label><input type="date" id="postDate" required>
@@ -13,10 +12,10 @@
 <label for="postTitle" data-i18n="titleLabel">Title</label><input id="postTitle" maxlength="180" required>
 <label for="postText" data-i18n="textLabel">Text / summary</label><textarea id="postText" rows="6" required></textarea>
 <label for="postLink" data-i18n="linkLabel">Optional video or guide URL (HTTPS)</label><input type="url" id="postLink" pattern="https://.*" placeholder="https://...">
-<div class="form-row"><button type="submit" data-i18n="saveButton">Publish changes</button><button type="button" id="deletePost" data-i18n="deleteButton">Delete selected article</button><button type="button" id="exportPosts" data-i18n="exportButton">Export JSON</button></div>
+<div class="form-row"><button type="submit" data-i18n="saveButton">Save draft</button><button type="button" id="deletePost" data-i18n="deleteButton">Remove draft</button><button type="button" id="exportPosts" data-i18n="exportButton">Download draft JSON</button></div>
 </form>
 </div><p id="editorMessage" role="status" aria-live="polite"></p>
 </section>
-<p style="margin-top:32px;font-size:.8rem" data-i18n="admin">Publishing is restricted to authorized ABYX editors.</p></main><footer><div class="shell">ABYX • Dark War: Survival</div></footer><script>
+<p style="margin-top:32px;font-size:.8rem" data-i18n="admin">Reading is public. Article drafts are available after ADMIN access; online publishing is not yet enabled.</p></main><footer><div class="shell">ABYX • Dark War: Survival</div></footer><script>
 let POSTS=[];const safeUrl=u=>{try{const p=new URL(u,location.href);return ['https:','http:'].includes(p.protocol)?p.href:null}catch(e){return null}};function renderPosts(){const c=document.getElementById('posts');c.replaceChildren();const L=lang(),d=t();if(!POSTS.length){const p=document.createElement('div');p.className='empty';p.textContent=d.empty;c.append(p);return;}for(const post of POSTS){const title=post.title?.[L]||post.title?.en||'',body=post.text?.[L]||post.text?.en||'';const a=document.createElement('article');a.className='post';const th=document.createElement('div');th.className='thumb';const pic=safeUrl(post.thumbnail);if(pic){const img=document.createElement('img');img.src=pic;img.alt='';img.loading='lazy';th.append(img)}else{th.textContent='✦'}const copy=document.createElement('div');copy.className='post-copy';const date=document.createElement('small');date.textContent=post.date||'';const h=document.createElement('h2');h.textContent=title;const p=document.createElement('p');p.textContent=body;copy.append(date,h,p);const url=safeUrl(post.url);if(url){const l=document.createElement('a');l.href=url;l.target='_blank';l.rel='noopener noreferrer';l.className='action';l.textContent=d.read+' ↗';copy.append(l)}a.append(th,copy);c.append(a)}}fetch('./posts.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(a=>{POSTS=Array.isArray(a)?a.filter(x=>x&&typeof x==='object'):[];POSTS.sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));renderPosts()}).catch(()=>{document.getElementById('posts').textContent=t().error});
 </script><script src="./editor.js" defer></script></body></html>
