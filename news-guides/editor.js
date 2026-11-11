@@ -11,8 +11,8 @@ function setForm(){var p=drafts[selection]||{}, l=$("postLanguage").value;$("pos
 function refresh(){var sel=$("postSelect");sel.replaceChildren();sel.add(new Option("— New article —","-1"));drafts.forEach(function(p,i){sel.add(new Option((p.date||"")+" — "+((p.title||{}).en||Object.values(p.title||{})[0]||"Untitled"),String(i)))});sel.value=String(selection);setForm()}
 function unlock(){if(sessionStorage.getItem("abyx_leader_unlocked")==="1"){$("unlockForm").hidden=true;$("editingArea").hidden=false;drafts=get();selection=-1;refresh();msg("Draft mode: changes are saved in this browser only, not published online.");return true}return false}
 function download(){var b=new Blob([JSON.stringify(drafts,null,2)+"\n"],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="abyx-news-draft.json";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},1500)}
+window.abyxInitDrafts=unlock;
 document.addEventListener("DOMContentLoaded",function(){
-$("adminToggle").addEventListener("click",function(){$("editorPanel").hidden=!$("editorPanel").hidden;if(!$("editorPanel").hidden)unlock()});
 $("loadRemote").textContent="Load local drafts";
 $("loadRemote").addEventListener("click",function(){drafts=get();selection=-1;refresh();msg("Local drafts loaded. These are not published articles.")});
 $("newPost").addEventListener("click",function(){selection=-1;$("postSelect").value="-1";setForm()});
