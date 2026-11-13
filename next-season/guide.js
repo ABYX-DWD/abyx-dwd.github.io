@@ -26,9 +26,23 @@ function render(){
  '<article><h2>'+esc(u.cautionTitle)+'</h2><p>'+esc(u.cautionText)+'</p></article></div>'+
  '<nav class="guide-toc" id="guide-contents" aria-label="'+esc(u.tocTitle)+'"><div class="guide-toc-top"><h2>'+esc(u.tocTitle)+'</h2><small>'+esc(u.tocHint)+'</small></div><ol class="guide-toc-list">'+cards+'</ol></nav>'+
  '<div class="guide-chapters">'+body+'</div>'+
- '<section class="guide-tail"><h2>'+esc(u.footerTitle)+'</h2><p>'+esc(u.footerText)+'</p></section>';
+ '<section class="guide-tail"><h2>'+esc(u.footerTitle)+'</h2><p>'+esc(u.footerText)+'</p></section>'+
+ '<a class="guide-fab" id="guideFloatingContents" href="#guide-contents" aria-label="'+esc(u.back)+'" hidden><span class="guide-fab-icon" aria-hidden="true">↑</span><span>'+esc(u.back)+'</span></a>';
  document.title=u.pageTitle+" • ABYX HUB";
+ updateFloatingContents();
 }
-document.addEventListener("DOMContentLoaded",function(){render();var l=document.getElementById("language");if(l)l.addEventListener("change",function(){requestAnimationFrame(render)})});
+function updateFloatingContents(){
+ var button=document.getElementById("guideFloatingContents");
+ var toc=document.getElementById("guide-contents");
+ if(!button||!toc)return;
+ button.hidden=!(toc.getBoundingClientRect().bottom<100);
+}
+document.addEventListener("DOMContentLoaded",function(){
+ render();
+ window.addEventListener("scroll",updateFloatingContents,{passive:true});
+ window.addEventListener("resize",updateFloatingContents);
+ var l=document.getElementById("language");
+ if(l)l.addEventListener("change",function(){requestAnimationFrame(render)});
+});
 window.abyxS8Render=render;
 })();
