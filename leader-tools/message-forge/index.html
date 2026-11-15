@@ -159,19 +159,61 @@ function paintCounter(el,n,label){el.textContent=n+' / 2000 '+label;el.classList
 function update(){
   const raw=htmlToCode();code.value=raw;preview.innerHTML=renderGameCode(raw);
   const visible=(editor.innerText||'').replace(/\n$/,'').length, total=raw.length;
-  paintCounter(visibleCount,visible,'visible');paintCounter(codeCount,total,'game code');
-  const left=2000-total;remaining.textContent=(left>=0?left:Math.abs(left))+(left>=0?' characters remaining':' characters over limit');
+  paintCounter(visibleCount,visible,document.documentElement.lang==='ja'?'表示文字':'visible');paintCounter(codeCount,total,document.documentElement.lang==='ja'?'ゲームコード':'game code');
+  const left=2000-total;remaining.textContent=(left>=0?left:Math.abs(left))+(left>=0?(document.documentElement.lang==='ja'?' 文字残り':' characters remaining'):(document.documentElement.lang==='ja'?' 文字超過':' characters over limit'));
   remaining.classList.toggle('danger',left<0);remaining.classList.toggle('warn',left>=0&&left<=400);
 }
 editor.addEventListener('input',update);
 editor.addEventListener('paste',e=>{e.preventDefault();const text=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,text)});
 document.getElementById('resetBtn').addEventListener('click',()=>{editor.innerHTML='';status.textContent='';update();editor.focus()});
 document.getElementById('copyBtn').addEventListener('click',async()=>{
-  if(code.value.length>2000){status.textContent='Game code is over the 2,000-character limit.';return}
-  try{await navigator.clipboard.writeText(code.value);status.textContent='Code copied.'}
-  catch(e){code.focus();code.select();document.execCommand('copy');status.textContent='Code copied.'}
+  if(code.value.length>2000){status.textContent=document.documentElement.lang==='ja'?'ゲームコードが2,000文字の上限を超えています。':'Game code is over the 2,000-character limit.';return}
+  try{await navigator.clipboard.writeText(code.value);status.textContent=document.documentElement.lang==='ja'?'コードをコピーしました。':'Code copied.'}
+  catch(e){code.focus();code.select();document.execCommand('copy');status.textContent=document.documentElement.lang==='ja'?'コードをコピーしました。':'Code copied.'}
 });
 update();
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var pairs=[
+    [".brand-sub","Leader Tools • Dark War Survival","リーダーツール • Dark War Survival"],
+    [".drawer h2","ABYX LEADER TOOLS","ABYX リーダーツール"],
+    [".drawer a[href='../']","Leader Tools Hub","リーダーツールへ戻る"],
+    [".intro h1","ABYX Message Forge","ABYX メッセージ作成"],
+    [".intro p","Forge and preview Dark War alliance messages, then copy the generated game code. Limit: 2,000 characters.","Dark Warの同盟メッセージを作成・プレビューして、ゲーム用コードをコピーできます。上限は2,000文字です。"],
+    ["#sizeSelect option[value='']","Size","サイズ"],
+    [".toolbar [data-color='#5DDCFF']","Cyan","シアン"],
+    [".toolbar [data-color='#FFD166']","Gold","ゴールド"],
+    [".toolbar [data-color='#FF5E73']","Red","レッド"],
+    [".toolbar [data-color='#35D785']","Green","グリーン"],
+    ["#clearFormat","Clear format","書式を解除"],
+    [".grid .card:nth-child(1) .card-head strong","MESSAGE","メッセージ"],
+    [".grid .card:nth-child(2) .card-head strong","LIVE PREVIEW","ライブプレビュー"],
+    [".wrap > .card .card-head strong","GAME CODE","ゲームコード"],
+    ["#copyBtn","COPY CODE","コードをコピー"],
+    ["#resetBtn","CLEAR","すべて消去"],
+    [".note","The game may count either visible text or raw rich-text code. This tool tracks both, so you can stay safely under the 2,000-character limit.","ゲーム内では表示文字数または装飾コードを含む文字数が計算される場合があります。このツールでは両方を確認できます。"]
+  ];
+  var jaLabels={"Text size":"文字サイズ","Text color":"文字の色","Open menu":"メニューを開く"};
+  function sync(){
+    var japan=document.documentElement.lang==="ja";
+    pairs.forEach(function(row){var el=document.querySelector(row[0]);if(el)el.textContent=japan?row[2]:row[1]});
+    document.querySelectorAll("[aria-label]").forEach(function(el){
+      var value=el.getAttribute("aria-label");for(var eng in jaLabels){if(value===eng||value===jaLabels[eng])el.setAttribute("aria-label",japan?jaLabels[eng]:eng)}
+    });
+    var code=document.getElementById("codeOutput"),counter=document.getElementById("codeCount"),vis=document.getElementById("visibleCount"),remaining=document.getElementById("remaining");
+    if(code&&counter&&vis&&remaining){
+      var raw=code.value||"",v=(document.getElementById("editor").innerText||"").replace(/\n$/,"").length,total=raw.length,left=2000-total;
+      vis.textContent=v+" / 2000 "+(japan?"表示文字":"visible");
+      counter.textContent=total+" / 2000 "+(japan?"ゲームコード":"game code");
+      remaining.textContent=(left>=0?left:-left)+(japan?(left>=0?" 文字残り":" 文字超過"):(left>=0?" characters remaining":" characters over limit"));
+    }
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",sync);else sync();
+  new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
 })();
 </script>
 </body>
