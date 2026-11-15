@@ -146,6 +146,9 @@
     var buildBtn = findBuildButton();
     var imageBtn = findImageButton();
 
+    var japan=document.documentElement.lang==="ja";
+    if(buildFab){buildFab.setAttribute("aria-label",japan?"ラリー計画を作成":"Build Rally Plan");var buildLabel=buildFab.querySelector(".fab-label");if(buildLabel)buildLabel.textContent=japan?"計画":"PLAN"}
+    if(imageFab){imageFab.setAttribute("aria-label",japan?"画像を生成":"Generate Image");var imageLabel=imageFab.querySelector(".fab-label");if(imageLabel)imageLabel.textContent=japan?"画像":"IMAGE"}
     var previewOpen = !!document.getElementById("frankyPosterPreview");
 
     var showBuild =
