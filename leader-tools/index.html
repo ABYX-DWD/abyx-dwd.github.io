@@ -43,7 +43,7 @@
     button,input{font:inherit}
     .shell{width:min(var(--max),calc(100% - 36px));margin:auto}
 
-    .topbar{position:fixed;inset:0 0 auto;z-index:50}
+    .topbar{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px)}
     .topbar:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,7,13,.96),rgba(1,7,13,.72) 75%,rgba(1,7,13,.36));border-bottom:1px solid rgba(102,229,255,.08);backdrop-filter:blur(14px)}
     .nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:1}
     .brand{display:flex;align-items:center;gap:13px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
