@@ -1,4 +1,4 @@
-(function(){var labels={en:"EN",fr:"FR",it:"IT",de:"DE",pl:"PL",ru:"RU",uk:"UA"};
+(function(){var labels={en:"EN",fr:"FR",it:"IT",de:"DE",pl:"PL",ru:"RU",uk:"UA",ja:"JA"};
       var translations={
         en:{statusHive:"Hive",hiveIndex:"03 • Placement",hiveTitle:"View the Hive",hiveDesc:"Know your position in the ABYX hive.",hiveLink:"Open the hive",leadershipIndex:"04 • Leadership",
           brandSub:"Dark War • Alliance Hub",navSeason:"Season Guide",navNews:"News & Guides",navLeader:"Leader Tools 🔒",navEnter:"Enter Hub",
@@ -155,6 +155,7 @@
 
       var labels={en:"EN",fr:"FR",it:"IT",de:"DE",pl:"PL",ru:"RU",uk:"UA"};
 
+      translations.ja={"statusHive":"ハイヴ","hiveIndex":"03 • 配置","hiveTitle":"ハイヴを見る","hiveDesc":"ABYXハイヴ内の自分の位置を確認","hiveLink":"ハイヴを開く","leadershipIndex":"04 • リーダー","brandSub":"Dark War • 同盟ハブ","navSeason":"シーズンガイド","navNews":"ニュース＆ガイド","navLeader":"リーダーツール 🔒","navEnter":"HUBへ","seasonTag":"現在のシーズン • 同盟司令部","heroLead":"深淵へ","heroAbyss":"深淵","heroSub":"ABYX HUB：同盟に役立つ資料とシーズン情報をまとめた場所。","openSeason":"ガイドを開く","leaderAccess":"リーダー専用","metaAlliance":"同盟","metaOnline":"HUB稼働中","explore":"探索","commandNetwork":"ABYX指揮ネットワーク","hubTitle":"同盟ハブ","hubIntro":"シーズンガイドからリーダー専用ツールまで利用可能。","statusSeason":"シーズン","fieldIntel":"01 • 戦況","seasonGuide":"シーズンガイド","seasonDesc":"目標、優先順位、イベント情報","openGuide":"ガイドを開く","statusCommunity":"コミュニティ","resourcesIndex":"02 • 資料","newsGuides":"ニュース＆ガイド","newsDesc":"同盟のお知らせや実用資料","exploreResources":"資料を見る","statusRestricted":"限定公開 🔒","leaderTools":"リーダーツール","leaderDesc":"リーダー向けの指揮ツール","leaderAccessCard":"リーダーとしてアクセス","migrationTitle":"ABYXツールの移行","migrationDesc":"新しいHUB構築中も従来のツールは利用できます。","devBadge":"V2 • 開発中","footerEdition":"同盟ハブ"};
       var picker=document.getElementById("langPicker");
       var current=document.getElementById("langCurrent");
       var options=[].slice.call(document.querySelectorAll(".lang-option"));
