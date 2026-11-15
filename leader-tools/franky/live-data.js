@@ -53,7 +53,8 @@
     catch (_) { return "all"; }
   })();
 
-  function txt(fr, en, it, de) { if (lang === "fr") return fr; if (lang === "it") return it || en; if (lang === "de") return de || en; return en; }
+  const japanText={"All types":"すべての兵種","No Restriction":"制限なし","Troop type":"兵種","Loading Google Sheet…":"Googleスプレッドシートを読み込み中…","Instant cached data shown · refreshing…":"保存済みデータを表示中 • 最新情報を取得しています…","Google Sheet data up to date":"Googleスプレッドシートは最新です","Search a player…":"プレイヤーを検索…","Clear search":"検索をクリア","No APC data":"APCデータなし","APCs listed":"登録済みAPC","APC listed":"登録済みAPC","Best: ":"最強：","No player found.":"プレイヤーが見つかりません。","CHECK ALL":"すべて選択","CLEAR ALL":"すべて解除","Sort by":"並び替え","Power":"戦力","Rally size":"ラリー容量","APCs available":"利用可能なAPC","players online":"オンラインプレイヤー","with APC data":"APCデータあり","Select the players who are online first.":"先にオンラインのプレイヤーを選択してください。","No APC matches this troop type.":"この兵種に該当するAPCはありません。","Exact value":"正確な数値","Estimated band":"推定範囲","No APC available among selected players.":"選択したプレイヤーに利用可能なAPCがありません。"};
+  function txt(fr, en, it, de) { if (lang === "ja") return japanText[en] || en; if (lang === "fr") return fr; if (lang === "it") return it || en; if (lang === "de") return de || en; return en; }
 
   function loadStoredSelection() {
     try {
