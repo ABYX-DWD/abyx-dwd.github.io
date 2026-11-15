@@ -32,4 +32,19 @@ window.abyxToggleEditor=function(){
     p.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
 };
-</script><script src="./editor.js?v=3edc4a8-fix2" defer></script></body></html>
+</script><script src="./editor.js?v=3edc4a8-fix2" defer></script><script>
+(function(){
+  var entries=[
+   [".hero .eyebrow","ABYX • Resources","ABYX • 資料"],
+   ["#unlockForm p","To manage articles, first unlock Leader Tools with the existing ADMIN password, then return to this page.","記事を管理するには、先にリーダーツールを既存の管理者パスワードで解除してから、このページに戻ってください。"],
+   ["#unlockForm a","Unlock in Leader Tools ↗","リーダーツールで解除 ↗"],
+   ["#publicationNotice","Draft editor only: articles saved here are not published to the website. Automatic publication using the ADMIN password alone requires a separate publishing service.","下書き専用エディターです。ここで保存した記事はサイトには公開されません。管理者パスワードだけで直接公開するには、別の公開サービスが必要です。"]
+  ];
+  function update(){
+    var ja=document.documentElement.lang==="ja";
+    entries.forEach(function(entry){var el=document.querySelector(entry[0]);if(el)el.textContent=ja?entry[2]:entry[1]});
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",update);else update();
+  new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+})();
+</script></body></html>
