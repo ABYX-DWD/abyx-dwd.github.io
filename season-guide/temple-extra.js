@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const K='abyx_lang',S=['en','fr','it','de','pl','ru','uk'];
+const K='abyx_lang',S=['en','fr','it','de','pl','ru','uk','ja'];
 const DATA={
 en:{questTitle:'TEMPLE QUESTS',questSub:'Access, choose and launch your temple missions.',steps:[
 ['Open the Temple Quest menu','Tap the <strong>Temple Quest icon</strong> on the left side of the world map to open the mission menu.'],
@@ -45,7 +45,8 @@ uk:{questTitle:'ЗАВДАННЯ ХРАМІВ',questSub:'Відкривай, о�
 shou:['Захист сезонних Warrior','+15%','Affinity Руїн збільшено','+15%'],seth:['Атака сезонних Warrior','+15%','Affinity Руїн збільшено','+15%'],nout:['Атака сезонних Лучників','+15%','Affinity Руїн збільшено','+15%'],tefnout:['Захист сезонних Лучників','+15%','Affinity Руїн збільшено','+15%'],geb:['Захист сезонної Кавалерії','+15%','Affinity Руїн збільшено','+15%'],nephthys:['Атака сезонної Кавалерії','+15%','Affinity Руїн збільшено','+15%'],sobek:['Зменшення шкоди сезонним військам','+5%','Швидкість лікування','+50%','Affinity Руїн збільшено','+15%'],isis:['Місткість Госпіталю збільшено','+500','Швидкість лікування','+50%','Affinity Руїн збільшено','+15%']},prefix:'Храм'}};
 const temples=[
 ['shou','Shou','blue','🏺','🛡'],['seth','Seth','blue','☾','⚔'],['nout','Nout','purple','✦','🏹'],['tefnout','Tefnout','purple','🏆','🛡'],['geb','Geb','orange','◉','⚙'],['nephthys','Nephthys','orange','♨','⚔'],['sobek','Sobek','green','🛡','✚'],['isis','Isis','green','⌛','🏥']];
-function lang(){const x=localStorage.getItem(K),s=document.getElementById('languageSelect')?.value,l=(document.getElementById('abyxLangCurrent')?.textContent||'').trim().toUpperCase(),m={EN:'en',FR:'fr',IT:'it',DE:'de',PL:'pl',RU:'ru',UA:'uk'};return S.includes(x)?x:S.includes(s)?s:m[l]||'en'}
+DATA.ja={"questTitle":"神殿任務","questSub":"神殿を選択して任務を開始しましょう。","steps":[["神殿任務メニューを開く","ワールドマップ左側の<strong>神殿任務アイコン</strong>をタップして任務メニューを開きます。"],["神殿を選んでGOを押す","利用できる神殿を選び、任務内容を確認して<strong>GO</strong>をタップします。"],["任務の選択肢を設定する","<strong>無料更新</strong>を使用すると任務を変更できます。最初の2回は無料で、それ以降はルビーが必要です。<br><br>任務ランクの横の<strong>強化ボタン</strong>を使うと、ランクを<strong>AまたはS</strong>に上げて報酬の質を高められます。"]],"buffTitle":"神殿の能力バフ","buffSub":"各神殿には固有のシーズンボーナスがあり、どの神殿でも遺跡の親和度が上昇します。","buffs":{"shou":["シーズン戦士の防御","+15%","遺跡の親和度アップ","+15%"],"seth":["シーズン戦士の攻撃","+15%","遺跡の親和度アップ","+15%"],"nout":["シーズン弓兵の攻撃","+15%","遺跡の親和度アップ","+15%"],"tefnout":["シーズン弓兵の防御","+15%","遺跡の親和度アップ","+15%"],"geb":["シーズン騎兵の防御","+15%","遺跡の親和度アップ","+15%"],"nephthys":["シーズン騎兵の攻撃","+15%","遺跡の親和度アップ","+15%"],"sobek":["シーズン部隊が受けるダメージを軽減","+5%","治療速度","+50%","遺跡の親和度アップ","+15%"],"isis":["病院の収容人数アップ","+500","治療速度","+50%","遺跡の親和度アップ","+15%"]},"prefix":"神殿"};
+function lang(){const x=localStorage.getItem(K),s=document.getElementById('languageSelect')?.value,l=(document.getElementById('abyxLangCurrent')?.textContent||'').trim().toUpperCase(),m={EN:'en',FR:'fr',IT:'it',DE:'de',PL:'pl',RU:'ru',UA:'uk',JA:'ja'};return S.includes(x)?x:S.includes(s)?s:m[l]||'en'}
 function create(){const r=document.getElementById('templeInfographic');if(!r||document.getElementById('templeQuestExtra'))return;
 const footer=r.querySelector('.temple-guide-footer');if(!footer)return;
 footer.insertAdjacentHTML('beforebegin',`<section id="templeQuestExtra" class="temple-extra-section temple-extra-quests">
