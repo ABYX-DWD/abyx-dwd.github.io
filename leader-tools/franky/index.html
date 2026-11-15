@@ -329,7 +329,7 @@ select{
       </div>
       <div class="header-actions">
         <div class="lang">
-          <button id="enBtn" class="active">EN</button><span>|</span><button id="frBtn">FR</button><span>|</span><button id="itBtn">IT</button><span>|</span><button id="deBtn">DE</button>
+          <button id="enBtn" class="active">EN</button><span>|</span><button id="frBtn">FR</button><span>|</span><button id="itBtn">IT</button><span>|</span><button id="deBtn">DE</button><span>|</span><button id="jaBtn">JA</button>
         </div>
         <button class="menu" id="globalMenuBtn" aria-label="Open menu">☰</button>
       </div>
@@ -488,6 +488,7 @@ resultsTitle:"Ergebnisse",recommended:"Empfohlene Starter-APCs",resultsSub:"Die 
 tip:"Die übrigen APCs bleiben verfügbar, um offenen Rallys beizutreten.",back:"Zurück zur Anwesenheit",present:"Online",absent:"Offline",power:"Stärke",capacity:"Rally-Kapazität",cap:"Kapazität",generateImage:"Bild erstellen"
 }
 };
+tr.ja={"brandSub":"Dark War Survival 同盟ツール","bannerText":"仲間のために戦い\n共に生き残ろう","desktopTitle":"Franky ラリー計画","desktopText":"オンラインのメンバーを選び、開始するラリー数を指定すると、使用可能な各APCを戦力順に評価します。","attendanceTab":"参加状況","vehiclesTab":"車両","resultsTab":"結果","attendanceTitle":"Franky — 参加者の確認","attendanceSub":"計算に含めるオンラインプレイヤーを選んでください。","online":"オンライン人数","leaders":"ラリーの数","calculate":"ラリー計画を作成","vehiclesTitle":"利用可能なAPC","vehiclesSub":"選択したプレイヤーの各APCを戦力順に表示します。","resultsTitle":"計算結果","recommended":"ラリー開始に推奨されるAPC","resultsSub":"オンラインの全プレイヤーから個々のAPCの戦力が高い順に選択します。","tip":"残りのAPCは開始済みラリーへの参加に使用できます。","back":"参加者一覧に戻る","present":"オンライン","absent":"オフライン","power":"戦力","capacity":"ラリー容量","cap":"容量","generateImage":"画像を生成"};
 let lang="en";
 
 function silhouette(){
@@ -517,7 +518,7 @@ function renderVehicles(){
  <div class="vehicle-card">
   <div class="avatar">${silhouette()}</div>
   <div>
-   <div class="vehicle-name">${p.name} — Vehicle 1</div>
+   <div class="vehicle-name">${p.name} — ${lang==='ja'?'車両 1':'Vehicle 1'}</div>
    <div class="vehicle-sub">${tr[lang].power} + ${tr[lang].capacity}</div>
    <div class="metric-grid">
     <div><div class="metric-label">${tr[lang].power}</div><div class="bar power"><i style="width:${Math.min(100,p.power/5*100)}%"></i></div></div>
@@ -535,14 +536,14 @@ function renderResults(){
  <div class="result-card">
   <div class="rank">${i+1}</div>
   <div class="avatar">${silhouette()}</div>
-  <div><div class="result-name">${p.name}</div><div class="vehicle-sub">Vehicle 1</div></div>
+  <div><div class="result-name">${p.name}</div><div class="vehicle-sub">${lang==="ja"?"車両 1":"Vehicle 1"}</div></div>
   <div class="result-right"><strong>${p.power.toFixed(1)} G</strong><span>${p.capacity.toLocaleString()} ${tr[lang].cap}</span></div>
  </div>`).join("");
 }
 function applyLang(){
  document.documentElement.lang=lang;
  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(tr[lang][k]!==undefined)el.innerHTML=tr[lang][k].replace("\n","<br>")});
- ["en","fr","it","de"].forEach(code=>{
+ ["en","fr","it","de","ja"].forEach(code=>{
    const btn=document.getElementById(code+"Btn");
    if(btn)btn.classList.toggle("active",lang===code);
  });
@@ -562,6 +563,7 @@ document.getElementById("enBtn").onclick=()=>{lang="en";renderAll()};
 document.getElementById("frBtn").onclick=()=>{lang="fr";renderAll()};
 document.getElementById("itBtn").onclick=()=>{lang="it";renderAll()};
 document.getElementById("deBtn").onclick=()=>{lang="de";renderAll()};
+document.getElementById("jaBtn").onclick=()=>{lang="ja";renderAll()};
 renderAll();
 </script>
 <script src="./live-data.js?v=54"></script>
