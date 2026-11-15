@@ -493,7 +493,7 @@
     img.style.cssText = "display:block;width:100%;height:auto;border-radius:10px;background:#06111b";
 
     var meta = document.createElement("div");
-    meta.textContent = count + " rallies · " + launcherCount + " launchers · " + Math.max(1, Math.round(blob.size / 1024)) + " KB";
+    meta.textContent = count + (document.documentElement.lang==="ja"?" ラリー • ":" rallies · ") + launcherCount + (document.documentElement.lang==="ja"?" 開始APC • ":" launchers · ") + Math.max(1, Math.round(blob.size / 1024)) + " KB";
     meta.style.cssText = "text-align:center;color:#7f96ad;font-size:10px;font-weight:800;margin:8px 0";
 
     var actions = document.createElement("div");
@@ -501,17 +501,17 @@
 
     var share = document.createElement("button");
     share.type = "button";
-    share.textContent = "SHARE";
+    share.textContent = document.documentElement.lang==="ja"?"共有":"SHARE";
     share.style.cssText = "min-height:44px;border:0;border-radius:9px;background:linear-gradient(180deg,#2ba9ff,#0874df);color:#fff;font-weight:950";
 
     var save = document.createElement("button");
     save.type = "button";
-    save.textContent = "SAVE";
+    save.textContent = document.documentElement.lang==="ja"?"保存":"SAVE";
     save.style.cssText = "min-height:44px;border:1px solid #2b5277;border-radius:9px;background:#0d2135;color:#fff;font-weight:950";
 
     var close = document.createElement("button");
     close.type = "button";
-    close.textContent = "CLOSE";
+    close.textContent = document.documentElement.lang==="ja"?"閉じる":"CLOSE";
     close.style.cssText = "width:100%;min-height:42px;margin-top:7px;border:1px solid #233f59;border-radius:9px;background:#0b1724;color:#a7bbcf;font-weight:900";
 
     function saveFile() {
@@ -531,7 +531,7 @@
         if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
           navigator.share({
             title: "ABYX FRANKY TIME!",
-            text: count + " rallies to be sent!",
+            text: count + (document.documentElement.lang==="ja"?" 個のラリーを出発させます！":" rallies to be sent!"),
             files: [file]
           }).catch(function () {});
         } else {
@@ -954,13 +954,13 @@
     var groups=getLaunchers();
     var rallyCount=getRallyCount();
     if(!groups.length || !rallyCount){
-      window.alert("Build a rally plan first.");
+      window.alert(document.documentElement.lang==="ja"?"先にラリー計画を作成してください。":"Build a rally plan first.");
       return;
     }
 
     var button=document.getElementById("generateImageBtn");
     var originalText=button?button.textContent:"GENERATE IMAGE";
-    if(button){button.disabled=true;button.textContent="GENERATING…";}
+    if(button){button.disabled=true;button.textContent=document.documentElement.lang==="ja"?"生成中…":"GENERATING…";}
 
     loadPosterAssets(function(headerImg){
       var maxRows=Math.min(groups.length,18);
