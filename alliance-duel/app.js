@@ -15,7 +15,7 @@
     document.getElementById('day-title').textContent=locale.themes[day-1];
     document.getElementById('day-summary').textContent=locale.summaries[day-1];
     document.querySelectorAll('[data-day]').forEach(function(a){a.setAttribute('aria-current',Number(a.dataset.day)===day?'true':'false');});
-    document.getElementById('image-error').hidden=true;img.src=url;img.alt='ABYX Alliance Duel Day '+day+' — '+data.name+' tasks';
+    document.getElementById('image-error').hidden=true;img.src=url;img.alt=document.documentElement.lang==='ja'?'ABYX 同盟対決 '+day+'日目の任務':'ABYX Alliance Duel Day '+day+' — '+data.name+' tasks';
     var dl=document.getElementById('download');dl.href=url;dl.download='ABYX-VS-Day-'+day+'.webp';document.getElementById('full-size').href=url;
     var ul=document.createElement('ul');(locale.tasks||tasks)[day-1].forEach(function(t){var li=document.createElement('li');li.textContent=t;ul.appendChild(li);});document.getElementById('task-text').replaceChildren(ul);
   }
