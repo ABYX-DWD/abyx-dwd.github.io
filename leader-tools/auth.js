@@ -11,13 +11,15 @@ function injectStyle(){
 }
 async function sha256(v){var data=new TextEncoder().encode(v);var hash=await crypto.subtle.digest("SHA-256",data);return Array.from(new Uint8Array(hash)).map(function(b){return b.toString(16).padStart(2,"0")}).join("")}
 function unlock(){try{sessionStorage.setItem(AUTH_KEY,"1")}catch(_){}document.documentElement.classList.remove("abyx-auth-pending");var o=document.getElementById("abyxToolLock");if(o)o.remove()}
+function authLang(){try{return localStorage.getItem("abyx_lang")==="ja"?"ja":"en"}catch(_){return "en"}}
+function authText(){return authLang()==="ja"?{title:"ABYX リーダー専用",subtitle:"このツールはABYXのリーダーのみ利用できます。",password:"パスワード",unlock:"ロック解除",back:"← リーダーツール",bad:"パスワードが正しくありません。"}:{title:"ABYX Leader Access",subtitle:"This tool is reserved for ABYX leadership.",password:"Password",unlock:"Unlock",back:"← Leader Tools",bad:"Incorrect password."}}
 function show(){
   injectStyle();
   var o=document.createElement("div");o.id="abyxToolLock";o.className="abyx-tool-lock";
-  o.innerHTML='<div class="abyx-tool-lock-card"><div class="abyx-tool-lock-mark">A</div><h2>ABYX Leader Access</h2><p>This tool is reserved for ABYX leadership.</p><form id="abyxToolLockForm"><input id="abyxToolPassword" type="password" autocomplete="current-password" placeholder="Password"><button type="submit">Unlock</button><p class="abyx-tool-lock-error" id="abyxToolLockError"></p></form><a class="abyx-tool-lock-back" href="../">← Leader Tools</a></div>';
+  var t=authText();o.innerHTML='<div class="abyx-tool-lock-card"><div class="abyx-tool-lock-mark">A</div><h2>'+t.title+'</h2><p>'+t.subtitle+'</p><form id="abyxToolLockForm"><input id="abyxToolPassword" type="password" autocomplete="current-password" placeholder="'+t.password+'"><button type="submit">'+t.unlock+'</button><p class="abyx-tool-lock-error" id="abyxToolLockError"></p></form><a class="abyx-tool-lock-back" href="../">'+t.back+'</a></div>';
   document.body.appendChild(o);document.documentElement.classList.add("abyx-auth-pending");
   var f=document.getElementById("abyxToolLockForm"),i=document.getElementById("abyxToolPassword"),e=document.getElementById("abyxToolLockError");
-  f.addEventListener("submit",async function(ev){ev.preventDefault();e.textContent="";try{if(await sha256(i.value)===PASS_HASH){i.value="";unlock()}else{e.textContent="Incorrect password.";i.select()}}catch(_){e.textContent="Incorrect password."}});
+  f.addEventListener("submit",async function(ev){ev.preventDefault();e.textContent="";try{if(await sha256(i.value)===PASS_HASH){i.value="";unlock()}else{e.textContent=authText().bad;i.select()}}catch(_){e.textContent=authText().bad}});
   setTimeout(function(){i.focus()},50);
 }
 function init(){if(unlocked()){document.documentElement.classList.remove("abyx-auth-pending");return}show()}
