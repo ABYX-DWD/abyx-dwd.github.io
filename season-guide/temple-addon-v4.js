@@ -144,7 +144,7 @@
 
   function isTempleDetail() {
     const title = document.getElementById('detailTitle');
-    return !!title && title.textContent.trim().toLowerCase() === 'divine temples';
+    return !!title && ['divine temples','神聖神殿'].includes(title.textContent.trim().toLowerCase());
   }
 
   function syncTempleMode() {
