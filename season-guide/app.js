@@ -255,7 +255,7 @@
 
   function applyLanguage(){
     document.documentElement.lang=lang;
-    document.title='434 — '+(lang==='fr'?'Road Map Ragnarok':lang==='it'?'Road Map Ragnarok':lang==='de'?'Ragnarok Road Map':lang==='pl'?'Ragnarok Road Map':'Ragnarok Road Map');
+    document.title='434 — '+(lang==='fr'?'Road Map Ragnarok':lang==='it'?'Road Map Ragnarok':lang==='de'?'Ragnarok Road Map':lang==='pl'?'Ragnarok Road Map':lang==='ja'?'ラグナロク ロードマップ':'Ragnarok Road Map');
     $('#languageSelect').value=lang;
     $$('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(tr()[key])el.textContent=tr()[key];});
     const shell=shellUi[lang]||shellUi.en;
